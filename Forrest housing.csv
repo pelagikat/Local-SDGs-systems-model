@@ -1,0 +1,773 @@
+LU_CODE,LU_DESC,LU_1,LU_2,LU_3,HECTARES,TENURE,LU_CODE_A,LU_DESCR_A,LC_CODE_17,LC_DESC_17
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",0.9215985,PUBLIC,5.6.0,Utilities,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",1.03010046,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"570",Softwood Plantation,"5","57","570",0.28625008,PRIVATE,3.1.2,Softwood plantation forestry,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",37.56947292,PUBLIC,1.1.7,Other conserved area,"124",Softwood Plantation
+"570",Softwood Plantation,"5","57","570",0.13853505,PRIVATE,3.1.2,Softwood plantation forestry,"0",Unknown
+"653",Suburban and Rural Roads,"6","65","653",0.33892096,PRIVATE,5.7.2,Roads,"0",Unknown
+"570",Softwood Plantation,"5","57","570",1.17622645,PRIVATE,3.1.2,Softwood plantation forestry,"0",Unknown
+"571",Hardwood Plantation,"5","57","571",46.06756449,PRIVATE,3.1.1,Hardwood plantation forestry,"124",Softwood Plantation
+"570",Softwood Plantation,"5","57","570",1.1645148,PRIVATE,3.1.2,Softwood plantation forestry,"0",Unknown
+"571",Hardwood Plantation,"5","57","571",36.08239532,PRIVATE,3.1.1,Hardwood plantation forestry,"124",Softwood Plantation
+"570",Softwood Plantation,"5","57","570",44.93578816,PRIVATE,3.1.2,Softwood plantation forestry,"124",Softwood Plantation
+"571",Hardwood Plantation,"5","57","571",83.32043342,PRIVATE,3.1.1,Hardwood plantation forestry,"124",Softwood Plantation
+"570",Softwood Plantation,"5","57","570",3.30120845,PRIVATE,3.1.2,Softwood plantation forestry,"0",Unknown
+"570",Softwood Plantation,"5","57","570",3.23360822,PRIVATE,3.1.2,Softwood plantation forestry,"0",Unknown
+"570",Softwood Plantation,"5","57","570",18.78210712,PRIVATE,3.1.2,Softwood plantation forestry,"124",Softwood Plantation
+"571",Hardwood Plantation,"5","57","571",35.82053945,PRIVATE,3.1.1,Hardwood plantation forestry,"124",Softwood Plantation
+"572",Native Hardwood (standing timber),"5","57","572",35.50593357,PRIVATE,2.2.0,Production native forests,"124",Softwood Plantation
+"572",Native Hardwood (standing timber),"5","57","572",19.1549803,PRIVATE,2.2.0,Production native forests,"124",Softwood Plantation
+"570",Softwood Plantation,"5","57","570",2.65803252,PRIVATE,3.1.2,Softwood plantation forestry,"0",Unknown
+"571",Hardwood Plantation,"5","57","571",132.16799937,PRIVATE,3.1.1,Hardwood plantation forestry,"124",Softwood Plantation
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",4.60278484,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",7.81081007,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",327.21813195,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"950",Forest Reserves - Public,"9","95","950",2.75579587,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",7.43379365,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",0.40253158,PUBLIC,5.6.0,Utilities,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.03415797,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.12633985,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.11307349,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.14075062,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"90",Reserved Land,"9","90","90",33.99913892,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"950",Forest Reserves - Public,"9","95","950",86.41748604,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"524",Livestock Production - Beef Cattle,"5","52","524",28.00080963,PRIVATE,3.3.0,Cropping,"124",Softwood Plantation
+"950",Forest Reserves - Public,"9","95","950",8.20048828,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",15.06188014,PUBLIC,1.1.7,Other conserved area,"124",Softwood Plantation
+"950",Forest Reserves - Public,"9","95","950",1.28369169,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",8.66952733,PRIVATE,3.3.0,Cropping,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",32.08292306,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"524",Livestock Production - Beef Cattle,"5","52","524",33.03021334,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"232",Serviced Apartments / Holiday Units,"2","23","232",0.90342506,PRIVATE,5.5.1,Commercial services,"0",Unknown
+"570",Softwood Plantation,"5","57","570",11.51433003,PRIVATE,3.1.2,Softwood plantation forestry,"0",Unknown
+"570",Softwood Plantation,"5","57","570",0.98138596,PRIVATE,3.1.2,Softwood plantation forestry,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",7.07474763,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"90",Reserved Land,"9","90","90",10.47909783,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"930",National Park - Land,"9","93","930",26.0500454,PUBLIC,1.1.3,National park,"11",Native woody cover
+"570",Softwood Plantation,"5","57","570",2.81702411,PUBLIC,3.1.2,Softwood plantation forestry,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",3.08174357,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.84929883,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",43.38935512,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"930",National Park - Land,"9","93","930",32.98149635,PUBLIC,1.1.3,National park,"11",Native woody cover
+"571",Hardwood Plantation,"5","57","571",73.33681942,PRIVATE,3.1.1,Hardwood plantation forestry,"124",Softwood Plantation
+"524",Livestock Production - Beef Cattle,"5","52","524",2.08842731,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",0.34807347,PRIVATE,3.3.0,Cropping,"0",Unknown
+"570",Softwood Plantation,"5","57","570",1.34839085,PRIVATE,3.1.2,Softwood plantation forestry,"0",Unknown
+"570",Softwood Plantation,"5","57","570",32.83121756,PRIVATE,3.1.2,Softwood plantation forestry,"124",Softwood Plantation
+"90",Reserved Land,"9","90","90",1.93224982,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.1874806,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"90",Reserved Land,"9","90","90",0.70171757,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",9.56571458,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",4.56744519,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.32203237,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"930",National Park - Land,"9","93","930",2.60495031,PUBLIC,1.1.3,National park,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.16509615,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.2923675,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"570",Softwood Plantation,"5","57","570",13.23334182,PRIVATE,3.1.2,Softwood plantation forestry,"124",Softwood Plantation
+"653",Suburban and Rural Roads,"6","65","653",0.06443855,PRIVATE,5.7.2,Roads,"0",Unknown
+"90",Reserved Land,"9","90","90",1.17076545,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"930",National Park - Land,"9","93","930",2.67553613,PUBLIC,1.1.3,National park,"0",Unknown
+"11",Single Residential Accommodation,"1","11","11",0.19237918,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",2.78696595,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"90",Reserved Land,"9","90","90",513.59219668,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"572",Native Hardwood (standing timber),"5","57","572",19.62436349,PRIVATE,2.2.0,Production native forests,"124",Softwood Plantation
+"950",Forest Reserves - Public,"9","95","950",324.54377678,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"572",Native Hardwood (standing timber),"5","57","572",230.1192959,PRIVATE,2.2.0,Production native forests,"11",Native woody cover
+"930",National Park - Land,"9","93","930",465.49664278,PUBLIC,1.1.3,National park,"11",Native woody cover
+"90",Reserved Land,"9","90","90",112.40981975,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"930",National Park - Land,"9","93","930",563.62904997,PUBLIC,1.1.3,National park,"11",Native woody cover
+"571",Hardwood Plantation,"5","57","571",86.55308678,PRIVATE,3.1.1,Hardwood plantation forestry,"124",Softwood Plantation
+"930",National Park - Land,"9","93","930",6.4540753,PUBLIC,1.1.3,National park,"0",Unknown
+"53",Mixed Farming and Grazing,"5","53","53",47.70118378,PRIVATE,5.4.2,Rural residential with agriculture,"124",Softwood Plantation
+"930",National Park - Land,"9","93","930",88.26180748,PUBLIC,1.1.3,National park,"11",Native woody cover
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",2.99153789,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",49.66406278,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",7.04487047,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",4.03202256,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.89664983,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"930",National Park - Land,"9","93","930",2.56936395,PUBLIC,1.1.3,National park,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",11.97439691,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"930",National Park - Land,"9","93","930",0.30665735,PUBLIC,1.1.3,National park,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",9.62422457,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"930",National Park - Land,"9","93","930",0.33068121,PUBLIC,1.1.3,National park,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",111.65474893,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",6.18778832,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"930",National Park - Land,"9","93","930",1.00297441,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",80.60696567,PUBLIC,1.1.3,National park,"11",Native woody cover
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",2.54232118,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",28.51455922,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.27964241,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",49.15606981,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"930",National Park - Land,"9","93","930",4.53928159,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",111.78250478,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",133.13641802,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",36.11104926,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",0.90321843,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",8.92345564,PUBLIC,1.1.3,National park,"0",Unknown
+"64",Water Supply,"6","64","64",26.61044237,PUBLIC,6.2.1,Reservoir,"124",Softwood Plantation
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",12.15108337,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",126.16188585,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"110",Detached Home,"1","11","110",0.07894684,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.07895012,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.07894749,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.07895182,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.25641741,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"53",Mixed Farming and Grazing,"5","53","53",23.65996579,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"110",Detached Home,"1","11","110",0.07894736,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.15790144,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.39112186,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",3.05388811,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",3.03768528,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"90",Reserved Land,"9","90","90",0.70423483,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"930",National Park - Land,"9","93","930",32.32894973,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",0.22111171,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",0.72333766,PUBLIC,1.1.3,National park,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.05661551,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",3.44655275,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"930",National Park - Land,"9","93","930",28.55823012,PUBLIC,1.1.3,National park,"11",Native woody cover
+"525",Livestock Production - Dairy Cattle,"5","52","525",19.86869729,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"950",Forest Reserves - Public,"9","95","950",1.24462592,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",17.93671741,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"11",Single Residential Accommodation,"1","11","11",0.35459794,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"571",Hardwood Plantation,"5","57","571",114.89321351,PRIVATE,3.1.1,Hardwood plantation forestry,"124",Softwood Plantation
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",0.93433061,PRIVATE,3.3.0,Cropping,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",31.93632599,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"91",Nature Reserve,"9","91","91",3.38013558,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"91",Nature Reserve,"9","91","91",11.20059362,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"571",Hardwood Plantation,"5","57","571",129.46475162,PRIVATE,3.1.1,Hardwood plantation forestry,"124",Softwood Plantation
+"524",Livestock Production - Beef Cattle,"5","52","524",38.35453379,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"930",National Park - Land,"9","93","930",0.69820083,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",33.1059734,PUBLIC,1.1.3,National park,"124",Softwood Plantation
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",19.38722747,PRIVATE,5.4.3,Rural residential without agriculture,"124",Softwood Plantation
+"930",National Park - Land,"9","93","930",0.56484845,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",83.34193898,PUBLIC,1.1.3,National park,"11",Native woody cover
+"90",Reserved Land,"9","90","90",230.10583501,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"950",Forest Reserves - Public,"9","95","950",5.2984231,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",126.81371886,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"950",Forest Reserves - Public,"9","95","950",0.45640561,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"930",National Park - Land,"9","93","930",0.03636277,PUBLIC,1.1.3,National park,"0",Unknown
+"570",Softwood Plantation,"5","57","570",48.82620002,PRIVATE,3.1.2,Softwood plantation forestry,"124",Softwood Plantation
+"571",Hardwood Plantation,"5","57","571",27.55789215,PRIVATE,3.1.1,Hardwood plantation forestry,"124",Softwood Plantation
+"950",Forest Reserves - Public,"9","95","950",1.14732599,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"571",Hardwood Plantation,"5","57","571",70.71778645,PRIVATE,3.1.1,Hardwood plantation forestry,"124",Softwood Plantation
+"90",Reserved Land,"9","90","90",0.69188334,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",8.93023027,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"571",Hardwood Plantation,"5","57","571",127.70911676,PRIVATE,3.1.1,Hardwood plantation forestry,"124",Softwood Plantation
+"525",Livestock Production - Dairy Cattle,"5","52","525",62.59990499,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",18.13266571,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",25.05833954,PRIVATE,3.2.0,Grazing modified pastures,"11",Native woody cover
+"91",Nature Reserve,"9","91","91",4.38130055,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",27.84096345,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"930",National Park - Land,"9","93","930",3.77449182,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",80.24636908,PUBLIC,1.1.3,National park,"11",Native woody cover
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",13.69121016,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",4.49924612,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",32.18500684,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",56.77568028,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",38.62410908,PRIVATE,3.2.0,Grazing modified pastures,"11",Native woody cover
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",9.85745653,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",107.74550169,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"930",National Park - Land,"9","93","930",54.60194213,PUBLIC,1.1.3,National park,"11",Native woody cover
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",14.09617452,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",51.23073099,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",5.18664837,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"930",National Park - Land,"9","93","930",3.27735882,PUBLIC,1.1.3,National park,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",8.55998919,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.62488765,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",1.20622535,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"133",Short Term Holiday Accommodation,"1","13","133",3.84010955,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",20.23781616,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.86342588,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"91",Nature Reserve,"9","91","91",1.52418502,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"821",Outdoor Sports Grounds - town or suburban facilities,"8","82","821",3.12667604,PRIVATE,5.5.3,Recreation and culture,"0",Unknown
+"90",Reserved Land,"9","90","90",16.82314633,PUBLIC,1.1.7,Other conserved area,"124",Softwood Plantation
+"90",Reserved Land,"9","90","90",0.87972775,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"821",Outdoor Sports Grounds - town or suburban facilities,"8","82","821",3.16744719,PRIVATE,5.5.3,Recreation and culture,"0",Unknown
+"303",Industrial Land (with buildings which add no value),"3","30","303",1.14446398,PRIVATE,5.3.0,Manufacturing and industrial,"0",Unknown
+"91",Nature Reserve,"9","91","91",1.01083841,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"91",Nature Reserve,"9","91","91",0.27364559,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"303",Industrial Land (with buildings which add no value),"3","30","303",1.19221222,PRIVATE,5.3.0,Manufacturing and industrial,"0",Unknown
+"91",Nature Reserve,"9","91","91",2.50902038,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",1.18917877,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.32126657,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.40984162,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"90",Reserved Land,"9","90","90",0.33914223,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.48620642,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"930",National Park - Land,"9","93","930",68.76972212,PUBLIC,1.1.3,National park,"123",Hardwood plantation
+"78",Other Community service facilities,"7","78","78",0.84148124,PUBLIC,5.5.2,Public services,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.25253746,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.22652824,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.14244677,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",1.70703448,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.81422989,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",3.91231085,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.6530545,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.01230075,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.26651552,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",2.42758422,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.10117452,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.8116564,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"133",Short Term Holiday Accommodation,"1","13","133",0.10117473,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.8477454,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.10117836,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.14478029,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",5.85190497,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.84772855,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.21024507,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.84772758,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.6354062,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.99290527,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",1.54754036,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",1.33241145,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"90",Reserved Land,"9","90","90",0.21874892,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"90",Reserved Land,"9","90","90",0.06387814,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",1.05728526,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.50956767,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.07894755,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.07895332,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"930",National Park - Land,"9","93","930",167.00847482,PUBLIC,1.1.3,National park,"11",Native woody cover
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",13.4696912,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"930",National Park - Land,"9","93","930",0.10922484,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",13.57959611,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",0.03012774,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",12.61891904,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",0.0488084,PUBLIC,1.1.3,National park,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",5.51803571,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"930",National Park - Land,"9","93","930",0.12559471,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",41.44429384,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",1.43694006,PUBLIC,1.1.3,National park,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",2.46192263,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"930",National Park - Land,"9","93","930",0.03074387,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",0.18764571,PUBLIC,1.1.3,National park,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",13.85609441,PRIVATE,5.4.3,Rural residential without agriculture,"11",Native woody cover
+"930",National Park - Land,"9","93","930",0.03521618,PUBLIC,1.1.3,National park,"0",Unknown
+"90",Reserved Land,"9","90","90",1.69620836,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"90",Reserved Land,"9","90","90",1.92526045,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"111",Separate House and Curtilage,"1","11","111",0.18860937,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"90",Reserved Land,"9","90","90",2.31330776,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"90",Reserved Land,"9","90","90",0.38513419,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"90",Reserved Land,"9","90","90",2.44114582,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"90",Reserved Land,"9","90","90",2.36486813,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"90",Reserved Land,"9","90","90",7.66496524,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"90",Reserved Land,"9","90","90",0.70521759,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"930",National Park - Land,"9","93","930",40.80155218,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",1.55135028,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",60.44015248,PUBLIC,1.1.3,National park,"124",Softwood Plantation
+"90",Reserved Land,"9","90","90",5.14851413,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",23.5132986,PRIVATE,3.2.0,Grazing modified pastures,"11",Native woody cover
+"90",Reserved Land,"9","90","90",0.3103187,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"930",National Park - Land,"9","93","930",54.98806567,PUBLIC,1.1.3,National park,"124",Softwood Plantation
+"930",National Park - Land,"9","93","930",8.30261762,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",4.32167607,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",12.99240329,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",0.79792771,PUBLIC,1.1.3,National park,"0",Unknown
+"64",Water Supply,"6","64","64",0.20287511,PUBLIC,6.2.1,Reservoir,"0",Unknown
+"930",National Park - Land,"9","93","930",0.32806465,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",24.27244944,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",0.0929075,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",219.28447592,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",0.67327943,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",0.03885893,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",2.84940712,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",0.16907925,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",37.09405502,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",0.78368398,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",0.247191,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",0.33662344,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",407.32821693,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",1021.00114716,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",3.32948531,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",2.05774426,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",1.20460757,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",7.22722031,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",44.98252118,PUBLIC,1.1.3,National park,"124",Softwood Plantation
+"930",National Park - Land,"9","93","930",31.96546843,PUBLIC,1.1.3,National park,"124",Softwood Plantation
+"930",National Park - Land,"9","93","930",17.01355502,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",0.30040917,PUBLIC,1.1.3,National park,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",13.40808616,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"133",Short Term Holiday Accommodation,"1","13","133",9.45432677,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",22.15027113,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.64534097,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.51580001,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"90",Reserved Land,"9","90","90",15.18297875,PUBLIC,1.1.7,Other conserved area,"21",Pasture and grassland
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.523157,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",3.17683134,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"90",Reserved Land,"9","90","90",0.39414812,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",14.60720326,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"91",Nature Reserve,"9","91","91",7.63659786,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"91",Nature Reserve,"9","91","91",1.92377931,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",5.07591583,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.80151048,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",11.16818387,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",2.55503371,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"90",Reserved Land,"9","90","90",0.54741464,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"821",Outdoor Sports Grounds - town or suburban facilities,"8","82","821",0.34126825,PRIVATE,5.5.3,Recreation and culture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.72556677,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",3.16096076,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",1.37938959,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"90",Reserved Land,"9","90","90",0.24803583,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.19663156,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.64274074,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"150",Miscellaneous Improvements on Residential Land,"1","15","150",0.19903841,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.1981656,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",6.69235415,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.20008231,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",1.73638649,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"11",Single Residential Accommodation,"1","11","11",0.10006082,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.10006082,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.20013912,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.2001412,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.93811871,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.19995443,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"11",Single Residential Accommodation,"1","11","11",0.10007705,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.10007705,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"78",Other Community service facilities,"7","78","78",2.00540884,PUBLIC,5.5.2,Public services,"0",Unknown
+"110",Detached Home,"1","11","110",0.07767164,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"90",Reserved Land,"9","90","90",0.06657897,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"78",Other Community service facilities,"7","78","78",0.2446288,PUBLIC,5.5.2,Public services,"0",Unknown
+"133",Short Term Holiday Accommodation,"1","13","133",0.11845668,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.28252816,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.18992466,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.18992466,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.67354146,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.67354146,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.26231196,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.42150477,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"91",Nature Reserve,"9","91","91",59.49884405,PUBLIC,1.1.1,Strict nature reserves,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",26.29048779,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",4.51390629,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",5.18819209,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",31.97239419,PRIVATE,3.2.0,Grazing modified pastures,"123",Hardwood plantation
+"524",Livestock Production - Beef Cattle,"5","52","524",32.03108804,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"110",Detached Home,"1","11","110",0.20987594,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.51941014,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",3.43239216,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.40486793,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.26685393,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",31.60386609,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"110",Detached Home,"1","11","110",0.3901628,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.60906031,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.22229062,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.1693972,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.15977618,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.06687557,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.15566435,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.31990429,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",30.07928815,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"525",Livestock Production - Dairy Cattle,"5","52","525",3.86995405,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",20.29149181,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"950",Forest Reserves - Public,"9","95","950",5.84696312,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",1.4316744,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",7.28146098,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",2.39179557,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",25.42776694,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"525",Livestock Production - Dairy Cattle,"5","52","525",53.0848724,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",6.59149178,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.62444825,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",24.71922259,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.13781595,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.0605012,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.26913093,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.52794457,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",31.23302335,PRIVATE,3.2.0,Grazing modified pastures,"123",Hardwood plantation
+"950",Forest Reserves - Public,"9","95","950",0.49199523,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.30949944,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",75.48087223,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"950",Forest Reserves - Public,"9","95","950",0.03708893,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.42969502,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",10.68426953,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",11.83429858,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",32.60355001,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",16.49259073,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"950",Forest Reserves - Public,"9","95","950",0.1642207,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.13796295,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",0.19709128,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",25.30453423,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",27.12926838,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"950",Forest Reserves - Public,"9","95","950",13.13478548,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"524",Livestock Production - Beef Cattle,"5","52","524",8.14805103,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"91",Nature Reserve,"9","91","91",16.98478975,PUBLIC,1.1.1,Strict nature reserves,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",20.70108499,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"930",National Park - Land,"9","93","930",35.95224477,PUBLIC,1.1.3,National park,"11",Native woody cover
+"524",Livestock Production - Beef Cattle,"5","52","524",1.22969444,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",16.12140609,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",6.43616212,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"930",National Park - Land,"9","93","930",1.08403921,PUBLIC,1.1.3,National park,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",25.68181561,PRIVATE,3.2.0,Grazing modified pastures,"224",Non-woody horticulture
+"930",National Park - Land,"9","93","930",5.23264128,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",11.28849444,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",11.03680086,PUBLIC,1.1.3,National park,"0",Unknown
+"91",Nature Reserve,"9","91","91",9.36219521,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"930",National Park - Land,"9","93","930",72.39989363,PUBLIC,1.1.3,National park,"11",Native woody cover
+"655",Reserved Roads/Unused Roads,"6","65","655",0.64188158,PRIVATE,5.7.2,Roads,"0",Unknown
+"655",Reserved Roads/Unused Roads,"6","65","655",1.71809168,PRIVATE,5.7.2,Roads,"0",Unknown
+"930",National Park - Land,"9","93","930",0.19155106,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",7.43856841,PUBLIC,1.1.3,National park,"0",Unknown
+"655",Reserved Roads/Unused Roads,"6","65","655",0.29852135,PRIVATE,5.7.2,Roads,"0",Unknown
+"930",National Park - Land,"9","93","930",0.18925089,PUBLIC,1.1.3,National park,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",4.78836059,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",19.88507271,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",16.01022788,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"930",National Park - Land,"9","93","930",1.08127117,PUBLIC,1.1.3,National park,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",12.58621144,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"930",National Park - Land,"9","93","930",0.05105919,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",0.60744005,PUBLIC,1.1.3,National park,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",12.11219785,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",17.34538127,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"930",National Park - Land,"9","93","930",1.49733509,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",0.03434479,PUBLIC,1.1.3,National park,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",45.66263778,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",19.87507999,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",56.87998237,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",67.24167993,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",13.5448918,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",32.34868187,PRIVATE,3.3.0,Cropping,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",14.1045107,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",74.59084894,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",1.9935322,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",56.78196831,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",63.24941886,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",3.27567581,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"91",Nature Reserve,"9","91","91",3.56560309,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",44.32816998,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",34.88746272,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",41.28397412,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"53",Mixed Farming and Grazing,"5","53","53",86.22061827,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",3.58361712,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",18.59880509,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.83190309,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",38.66048689,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",15.36497844,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",4.74034888,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",112.23289027,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"570",Softwood Plantation,"5","57","570",96.42892897,PRIVATE,3.1.2,Softwood plantation forestry,"124",Softwood Plantation
+"53",Mixed Farming and Grazing,"5","53","53",43.66846695,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",11.85114505,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",12.11416944,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",13.95235268,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"950",Forest Reserves - Public,"9","95","950",10.20606492,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",9.22271186,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",2.21191959,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",8.41694641,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",49.86197418,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"524",Livestock Production - Beef Cattle,"5","52","524",17.87410914,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",6.96192093,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",0.49022822,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",56.83335656,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.21796487,PRIVATE,3.3.0,Cropping,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",54.0584694,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"950",Forest Reserves - Public,"9","95","950",0.98919915,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",23.29527351,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"950",Forest Reserves - Public,"9","95","950",3.33889637,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",7.67808261,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",12.58493449,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",17.38587505,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",82.10609423,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",28.73307863,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",6.58928323,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",5.7764894,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"151",Miscellaneous Improvements on Residential Rural Land (0.4 to 20 Hectares),"1","15","151",3.47687346,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",3.46742259,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",16.53689408,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"91",Nature Reserve,"9","91","91",0.89231293,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"133",Short Term Holiday Accommodation,"1","13","133",3.18121503,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"500",Native Vegetation / Bushland Without Covenant/Agreement,"5","50","500",24.00675881,PRIVATE,1.3.0,Other minimal use,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",3.78728814,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",12.73968586,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",101.50054972,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",3.46156337,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",3.84491689,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",2.73972665,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"91",Nature Reserve,"9","91","91",8.63755235,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",5.62905629,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",17.32561973,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",3.2404215,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",50.65787325,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",17.8638607,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",41.90880094,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",3.61521113,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",2.61124099,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",3.47949541,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"570",Softwood Plantation,"5","57","570",166.96448554,PUBLIC,3.1.2,Softwood plantation forestry,"124",Softwood Plantation
+"91",Nature Reserve,"9","91","91",5.78626962,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",3.57379373,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",186.14209034,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",53.73058443,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.69194891,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"90",Reserved Land,"9","90","90",4.09622952,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",3.97759616,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",1.56256351,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",8.40150304,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",2.30876573,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.50938391,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"90",Reserved Land,"9","90","90",0.35487043,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",5.36749766,PRIVATE,3.3.0,Cropping,"0",Unknown
+"90",Reserved Land,"9","90","90",0.1923788,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"78",Other Community service facilities,"7","78","78",3.84191063,PUBLIC,5.5.2,Public services,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",13.13180335,PRIVATE,3.2.0,Grazing modified pastures,"11",Native woody cover
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",9.96803448,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",1.06177746,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",1.23014923,PRIVATE,3.3.0,Cropping,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",0.14301021,PRIVATE,3.3.0,Cropping,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",7.97534288,PRIVATE,3.3.0,Cropping,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",19.31340559,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",3.364107,PUBLIC,5.6.0,Utilities,"0",Unknown
+"90",Reserved Land,"9","90","90",0.3674917,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",9.93639315,PUBLIC,5.6.0,Utilities,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.11113711,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",3.41824558,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",2.07511635,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",0.05548089,PRIVATE,3.3.0,Cropping,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",3.78137867,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.10245514,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.91666474,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",0.09388928,PUBLIC,5.6.0,Utilities,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.75956674,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",1.34034142,PUBLIC,5.6.0,Utilities,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",1.89902112,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",3.91367569,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"78",Other Community service facilities,"7","78","78",4.83079568,PUBLIC,5.5.2,Public services,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.22361871,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.32364563,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",4.67733944,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",1.4158931,PUBLIC,5.6.0,Utilities,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",2.15882259,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",0.05511814,PUBLIC,5.6.0,Utilities,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",6.41941663,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",0.13145022,PUBLIC,5.6.0,Utilities,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.38541529,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.09130272,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"930",National Park - Land,"9","93","930",52.35984092,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",670.93424212,PUBLIC,1.1.3,National park,"11",Native woody cover
+"91",Nature Reserve,"9","91","91",11.90118957,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",6.43066628,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",28.14323108,PRIVATE,3.3.0,Cropping,"124",Softwood Plantation
+"91",Nature Reserve,"9","91","91",11.11716271,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",133.57973599,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",3.39450852,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",14.05360899,PRIVATE,5.4.3,Rural residential without agriculture,"124",Softwood Plantation
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",4.19119713,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",12.73842767,PRIVATE,3.2.0,Grazing modified pastures,"124",Softwood Plantation
+"524",Livestock Production - Beef Cattle,"5","52","524",2.84635874,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"78",Other Community service facilities,"7","78","78",2.95013232,PUBLIC,5.5.2,Public services,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",2.05664777,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",4.93974152,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"151",Miscellaneous Improvements on Residential Rural Land (0.4 to 20 Hectares),"1","15","151",1.65519015,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.41151878,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",1.2188035,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.83284234,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",15.26832427,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",8.82459618,PRIVATE,3.3.0,Cropping,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.02731315,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",9.43112258,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",7.53041426,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",0.84699151,PUBLIC,5.6.0,Utilities,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",13.49388877,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"525",Livestock Production - Dairy Cattle,"5","52","525",10.5347552,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",17.44309218,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",2.54089094,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"90",Reserved Land,"9","90","90",5.38853617,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",20.83801168,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",0.13011304,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"90",Reserved Land,"9","90","90",12.36883296,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",3.63472437,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.09064539,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",1.73268078,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",9.43297715,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",6.71619862,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",5.32763976,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",11.98819216,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.937195,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",0.22573185,PUBLIC,5.6.0,Utilities,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",0.30386617,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",8.26658536,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"91",Nature Reserve,"9","91","91",1.92043373,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.83819699,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",8.44606786,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.10088106,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.35607305,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.83084245,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.09207644,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"91",Nature Reserve,"9","91","91",8.2244371,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"90",Reserved Land,"9","90","90",0.27159813,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.2705932,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",36.94055429,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.80171596,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.20778678,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.04387347,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",3.22390462,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"90",Reserved Land,"9","90","90",0.11550234,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"91",Nature Reserve,"9","91","91",3.07846502,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"91",Nature Reserve,"9","91","91",3.4789572,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.9231798,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"653",Suburban and Rural Roads,"6","65","653",0.68776656,PRIVATE,5.7.2,Roads,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",6.48605399,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.7329219,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.43511264,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.78115477,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"698",Telephone Exchange - Purpose Built,"6","69","698",13.98678344,PRIVATE,5.7.5,Navigation and communication,"21",Pasture and grassland
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.08041336,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.49797235,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"572",Native Hardwood (standing timber),"5","57","572",32.8574454,PRIVATE,2.2.0,Production native forests,"21",Pasture and grassland
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.08934257,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.85220146,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.09652374,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.66816389,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",3.46887394,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.92772465,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.09652386,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.1593437,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.03188575,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.4769803,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"653",Suburban and Rural Roads,"6","65","653",1.33614342,PRIVATE,5.7.2,Roads,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",9.40892335,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.13530798,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",1.79069414,PUBLIC,5.6.0,Utilities,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",13.99219193,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",27.79611662,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"110",Detached Home,"1","11","110",0.12444003,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.18634811,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.99004033,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.11015844,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.19443047,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.07965975,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"91",Nature Reserve,"9","91","91",0.1802606,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",19.19568524,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.03717619,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",7.7484291,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.03130643,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"11",Single Residential Accommodation,"1","11","11",0.08085697,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",8.36359895,PUBLIC,5.6.0,Utilities,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",41.33773423,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",2.24708971,PUBLIC,5.6.0,Utilities,"0",Unknown
+"645",Major Water Conduits,"6","64","645",0.8192105,PRIVATE,6.4.1,Supply channel/aqueduct,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",92.73505607,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",26.31930385,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",33.63861623,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.40334465,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.20857403,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"733",Fire Station Facility,"7","73","733",0.12034819,PRIVATE,5.5.2,Public services,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.40519096,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.40200297,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.40200297,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.19376228,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",36.9279515,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.40507587,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.40507587,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.40531877,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.40435448,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.42755772,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.40491562,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.40429963,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"53",Mixed Farming and Grazing,"5","53","53",35.5828808,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.40491769,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",0.16392631,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",0.16703265,PUBLIC,5.6.0,Utilities,"0",Unknown
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",1.50945876,PUBLIC,5.6.0,Utilities,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",1.65339064,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",80.41858506,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",0.08777551,PUBLIC,5.6.0,Utilities,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",0.10094771,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.32210951,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.17623284,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",0.14299473,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",0.02796083,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"91",Nature Reserve,"9","91","91",0.82210125,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",39.03452083,PRIVATE,3.3.0,Cropping,,Unknown
+"53",Mixed Farming and Grazing,"5","53","53",39.03452083,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"11",Single Residential Accommodation,"1","11","11",0.24403481,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.50356963,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"91",Nature Reserve,"9","91","91",4.02870211,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"91",Nature Reserve,"9","91","91",0.78108165,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"11",Single Residential Accommodation,"1","11","11",0.21600297,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.36025011,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",41.27793949,PRIVATE,3.3.0,Cropping,,Unknown
+"53",Mixed Farming and Grazing,"5","53","53",41.27793949,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",40.01185972,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",40.01185972,PRIVATE,3.3.0,Cropping,,Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",4.92869653,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",12.11189768,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",19.45396037,PRIVATE,3.2.0,Grazing modified pastures,"123",Hardwood plantation
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",2.01204323,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.08107047,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.09761392,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.11643494,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"91",Nature Reserve,"9","91","91",2.09540343,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.73719241,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",4.77645555,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",1.04908313,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.81586004,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",1.20616984,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.00564398,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.11305141,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.12038609,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"91",Nature Reserve,"9","91","91",1.63733653,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"110",Detached Home,"1","11","110",0.12673138,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.99527882,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.07803315,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"91",Nature Reserve,"9","91","91",4.54206878,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"110",Detached Home,"1","11","110",0.04090838,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"91",Nature Reserve,"9","91","91",5.37969987,PUBLIC,1.1.1,Strict nature reserves,"0",Unknown
+"110",Detached Home,"1","11","110",0.21105408,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.99673028,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"150",Miscellaneous Improvements on Residential Land,"1","15","150",0.33373144,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.60822701,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.17781109,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.93622021,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.10158512,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.12146046,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.10181917,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.1967961,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.8473225,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.60135428,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"110",Detached Home,"1","11","110",0.08075943,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.10159479,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.06344588,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"110",Detached Home,"1","11","110",0.32694993,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.1996738,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.10137516,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.75463552,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.10114791,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.19864828,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.1009288,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.18687318,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",0.10070877,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"91",Nature Reserve,"9","91","91",39.55082362,PUBLIC,1.1.1,Strict nature reserves,"21",Pasture and grassland
+"78",Other Community service facilities,"7","78","78",2.09164445,PUBLIC,5.5.2,Public services,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",53.01261394,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",16.70741255,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",47.74589422,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",2.0982628,PRIVATE,5.4.2,Rural residential with agriculture,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",72.83516502,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",1.23671275,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",72.29360244,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",10.23439025,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"524",Livestock Production - Beef Cattle,"5","52","524",35.65738129,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"524",Livestock Production - Beef Cattle,"5","52","524",2.02406893,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",69.17244367,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",12.39913867,PRIVATE,3.2.0,Grazing modified pastures,"0",Unknown
+"572",Native Hardwood (standing timber),"5","57","572",40.49601683,PRIVATE,2.2.0,Production native forests,"21",Pasture and grassland
+"525",Livestock Production - Dairy Cattle,"5","52","525",25.01173696,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"821",Outdoor Sports Grounds - town or suburban facilities,"8","82","821",0.10470909,PRIVATE,5.5.3,Recreation and culture,"0",Unknown
+"844",Parks and Gardens (local),"8","84","844",0.68647084,PRIVATE,5.5.3,Recreation and culture,"0",Unknown
+"100",Vacant Residential Home Site/Surveyed Lot,"1","10","100",0.14152873,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",19.07635373,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"110",Detached Home,"1","11","110",0.08235257,PRIVATE,5.4.1,Urban residential,"0",Unknown
+"525",Livestock Production - Dairy Cattle,"5","52","525",38.21004456,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"930",National Park - Land,"9","93","930",1524.01765907,PUBLIC,1.1.3,National park,"11",Native woody cover
+"530",Mixed farming and grazing  (generally more than 20 ha),"5","53","530",20.68556224,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"950",Forest Reserves - Public,"9","95","950",409.32059871,PUBLIC,1.1.7,Other conserved area,"11",Native woody cover
+"930",National Park - Land,"9","93","930",651.11795429,PUBLIC,1.1.3,National park,"11",Native woody cover
+"524",Livestock Production - Beef Cattle,"5","52","524",39.68911555,PRIVATE,3.2.0,Grazing modified pastures,"21",Pasture and grassland
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",1.19879094,PUBLIC,5.6.0,Utilities,"0",Unknown
+"90",Reserved Land,"9","90","90",43.29015671,PUBLIC,1.1.7,Other conserved area,"124",Softwood Plantation
+"601","Unspecified - Transport, Storage, Utilities and Communication","6","60","601",6.03375584,PUBLIC,5.6.0,Utilities,"0",Unknown
+"117",Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","11","117",11.248273,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+"950",Forest Reserves - Public,"9","95","950",0.13771456,PUBLIC,1.1.7,Other conserved area,"0",Unknown
+"103",Vacant Residential Rural / Rural Lifestyle (0.4 to 20 Hectares),"1","10","103",1.4572504,PRIVATE,5.4.3,Rural residential without agriculture,"0",Unknown
+BUILT,Built Up Area,B,BU,BUA,1100.85061162,BUILT,5.4.1,Urban residential,,
+"930",National Park - Land,"9","93","930",47.62708818,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",39.73623908,PUBLIC,1.1.3,National park,"11",Native woody cover
+"930",National Park - Land,"9","93","930",0.85926529,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",0.50060131,PUBLIC,1.1.3,National park,"0",Unknown
+"930",National Park - Land,"9","93","930",94.27620666,PUBLIC,1.1.3,National park,"11",Native woody cover
