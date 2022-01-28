@@ -6,7 +6,7 @@ library(dplyr)
 
 ### 2006
 
-Landuse_2006 <- read.csv("C:/Users/szeteyka/OneDrive - Deakin University/PhD/Data/Land Use/Landuse_2006.csv")
+Landuse_2006 <- read.csv("Landuse_2006.csv") # adjust code to match your working directory
 
 sum(Landuse_2006$HECTARES)
 
@@ -46,7 +46,7 @@ sum(HouAcc$area, bush$area, agri$area, protected$area)
 
 ### 2008
 
-Landuse_2008 <- read.csv("C:/Users/szeteyka/OneDrive - Deakin University/PhD/Data/Land Use/Landuse_2008.csv")
+Landuse_2008 <- read.csv("Landuse_2008.csv") # adjust code to match your working directory
 
 sum(Landuse_2008$HECTARES)
 
@@ -94,7 +94,7 @@ sum(ag_protec_area$HECTARES)
 
 ### 2010
 
-Landuse_2010 <- read.csv("C:/Users/szeteyka/OneDrive - Deakin University/PhD/Data/Land Use/Landuse_2010.csv")
+Landuse_2010 <- read.csv("Landuse_2010.csv") # adjust code to match your working directory
 
 sum(Landuse_2010$HECTARES)
 
@@ -133,7 +133,7 @@ sum(HouAcc$area, bush$area, agri$area, protected$area)
 
 ### 2012
 
-Landuse_2012 <- read.csv("C:/Users/szeteyka/OneDrive - Deakin University/PhD/Data/Land Use/Landuse_2012.csv")
+Landuse_2012 <- read.csv("Landuse_2012.csv") # adjust code to match your working directory
 
 sum(Landuse_2012$HECTARES)
 
@@ -174,7 +174,7 @@ sum(HouAcc$area, bush$area, agri$area, protected$area)
 
 ### 2014
 
-Landuse_2014 <- read.csv("C:/Users/szeteyka/OneDrive - Deakin University/PhD/Data/Land Use/Landuse_2014.csv")
+Landuse_2014 <- read.csv("Landuse_2014.csv") # adjust code to match your working directory
 
 sum(Landuse_2014$HECTARES)
 
@@ -215,7 +215,7 @@ sum(HouAcc$area, bush$area, agri$area, protected$area)
 
 ### 2016
 
-Landuse_2016 <- read.csv("C:/Users/szeteyka/OneDrive - Deakin University/PhD/Data/Land Use/Landuse_2016.csv")
+Landuse_2016 <- read.csv("Landuse_2016.csv") # adjust code to match your working directory
 
 sum(Landuse_2016$HECTARES)
 
@@ -256,7 +256,7 @@ sum(HouAcc$area, bush$area, agri$area, protected$area)
 
 ### 2017
 
-Landuse_2017 <- read.csv("C:/Users/szeteyka/OneDrive - Deakin University/PhD/Data/Land Use/Landuse_2017.csv")
+Landuse_2017 <- read.csv("Landuse_2017.csv") # adjust code to match your working directory
 
 sum(Landuse_2017$HECTARES)
 
