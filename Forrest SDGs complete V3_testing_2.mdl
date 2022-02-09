@@ -1,0 +1,4948 @@
+{UTF-8}
+Land for BD impact= INTEG (
+	land use change over time-land reduction from CD,
+		0)
+	~	hectares
+	~		|
+
+land use change impact on biodiversity=
+	(species area curve coefficient*Land for BD impact^species area curve exponent)/simulation time
+	~	species/Year
+	~	Species area curve, z = 0.86
+		S = cA^z
+		Assume that species richness initial variable is 50% of total
+		c = 2
+		Area = 8375
+		S = 4637
+	|
+
+land use change over time=
+	(Forest Land+Protected Land)/simulation time
+	~	hectares/Year
+	~		|
+
+land reduction from CD=
+	Land for BD impact*impact of climate damage on biodiversity
+	~	hectares/Year
+	~		|
+
+Forest to Housing transfer rate=
+	MAX(0, MIN ( max land housing, 
+	             forest to housing change 
+	                  * ( Forest Land ) 
+	                  / forest to housing land allocation time ))
+	~	ha/Year
+	~		|
+
+Species richness decrease rate=
+	(invasive species impact discrepancy/simulation time)*fire impact on biodiversity
+	~	species/Year
+	~		|
+
+effect of housing on migration=
+	
+	IF THEN ELSE( housing supply demand ratio > 1, 
+	(IF THEN ELSE("social housing supply/demand ratio" = 0, 
+	(average house price/reference average house price)*housing supply demand ratio, 
+	(average house price/reference average house price)*housing supply demand ratio*"social housing supply/demand ratio"\
+		)),
+	1)
+	~	Dmnl
+	~	As demand goes up, supply goes down and the ratio also goes down, and the prices go \
+		up.
+		Additionally, if the housing supply/demand ratio is less than 1, then \
+		there aren't enough houses available for new families to move in unless \
+		existing families move out, so the effect of housing on net migration is \
+		zero (this also affects all other effect variables on migration).
+	|
+
+minimum average land per house=
+	1.2
+	~	ha
+	~	Rural Living Zone has minimum 2ha and Low Density Residential Zone has \
+		minimum 0.4ha: average min of the two
+	|
+
+housing discrepancy=
+	MIN(housing demand-(Residential Housing+Tourism Housing), 140)
+	~	structure
+	~		|
+
+housing discrepancy delay=
+	DELAY3(housing discrepancy/housing transfer delay, housing build delay + Current time\
+		 )
+	~	structure/Year
+	~		|
+
+housing land occupied=
+	minimum average land per house*(Residential Housing+Tourism Housing)
+	~	hectares
+	~		|
+
+initial tourist increase=
+	RAMP(100, 2000, 2006 )
+	~	people/Year
+	~		|
+
+housing supply demand ratio=
+	(Residential Housing+Tourism Housing)/housing demand
+	~	Dmnl
+	~		|
+
+Rate of tourist increase=
+	IF THEN ELSE(Time > 2006, tourist house discrepancy*average size of household*tourist numbers multiplier\
+		, 
+	initial tourist increase )
+	~	people/Year
+	~	IF THEN ELSE ( tourist house discrepancy <0 , tourist house discrepancy * -(tourist \
+		numbers multiplier) , 
+		 tourist house discrepancy * (tourist numbers multiplier) )
+	|
+
+Housing construction=
+	IF THEN ELSE(Wastewater availability > 0 :AND: Housing Land > housing land occupied,\
+		 housing discrepancy delay
+	, 0)
+	~	structure/Year
+	~	IF THEN ELSE(Wastewater availability > 0 :AND: Housing Land > housing land occupied \
+		, housing discrepancy/housing build delay
+		, 0)
+	|
+
+Residential housing allocation rate=
+	MIN((total population/average size of household)/housing transfer delay, Housing Supply\
+		/housing transfer delay)
+	~	structure/Year
+	~		|
+
+Number Of Tourists= INTEG (
+	Rate of tourist increase,
+		0)
+	~	people/Year
+	~		|
+
+number of mortgaged households=
+	fraction of mortgaged houses*Residential Housing
+	~	structure
+	~		|
+
+normalised housing stress=
+	(number of households under mortgage stress + number of households under rent stress\
+		)/Residential Housing
+	~	Dmnl
+	~		|
+
+tourist house discrepancy=
+	(Tourism Housing*number of times each tourist house occupied per year - (Number Of Tourists\
+		/average size of household
+	))
+	~	structure/Year
+	~		|
+
+max number of premises to connect to the internet=
+	Residential Housing+Tourism Housing
+	~	structure
+	~		|
+
+Housing Supply= INTEG (
+	Housing construction-Housing demolition-Residential housing allocation rate-Tourism housing allocation rate\
+		,
+		100)
+	~	structure
+	~	From ABS Census data
+	|
+
+number of rented households=
+	(fraction of rented houses*Residential Housing)-Social Housing Supply
+	~	structure
+	~	Assume that social housing will withdraw households from the rental market
+	|
+
+number of young people at risk for intergenerational inequality=
+	intergenerational risk factor*"0-14"*(sum of people below poverty line/Residential Housing\
+		)
+	~	people
+	~		|
+
+Tourism housing allocation rate=
+	MIN((Number Of Tourists/(average size of household*number of times each tourist house occupied per year\
+		))/housing transfer delay, Housing Supply/housing transfer delay)
+	~	structure/Year
+	~		|
+
+Residential Housing= INTEG (
+	Residential housing allocation rate,
+		67)
+	~	structure
+	~		|
+
+housing transfer delay=
+	2
+	~	Year
+	~		|
+
+Tourism Housing= INTEG (
+	Tourism housing allocation rate,
+		33)
+	~	structure
+	~		|
+
+Wastewater approved funding=
+	IF THEN ELSE ( Wastewater funding scenario
+	                  = 1, 
+	             1.01e+07, 
+	             0)
+	~	dollar
+	~	Confirmed CFA truck $ with Pete Ashton
+	|
+
+Wastewater funding scenario=
+	0
+	~	Dmnl
+	~		|
+
+time at which Wastewater is complete=
+	IF THEN ELSE(Wastewater funding scenario > 0, build delay Wastewater+build time Wastewater\
+		+funding lag Wastewater, 0)
+	~	Year
+	~		|
+
+tourist numbers multiplier=
+	
+	SMOOTH3( impact of tourism infrastructure improvements on tourist numbers*
+	impact of climate on tourism*
+	impact of bus frequency on tourist numbers , 10 )
+	~	Dmnl
+	~		|
+
+max land forest=
+	max land-Agriculture Land-Housing Land-Protected Land
+	~	hectares
+	~		|
+
+max land housing=
+	max land-Agriculture Land-Forest Land-Protected Land
+	~	hectares
+	~		|
+
+max land ag=
+	max land-Forest Land-Housing Land-Protected Land
+	~	hectares
+	~		|
+
+max land protected=
+	max land-Agriculture Land-Forest Land-Housing Land
+	~	hectares
+	~		|
+
+Forest to Agriculture transfer rate=
+	MAX(0, MIN ( max land ag, 
+	             forest to agriculture change 
+	                  * ( Forest Land ) 
+	                  / ( forest to agriculture land allocation time ) ))
+	~	ha/Year
+	~		|
+
+Agricultural to Housing transfer rate=
+	MAX(0, MIN (max land housing, 
+	             agriculture to housing change 
+	                  * ( Agriculture Land 
+	                       - agriculture protected land ) 
+	                  / agriculture to housing land allocation time ))
+	~	ha/Year
+	~		|
+
+Forest to Protected transfer rate=
+	MAX(0, MIN ( max land protected, forest to protected change * ( Forest Land / forest to protected allocation time
+	 )))
+	~	hectare/Year
+	~		|
+
+Agriculture to Forest transfer rate=
+	MAX(0, MIN ( max land forest, agriculture to forest change * ( Agriculture Land  - agriculture protected land
+	 ) 
+	                       / agriculture to forest land allocation time ))
+	~	ha/Year
+	~		|
+
+Social housing construction=
+	IF THEN ELSE(Wastewater availability>0, social housing discrepancy*social housing scenario switch\
+		/social housing build delay
+	, 0)
+	~	structure/Year
+	~		|
+
+Social Housing Supply= INTEG (
+	Social housing construction,
+		0)
+	~	structure
+	~		|
+
+Rate of productivity change other=
+	other productivity multiplier*productivity factor other*(capital input other^elasticity q1 other\
+		)*(labour input other^elasticity q2 other
+	)
+	~	dollars/(Year*Year)
+	~		|
+
+Rate of productivity change tourism=
+	tourism productivity multiplier*productivity factor tourism*(capital input tourism^elasticity q1 tourism\
+		)*(labour input tourism
+	^elasticity q2 tourism)
+	~	dollars/(Year*Year)
+	~		|
+
+elasticity q2 other=
+	0.74
+	~	Dmnl
+	~		|
+
+max land=
+	12041
+	~	hectares/Year
+	~	Limiting factor for land stock expansion
+	|
+
+elasticity q1 tourism=
+	0.26
+	~	Dmnl
+	~		|
+
+elasticity q2 tourism=
+	0.73
+	~	Dmnl
+	~		|
+
+Protected Land= INTEG (
+	Forest to Protected transfer rate
+	,
+		 
+		             INIT protected land)
+	~	hectare
+	~		|
+
+elasticity q1 other=
+	0.2
+	~	Dmnl
+	~		|
+
+build time Wastewater=
+	3
+	~	Year
+	~		|
+
+asset component discrepancy Wastewater=
+	total number of asset components Wastewater- Completed Wastewater
+	~	asset component
+	~		|
+
+CFA Truck approved funding=
+	IF THEN ELSE ( funding scenario CFA Truck
+	                  = 1, 
+	             21000, 
+	             0)
+	~	dollar
+	~	Confirmed CFA truck $ with Pete Ashton
+	|
+
+CFA Truck availability=
+	IF THEN ELSE(time at which CFA Truck is complete>0, STEP(1, (Current time + time at which CFA Truck is complete\
+		)) , 0 )
+	~	Year
+	~		|
+
+MTB Trails approved funding=
+	IF THEN ELSE ( MTB Trails funding scenario
+	                  = 1, 
+	             4.55e+06, 
+	             0)
+	~	dollar
+	~	Confirmed CFA truck $ with Pete Ashton
+	|
+
+MTB Trails Build In Progress= INTEG (
+	MTB Trails start rate-MTB Trails completion rate,
+		0)
+	~	asset component
+	~		|
+
+MTB Trails completion rate=
+	(asset component discrepancy MTB Trails)/build time MTB Trails
+	~	asset component/Year
+	~		|
+
+MTB Trails Funding= INTEG (
+	-MTB Trails funding allocation rate,
+		MTB Trails approved funding)
+	~	dollar
+	~		|
+
+MTB Trails funding allocation rate=
+	MTB Trails Funding/MTB Trails funding duration
+	~	dollar/Year
+	~		|
+
+MTB Trails funding duration=
+	1
+	~	Year
+	~		|
+
+MTB Trails funding scenario=
+	1
+	~	Dmnl
+	~		|
+
+MTB trails improvements availability=
+	IF THEN ELSE(time at which MTB Trails is complete>0, STEP(1, (Current time + time at which MTB Trails is complete\
+		)) , 0 )
+	~	Year
+	~		|
+
+MTB Trails start rate=
+	DELAY1 ( MTB Trails funding allocation rate/cost per asset component MTB Trails, build delay MTB Trails\
+		 + funding lag MTB Trails)
+	~	asset component/Year
+	~		|
+
+funding lag MTB Trails=
+	0.5
+	~	Year
+	~		|
+
+funding lag Wastewater=
+	2
+	~	Year
+	~		|
+
+cost per asset component Forrest Common=
+	1.7e+06
+	             / 10
+	~	dollar/asset component
+	~		|
+
+cost per asset component GTOC=
+	( 1.2e+07) 
+	             / 10
+	~	dollar/asset component
+	~		|
+
+cost per asset component MTB Trails=
+	4.55e+06
+	             / 10
+	~	dollar/asset component
+	~		|
+
+CFA Truck Build In Progress= INTEG (
+	CFA Truck start rate-CFA Truck completion rate,
+		0)
+	~	asset component
+	~		|
+
+CFA Truck completion rate =
+	(asset component discrepancy CFA Truck)/build time CFA Truck
+	~	asset component/Year
+	~		|
+
+CFA Truck Funding = INTEG (
+	-CFA Truck funding allocation rate,
+		CFA Truck approved funding)
+	~	dollar
+	~		|
+
+CFA Truck funding allocation rate=
+	CFA Truck Funding/CFA Truck funding duration
+	~	dollar/Year
+	~		|
+
+CFA Truck funding duration=
+	1
+	~	Year
+	~		|
+
+CFA Truck start rate=
+	DELAY1 ( CFA Truck funding allocation rate/cost per asset component CFA Truck, build delay CFA Truck\
+		 + funding lag CFA Truck)
+	~	asset component/Year
+	~		|
+
+GTOC funding duration=
+	2
+	~	Year
+	~		|
+
+asset component discrepancy CFA Truck=
+	total number of asset components CFA Truck- Completed CFA Truck
+	~	asset component
+	~		|
+
+asset component discrepancy Forrest Common=
+	total number of asset components Forrest Common- Completed Forrest Common
+	~	asset component
+	~		|
+
+asset component discrepancy GTOC=
+	total number of asset components GTOC- Completed GTOC
+	~	asset component
+	~		|
+
+asset component discrepancy MTB Trails=
+	total number of asset components MTB Trails- Completed MTB Trails
+	~	asset component
+	~		|
+
+Completed MTB Trails= INTEG (
+	MTB Trails completion rate,
+		0)
+	~	asset component
+	~		|
+
+funding scenario CFA Truck=
+	0
+	~	Dmnl
+	~		|
+
+Wastewater availability=
+	IF THEN ELSE(time at which Wastewater is complete > 0, STEP(1, (Current time + time at which Wastewater is complete\
+		)) , 0 )
+	~	Year
+	~	The time from which the wastewater infrastructure is complete and can \
+		begin having an effect on other variables
+	|
+
+Completed CFA Truck= INTEG (
+	CFA Truck completion rate,
+		0)
+	~	asset component
+	~		|
+
+Completed Forrest Common= INTEG (
+	Forrest Common completion rate,
+		0)
+	~	asset component
+	~		|
+
+Completed GTOC= INTEG (
+	GTOC completion rate,
+		0)
+	~	asset component
+	~		|
+
+build delay MTB Trails=
+	1
+	~	Year
+	~		|
+
+build delay Wastewater=
+	2
+	~	Year
+	~		|
+
+Completed Wastewater= INTEG (
+	Wastewater completion rate,
+		0)
+	~	asset component
+	~		|
+
+funding lag CFA Truck=
+	1
+	~	Year
+	~		|
+
+funding lag Forrest Common=
+	2
+	~	Year
+	~		|
+
+funding lag GTOC=
+	5
+	~	Year
+	~		|
+
+time at which MTB Trails is complete=
+	IF THEN ELSE(MTB Trails funding scenario > 0, build delay MTB Trails+build time MTB Trails\
+		+funding lag MTB Trails , 0 )
+	~	Year
+	~		|
+
+cost per asset component CFA Truck=
+	210000/10
+	~	dollar/asset component
+	~		|
+
+GTOC Funding= INTEG (
+	-GTOC funding allocation rate,
+		GTOC approved funding)
+	~	dollar
+	~		|
+
+build time CFA Truck=
+	0.25
+	~	Year
+	~		|
+
+build delay CFA Truck=
+	0.5
+	~	Year
+	~		|
+
+build delay Forrest Common=
+	0.5
+	~	Year
+	~		|
+
+build delay GTOC=
+	1
+	~	Year
+	~		|
+
+GTOC completion rate=
+	(asset component discrepancy GTOC)/build time GTOC
+	~	asset component/Year
+	~		|
+
+Wastewater funding duration=
+	3
+	~	Year
+	~		|
+
+Forrest Common completion rate=
+	(asset component discrepancy Forrest Common)/build time Forrest Common
+	~	asset component/Year
+	~		|
+
+Wastewater start rate=
+	DELAY1 ( Wastewater funding allocation rate/cost per asset component Wastewater, build delay Wastewater\
+		 + funding lag Wastewater)
+	~	asset component/Year
+	~		|
+
+build time Forrest Common=
+	0.5
+	~	Year
+	~		|
+
+build time GTOC=
+	2
+	~	Year
+	~		|
+
+build time MTB Trails=
+	1
+	~	Year
+	~		|
+
+Forrest Common start rate=
+	DELAY1 ( Forrest Common funding allocation rate/cost per asset component Forrest Common\
+		, build delay Forrest Common + funding lag Forrest Common)
+	~	asset component/Year
+	~		|
+
+total number of asset components MTB Trails=
+	10
+	~	asset component
+	~		|
+
+time at which CFA Truck is complete=
+	IF THEN ELSE(funding scenario CFA Truck > 0, build delay CFA Truck+build time CFA Truck\
+		+funding lag CFA Truck , 0 )
+	~	Year
+	~		|
+
+Forrest Common Funding= INTEG (
+	-Forrest Common funding allocation rate,
+		Forrest Common approved funding)
+	~	dollar
+	~		|
+
+GTOC approved funding=
+	IF THEN ELSE ( GTOC funding scenario
+	                  = 1, 
+	             1.2e+07, 
+	             0)
+	~	dollar
+	~	Confirmed CFA truck $ with Pete Ashton
+	|
+
+GTOC availability=
+	IF THEN ELSE(time at which GTOC is complete>0, STEP(1, (Current time + time at which GTOC is complete\
+		)) , 0 )
+	~	Year
+	~		|
+
+GTOC Build In Progress= INTEG (
+	GTOC start rate-GTOC completion rate,
+		0)
+	~	asset component
+	~		|
+
+Wastewater funding allocation rate =
+	Wastewater Funding/Wastewater funding duration
+	~	dollar/Year
+	~		|
+
+Forrest Common Build In Progress= INTEG (
+	Forrest Common start rate-Forrest Common completion rate,
+		0)
+	~	asset component
+	~		|
+
+GTOC funding allocation rate=
+	GTOC Funding/GTOC funding duration
+	~	dollar/Year
+	~		|
+
+Forrest Common funding scenario=
+	0
+	~	Dmnl
+	~		|
+
+time at which Forrest Common is complete=
+	IF THEN ELSE(Forrest Common funding scenario > 0, build delay Forrest Common+build time Forrest Common\
+		+funding lag Forrest Common , 0 )
+	~	Year
+	~		|
+
+time at which GTOC is complete=
+	IF THEN ELSE(GTOC funding scenario > 0, build delay GTOC+build time GTOC+funding lag GTOC\
+		 , 0 )
+	~	Year
+	~		|
+
+cost per asset component Wastewater=
+	1.01e+07
+	             / 10
+	~	dollar/asset component
+	~		|
+
+Wastewater completion rate=
+	(asset component discrepancy Wastewater)/build time Wastewater
+	~	asset component/Year
+	~		|
+
+Wastewater Funding= INTEG (
+	-Wastewater funding allocation rate,
+		Wastewater approved funding)
+	~	dollar
+	~		|
+
+total number of asset components GTOC=
+	10
+	~	asset component
+	~		|
+
+GTOC funding scenario=
+	0
+	~	Dmnl
+	~		|
+
+total number of asset components Wastewater=
+	10
+	~	asset component
+	~		|
+
+total number of asset components Forrest Common=
+	10
+	~	asset component
+	~		|
+
+Forrest Common availability=
+	IF THEN ELSE(time at which Forrest Common is complete>0, STEP(1, (Current time+ time at which Forrest Common is complete
+	)) , 0 )
+	~	Year
+	~		|
+
+GTOC start rate=
+	DELAY1 ( GTOC funding allocation rate/cost per asset component GTOC, build delay GTOC\
+		 + funding lag GTOC)
+	~	asset component/Year
+	~		|
+
+total number of asset components CFA Truck=
+	10
+	~	asset component
+	~		|
+
+Forrest Common approved funding=
+	IF THEN ELSE ( Forrest Common funding scenario
+	                  = 1, 
+	             1.7e+06, 
+	             0)
+	~	dollar
+	~	Confirmed CFA truck $ with Pete Ashton
+	|
+
+Wastewater Build In Progress= INTEG (
+	Wastewater start rate-Wastewater completion rate,
+		0)
+	~	asset component
+	~		|
+
+Forrest Common funding allocation rate=
+	Forrest Common Funding/Forrest Common funding duration
+	~	dollar/Year
+	~		|
+
+Forrest Common funding duration=
+	1
+	~	Year
+	~		|
+
+"migration rate 15-64"=
+	"reference migration rate 15-64"*effect of job availability on migration*effect of housing on migration\
+		*job availability unit conversion factor
+	~	1/Year
+	~		|
+
+"migration rate 0-14"=
+	"migration rate 15-64"*"reference migration rate 0-14"
+	~	1/Year
+	~	Migration rate of 0-14 cohort will be strongly influenced by the migration \
+		rate of their parents' cohort. We worked out 0-14 migration/15-64 \
+		migration using Otway SA2 data for 2017-2019 and took the average.
+	|
+
+"reference migration rate 0-14"=
+	-4
+	~	Dmnl
+	~		|
+
+agriculture to forest change=
+	("number of businesses (agriculture)"*average land per agricultural business)/Agriculture Land
+	~	Dmnl
+	~	Calibrated 0.054
+	|
+
+total land=
+	Agriculture Land+Forest Land+Housing Land+Protected Land
+	~	hectares
+	~	Mean total land area 2008-2017 = 12427 hectares
+	|
+
+fertiliser consumption=
+	( Fertilisation Intensity 
+	             * Agriculture Land )
+	~	TonNutrient/Year
+	~		|
+
+impact of climate damage on biodiversity=
+	0.00091
+	~	1/Year
+	~	Climate damage for Forrest area from LUTO model
+		Land suitable for biodiversity reduces by 10% between 1990 and 2100, \
+		therefore annualised reduction is 9.1e-4
+	|
+
+Total Other Productivity= INTEG (
+	Rate of productivity change other,
+		INIT other productivity)
+	~	dollars/Year
+	~		|
+
+INIT other productivity=
+	1.175e+06
+	~	dollars/Year
+	~		|
+
+INIT tourism productivity=
+	25000
+	~	dollars/Year
+	~		|
+
+fire impact on biodiversity=
+	1 + (1 - (1/FFDI model))
+	~	Dmnl
+	~		|
+
+INIT ag productivity=
+	1.875e+06
+	~	dollars/Year
+	~		|
+
+Total Tourism Productivity= INTEG (
+	Rate of productivity change tourism,
+		INIT tourism productivity)
+	~	dollars/Year
+	~		|
+
+Total Agricultural Productivity= INTEG (
+	Rate of productivity change ag,
+		INIT ag productivity)
+	~	dollars/Year
+	~		|
+
+invasive species impact discrepancy=
+	Species richness-baseline invasive species impact
+	~	species
+	~		|
+
+road accidents=
+	Road Quality*accident coefficient + 9.6
+	~	people
+	~	Intercept is dataset mean
+	|
+
+baseline invasive species impact=
+	INIT species richness - (0.21*INIT species richness)
+	~	species
+	~	21% species richnesss decline compared to natural systems; Crystal-Ornelas \
+		et al 2020
+	|
+
+accident coefficient=
+	-19.25
+	~	people
+	~	Calibrated
+	|
+
+probability of catastrophic bushfire elsewhere in Victoria=
+	0.1
+	~	Dmnl
+	~	Assume 1 catastrophic bushfire every ten years elsewhere
+	|
+
+impact of climate on tourism=
+	1-((1-bushfire risk fraction)+probability of catastrophic bushfire elsewhere in Victoria\
+		-annual probability of flood)
+	~	Dmnl
+	~		|
+
+effect of flooding on road quality=
+	1-(damage to road from flooding*annual probability of flood)
+	~	Dmnl
+	~		|
+
+annual probability of flood=
+	0.01
+	~	Dmnl
+	~		|
+
+reference FFDI=
+	1.4
+	~	Dmnl
+	~	FFDI as at 1973; first year of data for linear model
+	|
+
+bushfire risk fraction=
+	reference FFDI/FFDI model
+	~	Dmnl
+	~		|
+
+increasing bushfire safety from GTOC=
+	IF THEN ELSE(GTOC availability>0, 1-bushfire risk fraction, 1)
+	~	Dmnl
+	~		|
+
+Becoming safer and healthier=
+	(increasing bushfire safety from GTOC*(biodiversity impact on health*
+	(middle and high income population/total population)*
+	total population)/
+	Time)
+	~	people/Year
+	~		|
+
+biodiversity impact on health=
+	Species richness/INIT species richness
+	~	Dmnl
+	~		|
+
+risk to health from increasing temperatures=
+	climate damage fraction
+	~	Dmnl
+	~		|
+
+FFDI model=
+	(FFDI model coefficient*Time) - 51.7397
+	~	Dmnl
+	~	linear model of FFDI dataset from 1990-2020
+	|
+
+risk to health from bushfire=
+	bushfire risk fraction
+	~	Dmnl
+	~		|
+
+FFDI model coefficient=
+	 0.02662
+	~	1/Year
+	~	Coefficient of linear model of FFDI dataset 1990-2020
+	|
+
+species area curve coefficient=
+	2
+	~	species/hectares
+	~		|
+
+CO2 change=
+	CO2 linear model-reference CO2
+	~	ppm
+	~		|
+
+Species richness increase rate=
+	impact of cultural burning on biodiversity*land use change impact on biodiversity
+	~	species/Year
+	~		|
+
+agriculture productivity multiplier=
+	regenerative agriculture multiplier*net climate change impact on economy
+	~	Dmnl
+	~		|
+
+rainfall change=
+	rainfall linear model-reference rainfall
+	~	mm
+	~		|
+
+temperature change since 1865=
+	temperature linear model-reference temperature 1865
+	~	DegreesC
+	~		|
+
+reference rainfall=
+	776
+	~	mm
+	~	Pennyroyal rainfall measuring station; mean of annual rainfall 1960-2020
+	|
+
+INIT species richness=
+	4637
+	~	species
+	~	Baseline 1990 data for species richness in the Colac Otway LGA area. \
+		Includes amphibians, birds, mammals, plants and reptiles.
+	|
+
+reference temperature 1865=
+	16.6
+	~	DegreesC
+	~	Earliest available full year dataset for Cape Otway climate station
+	|
+
+reference CO2=
+	348.33
+	~	ppm
+	~	CO2 mean Cape Grim data for 1976-2000
+	|
+
+simulation time=
+	50
+	~	Year
+	~		|
+
+species area curve exponent=
+	0.86
+	~	Dmnl
+	~		|
+
+Species richness= INTEG (
+	Species richness increase rate-Species richness decrease rate,
+		INIT species richness)
+	~	species
+	~		|
+
+climate damage fraction=
+	1/(1+climate damage scale*(temperature change since 1865/reference temperature for climate damages\
+		)^climate damage nonlinearity)
+	~	Dmnl
+	~	Fraction of Output lost to combating Climate Change.
+	|
+
+forest to housing change=
+	(average land per house*housing demand)/Housing Land
+	~	Dmnl
+	~	0.13 Calibrated
+	|
+
+agriculture to housing change=
+	(average land per house*housing demand)/Housing Land
+	~	Dmnl
+	~	0.035 Calibrated
+	|
+
+Forest Land= INTEG (
+	Agriculture to Forest transfer rate-Forest to Agriculture transfer rate-Forest to Housing transfer rate\
+		-Forest to Protected transfer rate,
+		 
+		INIT forest land)
+	~	hectare
+	~		|
+
+forest to agriculture change=
+	0.4
+	~	Dmnl
+	~	Calibrated
+	|
+
+Fertilisation intensity change rate  = 
+        Fertilisation Intensity 
+             * fertilisation intensity change 
+             / time to adjust fertilisation intensity
+	~	TonNutrient/(Year*Year*ha)
+	~		|
+
+forest to protected allocation time=
+	542
+	~	Year
+	~	Calibrated
+	|
+
+forest to protected change=
+	25
+	~	Dmnl
+	~		|
+
+fertilisation intensity change=
+	-0.1
+	~	Dmnl
+	~	Calibrated
+	|
+
+CO2 linear model=
+	CO2 model coefficient*Time - 3177.44
+	~	ppm
+	~	Cape Grim data modelled y-intercept -3177.44
+	|
+
+CO2 model coefficient=
+	1.77
+	~	ppm/Year
+	~	Cape Grim linear model of CO2 increase
+	|
+
+temperature linear model=
+	(temperature model coefficient*Time)-47.88
+	~	DegreesC
+	~	Modelled intercept of equation = -47.87707
+	|
+
+rainfall model coefficient=
+	-2.711
+	~	mm/Year
+	~	Coefficient of linear model of annual rainfall since 1990 using Pennyroyal \
+		weather station data
+	|
+
+rainfall linear model=
+	(rainfall model coefficient*Time)+ 6182.65
+	~	mm
+	~	Intercept calculated from linear model for data 1990-2020 for Pennyroyal \
+		weather station
+	|
+
+temperature model coefficient=
+	0.03241
+	~	DegreesC/Year
+	~	Coefficient of linear model of Cape Otway annual mean temperatures from \
+		1990-2020
+	|
+
+profitability increase from regenerative agriculture=
+	RA coefficient*Time +RA intercept
+	~	Dmnl
+	~	Linear model from NSW data - Ogilvy et al. 2018
+	|
+
+RA coefficient=
+	-0.034
+	~	Dmnl
+	~		|
+
+RA intercept=
+	69.8
+	~	Dmnl
+	~		|
+
+regenerative agriculture multiplier=
+	1+(fraction of land under regenerative agriculture*profitability increase from regenerative agriculture\
+		)
+	~	Dmnl
+	~		|
+
+fraction of land under regenerative agriculture=
+	0.05
+	~	fraction
+	~	Can be a scenario variable
+	|
+
+Rate of productivity change ag=
+	agriculture productivity multiplier*productivity factor ag*(capital input ag^elasticity q1 ag\
+		)*(labour input ag^elasticity q2 ag)
+	~	dollars/(Year*Year)
+	~		|
+
+Current time=
+	2021
+	~	Year
+	~		|
+
+tourism productivity multiplier=
+	Number Of Tourists/normal tourist numbers
+	~	Dmnl
+	~		|
+
+total productivity=
+	Total Agricultural Productivity+Total Other Productivity+Total Tourism Productivity
+	~	dollar/Year
+	~		|
+
+other productivity multiplier=
+	effect of internet on other sector business*"effect of non-local school parents participating in Forrest's economy"
+	~	Dmnl
+	~		|
+
+inequality indicator=
+	(disability fraction+households without internet access fraction+normalised intergenerational inequality youth at risk\
+		+
+	normalised poverty line+normalised travel inequality+normalised unemployed+normalised housing stress\
+		)/7
+	~	Dmnl
+	~	Arithmetic mean
+	|
+
+"number of businesses (tourism)"=
+	INTEGER(sum("number of businesses in income bracket (tourism)"[Business Income!]))
+	~	structure
+	~		|
+
+"number of businesses in income bracket (agriculture)"["0-$50k"]=
+	("business income distribution (agriculture)"["0-$50k"]*Total Agricultural Productivity\
+		)/25000 ~~|
+"number of businesses in income bracket (agriculture)"["$50k-$100k"]=
+	("business income distribution (agriculture)"["$50k-$100k"]*Total Agricultural Productivity\
+		)/75000 ~~|
+"number of businesses in income bracket (agriculture)"["$100k-$200k"]=
+	("business income distribution (agriculture)"["$100k-$200k"]*Total Agricultural Productivity\
+		)/150000 ~~|
+"number of businesses in income bracket (agriculture)"["$200k-$500k"]=
+	("business income distribution (agriculture)"["$200k-$500k"]*Total Agricultural Productivity\
+		)/350000 ~~|
+"number of businesses in income bracket (agriculture)"["$500k-$2m"]=
+	("business income distribution (agriculture)"["$500k-$2m"]*Total Agricultural Productivity\
+		)/1.25e+06 ~~|
+"number of businesses in income bracket (agriculture)"["$2m-$5m"]=
+	("business income distribution (agriculture)"["$2m-$5m"]*Total Agricultural Productivity\
+		)/3.5e+06
+	~	structure
+	~	Median values used for each for income bracket divisor
+	|
+
+"business income distribution (tourism)"["0-$50k"]=
+	0.1 ~~|
+"business income distribution (tourism)"["$50k-$100k"]=
+	0.1 ~~|
+"business income distribution (tourism)"["$100k-$200k"]=
+	0.1 ~~|
+"business income distribution (tourism)"["$200k-$500k"]=
+	0.3 ~~|
+"business income distribution (tourism)"["$500k-$2m"]=
+	0.3 ~~|
+"business income distribution (tourism)"["$2m-$5m"]=
+	0.1
+	~	structure*Year/dollars
+	~		|
+
+"number of businesses in income bracket (tourism)"["0-$50k"]=
+	("business income distribution (tourism)"["0-$50k"]*Total Tourism Productivity)/25000\
+		 ~~|
+"number of businesses in income bracket (tourism)"["$50k-$100k"]=
+	("business income distribution (tourism)"["$50k-$100k"]*Total Tourism Productivity)/\
+		75000 ~~|
+"number of businesses in income bracket (tourism)"["$100k-$200k"]=
+	("business income distribution (tourism)"["$100k-$200k"]*Total Tourism Productivity)\
+		/150000 ~~|
+"number of businesses in income bracket (tourism)"["$200k-$500k"]=
+	("business income distribution (tourism)"["$200k-$500k"]*Total Tourism Productivity)\
+		/350000 ~~|
+"number of businesses in income bracket (tourism)"["$500k-$2m"]=
+	("business income distribution (tourism)"["$500k-$2m"]*Total Tourism Productivity)/1.25e+06\
+		 ~~|
+"number of businesses in income bracket (tourism)"["$2m-$5m"]=
+	("business income distribution (tourism)"["$2m-$5m"]*Total Tourism Productivity)/3.5e+06
+	~	structure
+	~	Median values used for each for income bracket divisor
+	|
+
+"number of businesses in income bracket (other)"["0-$50k"]=
+	("business income distribution (other)"["0-$50k"]*Total Other Productivity)/25000 ~~|
+"number of businesses in income bracket (other)"["$50k-$100k"]=
+	("business income distribution (other)"["$50k-$100k"]*Total Other Productivity)/75000\
+		 ~~|
+"number of businesses in income bracket (other)"["$100k-$200k"]=
+	("business income distribution (other)"["$100k-$200k"]*Total Other Productivity)/150000\
+		 ~~|
+"number of businesses in income bracket (other)"["$200k-$500k"]=
+	("business income distribution (other)"["$200k-$500k"]*Total Other Productivity)/350000\
+		 ~~|
+"number of businesses in income bracket (other)"["$500k-$2m"]=
+	("business income distribution (other)"["$500k-$2m"]*Total Other Productivity)/1.25e+06\
+		 ~~|
+"number of businesses in income bracket (other)"["$2m-$5m"]=
+	("business income distribution (other)"["$2m-$5m"]*Total Other Productivity)/3.5e+06
+	~	structure
+	~	Median values used for each for income bracket divisor
+	|
+
+capital input other=
+	138131
+	~	dollars/Year
+	~		|
+
+productivity factor other=
+	700
+	~	1/job
+	~		|
+
+productivity factor tourism=
+	421.7
+	~	1/job
+	~		|
+
+capital input tourism=
+	928124
+	~	dollars/Year
+	~		|
+
+elasticity q2 ag=
+	0.01
+	~	Dmnl
+	~		|
+
+productivity factor ag=
+	145.7
+	~	1/job
+	~	Calibrated
+	|
+
+capital input ag=
+	2767.84
+	~	dollars/Year
+	~	Calibrated
+	|
+
+elasticity q1 ag=
+	0.45
+	~	Dmnl
+	~		|
+
+tower investment responsiveness=
+	0
+	~	Dmnl
+	~	This variable represents whether or not a new tower is built when it is \
+		oversubscribed. Currently a binary (yes/no) but can be modified to be an \
+		investment delay
+	|
+
+Fixed wireless tower investment rate=
+	IF THEN ELSE(tower investment responsiveness = 0, 0, tower oversubscription factor/tower build delay time\
+		)
+	~	tower/Year
+	~		|
+
+impact of bus frequency on tourist numbers=
+	IF THEN ELSE(tourist bus frequency>1, (1+((tourist bus frequency*tourist bus capacity\
+		)/Number Of Tourists)) , 1)
+	~	Dmnl
+	~		|
+
+tourist bus capacity=
+	25
+	~	people/bus
+	~		|
+
+tourist bus frequency=
+	0
+	~	bus/Year
+	~		|
+
+disease from wastewater=
+	(IF THEN ELSE(Wastewater availability > 0, WHO target disease burden/WHO target disease burden\
+		, disease burden before WW/WHO target disease burden))
+	~	Dmnl
+	~	Effect of installing new wastewater infrastructure as a proportion of the \
+		WHO target.
+	|
+
+cultural burning scenario switch=
+	0
+	~	Dmnl
+	~		|
+
+climate risk=
+	risk to health from bushfire*risk to health from increasing temperatures
+	~	Dmnl
+	~		|
+
+Becoming vulnerable=
+	((climate risk*
+	disability fraction*
+	water quality*
+	disease from wastewater*
+	excess disease burden from lowered healthcare access*
+	(low income population/total population)*
+	(road accidents/total population))*
+	total population)/
+	Time
+	~	people/Year
+	~		|
+
+Cultural burning rate=
+	IF THEN ELSE(Time < 2025, 0, (cultural burning discrepancy/cultural burning adjustment time\
+		)*cultural burning scenario switch)
+	~	1/Year
+	~	Assume that cultural burning won't commence until 2025
+	|
+
+low income population=
+	sum(number labour force in income bracket[low income!, Gender!])
+	~	people
+	~		|
+
+middle income population=
+	sum(number labour force in income bracket[mid income!,Gender!])
+	~	people
+	~		|
+
+Vulnerable People= INTEG (
+	Becoming vulnerable-Becoming safer and healthier,
+		0)
+	~	people
+	~		|
+
+population initial=
+	231
+	~	people
+	~	From 2016 Census data
+	|
+
+Safer Healthier People= INTEG (
+	Becoming safer and healthier-Becoming vulnerable,
+		population initial)
+	~	people
+	~		|
+
+high income population=
+	sum(number labour force in income bracket[high income!,Gender!])
+	~	people
+	~		|
+
+middle and high income population=
+	high income population+middle income population
+	~	people
+	~		|
+
+water quality=
+	1
+	~	Dmnl
+	~	Scenario variable. Baseline zero.
+	|
+
+Internet service capacity rate=
+	IF THEN ELSE(tower oversubscription factor <= Fixed Wireless Towers, internet capacity discrepancy\
+		/Time, (fixed wireless user limit
+	*maximum speed per connection)/Time)
+	~	Mbps*connection/(Year*tower)
+	~	The assumption here is that if the tower oversubscription factor is less \
+		than the number of towers (i.e., there are enough towers), then the \
+		discrepancy structure will be valid. However, if there are not enough \
+		towers to meet demand, then the capacity rate will stay at its max level, \
+		which is the user limit * max speed per connection.
+	|
+
+tower build delay time=
+	2
+	~	Year
+	~	Assume it takes two years to build
+	|
+
+social housing demand=
+	number of households under rent stress+(sum of people below poverty line/average size of household\
+		)
+	~	structure
+	~		|
+
+damage to road from flooding=
+	0.5
+	~	Dmnl
+	~	From Sultana et al 2015 - reduction in road structure of up to 50%
+	|
+
+Road deterioration rate=
+	(deterioration multiplier*effect of ageing of pavement on deterioration rate*effect of road quality on deterioration rate
+	*road damage ratio*effect of flooding on road quality*Road Quality)/Time
+	~	1/Year
+	~		|
+
+housing demand=
+	(number of desired residential households+number of desired tourist houses)
+	~	structure
+	~		|
+
+number of desired residential households=
+	total population/average size of household
+	~	structure
+	~		|
+
+normalised unemployed=
+	(number of unemployed people/total population)*normalised unemployed unit conversion
+	~	Dmnl
+	~		|
+
+normalised unemployed unit conversion=
+	1
+	~	Year*people/job
+	~		|
+
+deterioration multiplier=
+	1.2
+	~	Dmnl
+	~		|
+
+road damage ratio=
+	(car use+average number of bus trips per year+tourist trips per year)/allowable number of load cycles
+	~	Dmnl
+	~		|
+
+trips per tourist=
+	2
+	~	trip/person
+	~		|
+
+tourist trips per year=
+	Number Of Tourists*trips per tourist
+	~	trip/Year
+	~		|
+
+average land per agricultural business=
+	17.3
+	~	hectare/structure
+	~	Taken from Land Use spatial data set
+	|
+
+Agriculture Land= INTEG (
+	Forest to Agriculture transfer rate-Agricultural to Housing transfer rate-Agriculture to Forest transfer rate\
+		,
+		 
+		             INIT agricultural land)
+	~	hectare
+	~		|
+
+Internet service demand rate=
+	(business internet demand+residential internet demand)*demand per location/Time
+	~	connection/Year
+	~	Assume that all businesses require a connection to the internet
+	|
+
+"labour demand (other)"=
+	"average jobs per business (other)"*"number of businesses (other)"
+	~	job/Year
+	~		|
+
+business internet demand=
+	"number of businesses (agriculture)"+"number of businesses (other)"+"number of businesses (tourism)"
+	~	structure
+	~		|
+
+"number of businesses (other)"=
+	INTEGER(sum("number of businesses in income bracket (other)"[Business Income!]))
+	~	structure
+	~	MIN(INTEGER(sum("number of businesses in income bracket (other)"[Business \
+		Income!])), "business limit (other)")
+	|
+
+effect of internet on other sector business=
+	internet service performance/(maximum speed per connection/Fixed Wireless Towers)
+	~	Dmnl
+	~		|
+
+internet capacity discrepancy=
+	internet capacity demand-Internet Service Capacity
+	~	Mbps*connection/tower
+	~	This is the discrepancy between capacity demand and capacity actual.
+	|
+
+tower oversubscription factor=
+	INIT number of towers+(Internet Service Demand/fixed wireless user limit)-Fixed Wireless Towers
+	~	tower
+	~	Desired state of system
+	|
+
+internet capacity demand=
+	Internet Service Demand*maximum speed per connection/Fixed Wireless Towers
+	~	Mbps*connection/tower
+	~		|
+
+Infrastructure completion rate[Infrastructure]=
+	(asset component discrepancy[Infrastructure])/build time[Infrastructure]
+	~	asset component/Year
+	~		|
+
+effect of future improvements to infrastructure=
+	1
+	~	Dmnl
+	~	Scenario variable
+	|
+
+impact of tourism infrastructure improvements on tourist numbers=
+	effect of MTB Trails improvements * effect of wastewater * effect of future improvements to infrastructure
+	~	Dmnl
+	~		|
+
+"social housing supply/demand ratio"=
+	Social Housing Supply/social housing demand
+	~	Dmnl
+	~		|
+
+number of desired tourist houses=
+	Number Of Tourists/(average size of household*number of times each tourist house occupied per year\
+		)
+	~	structure
+	~	Assuming that tourist occupancy is even across the year
+	|
+
+number of rented households by income cohort[Negative]=
+	number of rented households*income distribution by income cohort[Negative] ~~|
+number of rented households by income cohort[Nil]=
+	number of rented households*income distribution by income cohort[Nil] ~~|
+number of rented households by income cohort["$1-$149"]=
+	number of rented households*income distribution by income cohort["$1-$149"] ~~|
+number of rented households by income cohort["$150-$299"]=
+	number of rented households*income distribution by income cohort["$150-$299"] ~~|
+number of rented households by income cohort["$300-$399"]=
+	number of rented households*income distribution by income cohort["$300-$399"] ~~|
+number of rented households by income cohort["$400-$499"]=
+	number of rented households*income distribution by income cohort["$400-$499"] ~~|
+number of rented households by income cohort["$500-$649"]=
+	number of rented households*income distribution by income cohort["$500-$649"] ~~|
+number of rented households by income cohort["$650-$799"]=
+	number of rented households*income distribution by income cohort["$650-$799"] ~~|
+number of rented households by income cohort["$800-$999"]=
+	number of rented households*income distribution by income cohort["$800-$999"] ~~|
+number of rented households by income cohort["$1,000-$1,249"]=
+	number of rented households*income distribution by income cohort["$1,000-$1,249"] ~~|
+number of rented households by income cohort["$1,250-$1,499"]=
+	number of rented households*income distribution by income cohort["$1,250-$1,499"] ~~|
+number of rented households by income cohort["$1,500-$1,749"]=
+	number of rented households*income distribution by income cohort["$1,500-$1,749"] ~~|
+number of rented households by income cohort["$1,750-$1,999"]=
+	number of rented households*income distribution by income cohort["$1,750-$1,999"] ~~|
+number of rented households by income cohort["$2,000-$2,999"]=
+	number of rented households*income distribution by income cohort["$2,000-$2,999"] ~~|
+number of rented households by income cohort["$3,000 or more"]=
+	number of rented households*income distribution by income cohort["$3,000 or more"]
+	~	structure
+	~		|
+
+School Enrolments= INTEG (
+	 (New enrolments - Outgoing school cohort),
+		 
+		             31)
+	~	people
+	~	31 students enrolled in 2019
+	|
+
+cohort time=
+	7
+	~	Dmnl
+	~	To prevent 're-enrolment' of the same student each year, divide the cohort \
+		values by 7 so each enrolment is new.
+	|
+
+New enrolments=
+	(( district 0 to 14 cohort + "0-14" )/cohort time * enrolment ratio)
+	~	people/Year
+	~	To prevent 're-enrolment' of the same student each year, divide the cohort \
+		values by 'cohort time' so each enrolment is new.
+	|
+
+cultural burning discrepancy=
+	cultural burning goal-Cultural Burning
+	~	Dmnl
+	~		|
+
+cultural burning goal=
+	1
+	~	Dmnl
+	~	The goal is to have 100% of land managed by cultural burning
+	|
+
+Cultural Burning= INTEG (
+	Cultural burning rate,
+		0)
+	~	Dmnl
+	~		|
+
+impact of cultural burning on biodiversity=
+	1+Cultural Burning
+	~	Dmnl
+	~	In personal discussions with an Australian fire researcher, they suggested that \
+		cultural burning would have a positive impact on biodiversity compared \
+		with a fire suppression regime (business as usual). Some evidence provided \
+		here https://onlinelibrary.wiley.com/doi/10.1002/ece3.1494
+		https://onlinelibrary.wiley.com/doi/10.1111/j.1365-2699.2011.02595.x
+	|
+
+cultural burning adjustment time=
+	15
+	~	Year
+	~	Victorian Cultural Fire Strategy states a 10 year transition time to \
+		properly implement cultural burning, as Country is currently too sick to \
+		immediatly begin cultural burns. We assume an additional 5 years to \
+		implement the strategy.
+	|
+
+social housing discrepancy=
+	social housing demand-Social Housing Supply
+	~	structure
+	~		|
+
+social housing scenario switch=
+	0
+	~	Dmnl
+	~		|
+
+social housing build delay=
+	2
+	~	Year
+	~		|
+
+intergenerational risk factor=
+	1.8
+	~	structure/people
+	~	Cobb-Clark et al 2017 estimate it is 1.8 times more likely for children of \
+		parents receivng long-term welfare to receive welfare themselves \
+		http://ftp.iza.org/dp11070.pdf
+	|
+
+excess disease burden from lowered healthcare access=
+	1.103
+	~	fraction
+	~	Forrest is classified as inner regional by the RRMA classification \
+		https://www.health.gov.au/health-topics/health-workforce/health-workforce-c\
+		lassifications/rural-remote-and-metropolitan-area
+		Inner regional areas have 10.3% excess disease burden compared to major cities \
+		(percentage of total observed burden for the area).
+		https://www.aihw.gov.au/getmedia/c076f42f-61ea-4348-9c0a-d996353e838f/aihw-\
+		bod-22.pdf.aspx?inline=true Table 8.5
+	|
+
+rent stress[Negative]=
+	IF THEN ELSE( Annual Rent Cost By Income Group[Negative] > "30 percent"*income values\
+		[Negative], number of rented households by income cohort[Negative], 0) ~~|
+rent stress[Nil]=
+	IF THEN ELSE( Annual Rent Cost By Income Group[Nil] > "30 percent"*income values[Nil\
+		], number of rented households by income cohort[Nil], 0) ~~|
+rent stress["$1-$149"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$1-$149"] > "30 percent"*income values\
+		["$1-$149"], number of rented households by income cohort["$1-$149"], 0) ~~|
+rent stress["$150-$299"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$150-$299"] > "30 percent"*income values\
+		["$150-$299"], number of rented households by income cohort["$150-$299"], 0) ~~|
+rent stress["$300-$399"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$300-$399"] > "30 percent"*income values\
+		["$300-$399"], number of rented households by income cohort["$300-$399"], 0) ~~|
+rent stress["$400-$499"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$400-$499"] > "30 percent"*income values\
+		["$400-$499"], number of rented households by income cohort["$400-$499"], 0) ~~|
+rent stress["$500-$649"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$500-$649"] > "30 percent"*income values\
+		["$500-$649"], number of rented households by income cohort["$500-$649"], 0) ~~|
+rent stress["$650-$799"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$650-$799"] > "30 percent"*income values\
+		["$650-$799"], number of rented households by income cohort["$650-$799"], 0) ~~|
+rent stress["$800-$999"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$800-$999"] > "30 percent"*income values\
+		["$800-$999"], number of rented households by income cohort["$800-$999"], 0) ~~|
+rent stress["$1,000-$1,249"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$1,000-$1,249"] > "30 percent"*income values\
+		["$1,000-$1,249"], number of rented households by income cohort["$1,000-$1,249"], 0\
+		) ~~|
+rent stress["$1,250-$1,499"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$1,250-$1,499"] > "30 percent"*income values\
+		["$1,250-$1,499"], number of rented households by income cohort["$1,250-$1,499"], 0\
+		) ~~|
+rent stress["$1,500-$1,749"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$1,500-$1,749"] > "30 percent"*income values\
+		["$1,500-$1,749"], number of rented households by income cohort["$1,500-$1,749"], 0\
+		) ~~|
+rent stress["$1,750-$1,999"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$1,750-$1,999"] > "30 percent"*income values\
+		["$1,750-$1,999"], number of rented households by income cohort["$1,750-$1,999"], 0\
+		) ~~|
+rent stress["$2,000-$2,999"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$2,000-$2,999"] > "30 percent"*income values\
+		["$2,000-$2,999"], number of rented households by income cohort["$2,000-$2,999"], 0\
+		) ~~|
+rent stress["$3,000 or more"]=
+	IF THEN ELSE( Annual Rent Cost By Income Group["$3,000 or more"] > "30 percent"*income values\
+		["$3,000 or more"], number of rented households by income cohort["$3,000 or more"],\
+		 0)
+	~	structure
+	~		|
+
+number of households under mortgage stress=
+	sum(mortgage stress[Income!])
+	~	structure
+	~		|
+
+number of households under rent stress=
+	sum(rent stress[Income!])
+	~	structure
+	~		|
+
+number of mortgaged households by income cohort[Negative]=
+	INTEGER(number of mortgaged households*income distribution by income cohort[Negative\
+		]) ~~|
+number of mortgaged households by income cohort[Nil]=
+	INTEGER(number of mortgaged households*income distribution by income cohort[Nil]) ~~|
+number of mortgaged households by income cohort["$1-$149"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$1-$149"\
+		]) ~~|
+number of mortgaged households by income cohort["$150-$299"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$150-$299"\
+		]) ~~|
+number of mortgaged households by income cohort["$300-$399"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$300-$399"\
+		]) ~~|
+number of mortgaged households by income cohort["$400-$499"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$400-$499"\
+		]) ~~|
+number of mortgaged households by income cohort["$500-$649"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$500-$649"\
+		]) ~~|
+number of mortgaged households by income cohort["$650-$799"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$650-$799"\
+		]) ~~|
+number of mortgaged households by income cohort["$800-$999"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$800-$999"\
+		]) ~~|
+number of mortgaged households by income cohort["$1,000-$1,249"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$1,000-$1,249"\
+		]) ~~|
+number of mortgaged households by income cohort["$1,250-$1,499"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$1,250-$1,499"\
+		]) ~~|
+number of mortgaged households by income cohort["$1,500-$1,749"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$1,500-$1,749"\
+		]) ~~|
+number of mortgaged households by income cohort["$1,750-$1,999"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$1,750-$1,999"\
+		]) ~~|
+number of mortgaged households by income cohort["$2,000-$2,999"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$2,000-$2,999"\
+		]) ~~|
+number of mortgaged households by income cohort["$3,000 or more"]=
+	INTEGER(number of mortgaged households*income distribution by income cohort["$3,000 or more"\
+		])
+	~	structure
+	~		|
+
+income distribution by income cohort[Negative]=
+	sum(income distribution fractions by income cohort and gender[Negative,Gender!]) ~~|
+income distribution by income cohort[Nil]=
+	sum(income distribution fractions by income cohort and gender[Nil,Gender!]) ~~|
+income distribution by income cohort["$1-$149"]=
+	sum(income distribution fractions by income cohort and gender["$1-$149",Gender!]) ~~|
+income distribution by income cohort["$150-$299"]=
+	sum(income distribution fractions by income cohort and gender["$150-$299",Gender!]) ~~|
+income distribution by income cohort["$300-$399"]=
+	sum(income distribution fractions by income cohort and gender["$300-$399",Gender!]) ~~|
+income distribution by income cohort["$400-$499"]=
+	sum(income distribution fractions by income cohort and gender["$400-$499",Gender!]) ~~|
+income distribution by income cohort["$500-$649"]=
+	sum(income distribution fractions by income cohort and gender["$500-$649",Gender!]) ~~|
+income distribution by income cohort["$650-$799"]=
+	sum(income distribution fractions by income cohort and gender["$650-$799",Gender!]) ~~|
+income distribution by income cohort["$800-$999"]=
+	sum(income distribution fractions by income cohort and gender["$800-$999",Gender!]) ~~|
+income distribution by income cohort["$1,000-$1,249"]=
+	sum(income distribution fractions by income cohort and gender["$1,000-$1,249",Gender\
+		!]) ~~|
+income distribution by income cohort["$1,250-$1,499"]=
+	sum(income distribution fractions by income cohort and gender["$1,250-$1,499",Gender\
+		!]) ~~|
+income distribution by income cohort["$1,500-$1,749"]=
+	sum(income distribution fractions by income cohort and gender["$1,500-$1,749",Gender\
+		!]) ~~|
+income distribution by income cohort["$1,750-$1,999"]=
+	sum(income distribution fractions by income cohort and gender["$1,750-$1,999",Gender\
+		!]) ~~|
+income distribution by income cohort["$2,000-$2,999"]=
+	sum(income distribution fractions by income cohort and gender["$2,000-$2,999",Gender\
+		!]) ~~|
+income distribution by income cohort["$3,000 or more"]=
+	sum(income distribution fractions by income cohort and gender["$3,000 or more",Gender\
+		!])
+	~	Dmnl
+	~		|
+
+income values[Negative]=
+	0 ~~|
+income values[Nil]=
+	0 ~~|
+income values["$1-$149"]=
+	3900 ~~|
+income values["$150-$299"]=
+	11700 ~~|
+income values["$300-$399"]=
+	18200 ~~|
+income values["$400-$499"]=
+	23400 ~~|
+income values["$500-$649"]=
+	29900 ~~|
+income values["$650-$799"]=
+	37700 ~~|
+income values["$800-$999"]=
+	46800 ~~|
+income values["$1,000-$1,249"]=
+	58500 ~~|
+income values["$1,250-$1,499"]=
+	71500 ~~|
+income values["$1,500-$1,749"]=
+	84500 ~~|
+income values["$1,750-$1,999"]=
+	97500 ~~|
+income values["$2,000-$2,999"]=
+	130000 ~~|
+income values["$3,000 or more"]=
+	260000
+	~	dollar
+	~	Take the median value of each income cohort as representative income value
+	|
+
+mortgage stress[Negative]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group[Negative] > "30 percent"*income values\
+		[Negative], number of mortgaged households by income cohort[Negative], 0) ~~|
+mortgage stress[Nil]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group[Nil] > "30 percent"*income values\
+		[Nil], number of mortgaged households by income cohort[Nil], 0) ~~|
+mortgage stress["$1-$149"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$1-$149"] > "30 percent"*income values\
+		["$1-$149"], number of mortgaged households by income cohort["$1-$149"], 0) ~~|
+mortgage stress["$150-$299"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$150-$299"] > "30 percent"*income values\
+		["$150-$299"], number of mortgaged households by income cohort["$150-$299"], 0) ~~|
+mortgage stress["$300-$399"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$300-$399"] > "30 percent"*income values\
+		["$300-$399"], number of mortgaged households by income cohort["$300-$399"], 0) ~~|
+mortgage stress["$400-$499"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$400-$499"] > "30 percent"*income values\
+		["$400-$499"], number of mortgaged households by income cohort["$400-$499"], 0) ~~|
+mortgage stress["$500-$649"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$500-$649"] > "30 percent"*income values\
+		["$500-$649"], number of mortgaged households by income cohort["$500-$649"], 0) ~~|
+mortgage stress["$650-$799"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$650-$799"] > "30 percent"*income values\
+		["$650-$799"], number of mortgaged households by income cohort["$650-$799"], 0) ~~|
+mortgage stress["$800-$999"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$800-$999"] > "30 percent"*income values\
+		["$800-$999"], number of mortgaged households by income cohort["$800-$999"], 0) ~~|
+mortgage stress["$1,000-$1,249"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$1,000-$1,249"] > "30 percent"*income values\
+		["$1,000-$1,249"], number of mortgaged households by income cohort["$1,000-$1,249"]\
+		, 0) ~~|
+mortgage stress["$1,250-$1,499"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$1,250-$1,499"] > "30 percent"*income values\
+		["$1,250-$1,499"], number of mortgaged households by income cohort["$1,250-$1,499"]\
+		, 0) ~~|
+mortgage stress["$1,500-$1,749"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$1,500-$1,749"]> "30 percent"*income values\
+		["$1,500-$1,749"],number of mortgaged households by income cohort["$1,500-$1,749"],\
+		 0) ~~|
+mortgage stress["$1,750-$1,999"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$1,750-$1,999"] > "30 percent"*income values\
+		["$1,750-$1,999"], number of mortgaged households by income cohort["$1,750-$1,999"]\
+		, 0) ~~|
+mortgage stress["$2,000-$2,999"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$2,000-$2,999"] > "30 percent"*income values\
+		["$2,000-$2,999"], number of mortgaged households by income cohort["$2,000-$2,999"]\
+		, 0) ~~|
+mortgage stress["$3,000 or more"]=
+	IF THEN ELSE( Annual Mortgage Cost By Income Group["$3,000 or more"] > "30 percent"*\
+		income values["$3,000 or more"], number of mortgaged households by income cohort["$3,000 or more"\
+		], 0)
+	~	structure
+	~		|
+
+normalised poverty line=
+	sum of people below poverty line/total population
+	~	Dmnl
+	~		|
+
+normalised travel inequality=
+	1-(bus frequency/bus frequency required for travel equity)
+	~	Dmnl
+	~		|
+
+households without internet access fraction=
+	1-households with internet access fraction
+	~	Dmnl
+	~		|
+
+normalised intergenerational inequality youth at risk=
+	number of young people at risk for intergenerational inequality/"0-14"
+	~	Dmnl
+	~		|
+
+Rent rate change[low income]=
+	consumer price index*INIT annual rent cost[low income]/Time ~~|
+Rent rate change[mid income]=
+	consumer price index*INIT annual rent cost[mid income]/Time ~~|
+Rent rate change[high income]=
+	consumer price index*INIT annual rent cost[high income]/Time
+	~	dollar/Year
+	~		|
+
+disability fraction=
+	0.177
+	~	Dmnl
+	~	https://www.abs.gov.au/statistics/health/disability/disability-ageing-and-carers-aust\
+		ralia-summary-findings/2018
+		Percentage of population who have a disability
+	|
+
+"30 percent"=
+	0.3
+	~	fraction
+	~		|
+
+mid income:
+	"$650-$799","$800-$999","$1,000-$1,249","$1,250-$1,499"
+	~	
+	~		|
+
+INIT annual rent cost[low income]=
+	13520 ~~|
+INIT annual rent cost[mid income]=
+	18720 ~~|
+INIT annual rent cost[high income]=
+	23400
+	~	dollars
+	~	1127, 1560, 1950 per month
+	|
+
+consumer price index=
+	1.009
+	~	Dmnl
+	~	CPI rose 0.9% in 2020
+	|
+
+high income:
+	"$3,000 or more","$2,000-$2,999","$1,750-$1,999","$1,500-$1,749"
+	~	
+	~		|
+
+INIT annual mortgage cost[low income]=
+	29588 ~~|
+INIT annual mortgage cost[mid income]=
+	49972 ~~|
+INIT annual mortgage cost[high income]=
+	57252
+	~	dollars
+	~	2466, 4163, 4770
+	|
+
+low income:
+	Negative,Nil,"$1-$149","$150-$299","$300-$399","$400-$499","$500-$649"
+	~	
+	~		|
+
+fraction of rented houses=
+	0.09
+	~	fraction
+	~	From ABS Census data
+	|
+
+Mortgage rate change[low income]=
+	consumer price index*INIT annual mortgage cost[low income]/Time ~~|
+Mortgage rate change[mid income]=
+	consumer price index*INIT annual mortgage cost[mid income]/Time ~~|
+Mortgage rate change[high income]=
+	consumer price index*INIT annual mortgage cost[high income]/Time
+	~	dollar/Year
+	~		|
+
+Annual Mortgage Cost By Income Group[low income]= INTEG (
+	Mortgage rate change[low income],
+		16176) ~~|
+Annual Mortgage Cost By Income Group[mid income]= INTEG (
+	Mortgage rate change[mid income],
+		18876) ~~|
+Annual Mortgage Cost By Income Group[high income]= INTEG (
+	Mortgage rate change[high income],
+		48288)
+	~	dollars
+	~		|
+
+fraction of mortgaged houses=
+	0.19
+	~	fraction
+	~	From ABS Census data
+	|
+
+Annual Rent Cost By Income Group[low income]= INTEG (
+	Rent rate change[low income],
+		11964) ~~|
+Annual Rent Cost By Income Group[mid income]= INTEG (
+	Rent rate change[mid income],
+		13524) ~~|
+Annual Rent Cost By Income Group[high income]= INTEG (
+	Rent rate change[high income],
+		13776)
+	~	dollar
+	~		|
+
+car use=
+	(number of cars in Forrest*number of car trips per year per car)
+	~	trip/Year
+	~		|
+
+travel equity bus frequency discrepancy=
+	bus frequency required for travel equity-bus frequency
+	~	trip/Year
+	~		|
+
+preventative maintenance=
+	IF THEN ELSE(critical condition index>=80, 1, 0.5)
+	~	Dmnl
+	~		|
+
+corrective maintenance=
+	IF THEN ELSE(critical condition index >=50 :AND: critical condition index <80, 1, 0.5\
+		)
+	~	Dmnl
+	~		|
+
+Road maintenance rate=
+	(IF THEN ELSE(Road Quality >= 0.8, 0, IF THEN ELSE(Road Quality >=0.6 :AND: Road Quality\
+		 <0.8, preventative maintenance, IF THEN ELSE(Road Quality >=0.4 :AND: Road Quality\
+		 <0.6, corrective maintenance, IF THEN ELSE( Road Quality >=0.2 :AND: Road Quality \
+		<0, restorative maintenance, restorative maintenance)))))/Time
+	~	1/Year
+	~		|
+
+critical condition index=
+	MAX(52, Road Quality*100)
+	~	Dmnl
+	~		|
+
+restorative maintenance=
+	IF THEN ELSE(critical condition index >=0, 1, 1)
+	~	Dmnl
+	~		|
+
+Road Quality= INTEG (
+	Road maintenance rate-Road deterioration rate,
+		0)
+	~	Dmnl
+	~		|
+
+allowable number of load cycles=
+	1e+08
+	~	trip/Year
+	~		|
+
+road quality nonlinearity factor=
+	2
+	~	Dmnl
+	~		|
+
+service life of road=
+	30
+	~	Year
+	~		|
+
+effect of ageing of pavement on deterioration rate=
+	1+(age of pavement/service life of road)^ageing nonlinearity factor
+	~	Dmnl
+	~		|
+
+age of pavement=
+	10
+	~	Year
+	~	Assume 10 year old pavements at start of simulation
+	|
+
+effect of road quality on deterioration rate=
+	1+(road quality multiplier*(1-Road Quality)^road quality nonlinearity factor)
+	~	Dmnl
+	~		|
+
+ageing nonlinearity factor=
+	1.42
+	~	Dmnl
+	~		|
+
+road quality multiplier=
+	8.6
+	~	Dmnl
+	~		|
+
+bus frequency required for whole population=
+	annual potential bus demand/bus capacity
+	~	trip/Year
+	~		|
+
+annual potential bus demand=
+	average number of bus trips per year*number people with ability to travel by bus
+	~	trip*people/Year
+	~		|
+
+whole population bus frequency discrepancy=
+	bus frequency required for whole population-bus frequency
+	~	trip/Year
+	~		|
+
+bus frequency required for travel equity=
+	travel equity bus demand/bus capacity
+	~	trip/Year
+	~		|
+
+sum of people below poverty line=
+	sum(number people below poverty line[poverty line ss!,Gender!])
+	~	people
+	~		|
+
+number of people of reduced mobility=
+	"0-14"+"65+"+sum of people below poverty line
+	~	people
+	~	This is a simplification - many people 65 and over will be able to drive, \
+		but as they age this will change
+	|
+
+average number of bus trips per year=
+	156
+	~	trip/Year
+	~	Assumption: 3 x return trips per week per person = 156 trips per person
+	|
+
+travel equity bus demand=
+	average number of bus trips per year*number of people of reduced mobility
+	~	trip*people/Year
+	~		|
+
+"working-age population"=
+	"15-64"
+	~	people
+	~		|
+
+number of childcare enrolments  = 
+        INTEGER ( ( district 0 to 14 cohort 
+                  + "0-14" ) 
+                  * 0.25)
+	~	people
+	~	Arbitrary value of one quarter of 0-14 cohort
+	|
+
+"Deaths 15-64"=
+	"15-64" 
+	             * "mortality rate 15-64"
+	~	people/Year
+	~	Number of deaths in a year for the 15-64 age group
+	|
+
+"Deaths 65+"  = 
+        "65+" 
+             * "mortality rate 65+"
+	~	people/Year
+	~		|
+
+"Ageing 0-14"=
+	"0-14" 
+	             / "maturation factor 0-14"
+	~	people/Year
+	~	Number of population 0-14 moving to next age group
+	|
+
+"Ageing 15-64"  = 
+        "15-64" 
+             / "maturation factor 15-64"
+	~	people/Year
+	~		|
+
+number people with ability to travel by bus=
+	(fraction of population who would choose to travel by bus*total population)
+	~	people
+	~	Multiply fraction by population on incorporation
+	|
+
+total population=
+	"0-14" + "15-64" + "65+"
+	~	people
+	~		|
+
+"In-out migration 15-64"=
+	"migration rate 15-64" 
+	             * "15-64"
+	~	people/Year
+	~	Net migration per year for the 15-64 cohort
+	|
+
+"effect of non-local school parents participating in Forrest's economy"=
+	((district kids' parents cohort/"15-64")+1) * "non-local retail demand"
+	~	Dmnl
+	~		|
+
+"Deaths 0-14"  = 
+        "mortality rate 0-14" 
+             * "0-14"
+	~	people/Year
+	~	Number of deaths per year of the 0-14 cohort
+	|
+
+"In-out migration 0-14"  = 
+        "migration rate 0-14" 
+             * "0-14"
+	~	people/Year
+	~	Net migration per year
+	|
+
+"In-out migration 65+"=
+	"migration rate 65+" 
+	             * "65+"
+	~	people/Year
+	~	Net migration per year
+	|
+
+Births  = 
+        ( "15-64" 
+             * fertility rate ) 
+             / 2
+	~	people/Year
+	~	 Assume half of the 15-64 cohort are able to bear children
+	|
+
+car travel cost per year=
+	((average litres of petrol per 100km*cost of petrol)/average trip distance)*car use
+	~	trip*dollar/(Year*Km)
+	~		|
+
+annual bus capacity discrapancy=
+	annual potential bus demand-max annual capacity of bus route
+	~	trip*people/Year
+	~		|
+
+max annual capacity of bus route=
+	bus capacity*bus frequency
+	~	trip*people/Year
+	~		|
+
+bus frequency=
+	52
+	~	trip/Year
+	~		|
+
+number of car trips per year per car=
+	654
+	~	trip/(vehicle*Year)
+	~	Vic total km travelled 2020 = 63,602,000,000 km
+		Vic number of vehicles 2020 = 5,114,444
+		Avg trip distance = 19km
+		Total km travelled/total no cars = 12,435km travelled by each car in one year
+		Div by avg trip distance = 654 trips per year
+	|
+
+number of cars in Forrest=
+	LOOKUP EXTRAPOLATE(table for car ownership, Time )
+	~	vehicle
+	~		|
+
+fraction of population who would choose to travel by bus=
+	0.35
+	~	Dmnl
+	~	Aritrary value
+	|
+
+table for car ownership(
+	[(2000,0)-(2100,300)],(2006,266),(2011,172),(2016,167))
+	~	Dmnl
+	~	Data from ABS: 2006 = 266; 2011 = 172; 2016 = 167
+	|
+
+average trip distance=
+	19
+	~	Km
+	~	Census travel to work daya
+	|
+
+bus capacity=
+	24
+	~	people
+	~	Confirmed with bus line running route
+	|
+
+cost of petrol=
+	1.47
+	~	$/litre
+	~	https://www.globalpetrolprices.com/Australia/Melbourne/gasoline_prices
+	|
+
+average litres of petrol per 100km=
+	11.1
+	~	litre
+	~	https://www.abs.gov.au/statistics/industry/tourism-and-transport/survey-mot\
+		or-vehicle-use-australia/latest-release
+	|
+
+district 0 to 14 cohort=
+	INTEGER (RANDOM NORMAL ( 0, 
+	                  76, 
+	                  38, 
+	                  1, 
+	                  0) )
+	~	people
+	~	Selecting from a normal distrbution to obtain values for enrolments \
+		external to Forrest's population. The parameters are min = 0, max = 76, \
+		mean = 38, SD = 1, based on populations from the townships in the district.
+	|
+
+poverty line ss:
+	Negative,Nil,"$1-$149","$150-$299","$300-$399"
+	~	
+	~		|
+
+disease burden before WW=
+	0.1
+	~	Year/person
+	~	Data from Forrest Wastewater Investigation report
+	|
+
+effect of wastewater=
+	IF THEN ELSE(Wastewater availability > 0, 2, 1)
+	~	Dmnl
+	~	Assume a doubling of tourists from improved wastewater infrastructure
+	|
+
+effect of MTB Trails improvements=
+	IF THEN ELSE(MTB trails improvements availability >0, 1.5, 1)
+	~	Dmnl
+	~	Cost benefit analysis of mountain bike trail improvements: increase of \
+		25,000 cycling tourists per annum from 24,000 (doubling). Assume that only \
+		half of these stay in Forrest.
+	|
+
+Infrastructure Build In Progress[Infrastructure]= INTEG (
+	Infrastructure start rate[Infrastructure]-Infrastructure completion rate[Infrastructure\
+		],
+		0)
+	~	asset component
+	~		|
+
+Infrastructure Funding[Infrastructure]= INTEG (
+	-Infrastructure funding allocation rate[Infrastructure],
+		infrastructure approved funding[Infrastructure])
+	~	dollar
+	~		|
+
+Infrastructure funding allocation rate[Infrastructure]=
+	Infrastructure Funding[Infrastructure]/funding duration[Infrastructure]
+	~	dollar/Year
+	~		|
+
+Infrastructure start rate[Infrastructure]=
+	DELAY1 ( Infrastructure funding allocation rate[Infrastructure]/cost per asset component\
+		[Infrastructure], build delay[Infrastructure] + funding lag[Infrastructure])
+	~	asset component/Year
+	~		|
+
+funding lag[Forrest Common]=
+	2 ~~|
+funding lag[GTOC]=
+	5 ~~|
+funding lag[MTB Trails]=
+	0.5 ~~|
+funding lag[Wastewater]=
+	2 ~~|
+funding lag[CFA Truck]=
+	1
+	~	Year
+	~		|
+
+cost per asset component[Forrest Common]=
+	1.7e+06
+	             / 10 ~~|
+cost per asset component[GTOC]=
+	( 1.2e+07) 
+	             / 10 ~~|
+cost per asset component[MTB Trails]=
+	4.55e+06
+	             / 10 ~~|
+cost per asset component[Wastewater]=
+	1.01e+07
+	             / 10 ~~|
+cost per asset component[CFA Truck]=
+	210000/10
+	~	dollar/asset component
+	~		|
+
+total number of asset components[Infrastructure]=
+	10
+	~	asset component
+	~		|
+
+build delay[Forrest Common]=
+	0.5 ~~|
+build delay[GTOC]=
+	1 ~~|
+build delay[MTB Trails]=
+	1 ~~|
+build delay[Wastewater]=
+	2 ~~|
+build delay[CFA Truck]=
+	0.5
+	~	Year
+	~		|
+
+build time[Forrest Common]=
+	0.5 ~~|
+build time[GTOC]=
+	2 ~~|
+build time[MTB Trails]=
+	1 ~~|
+build time[Wastewater]=
+	3 ~~|
+build time[CFA Truck]=
+	0.25
+	~	Year
+	~		|
+
+asset component discrepancy[Infrastructure]=
+	total number of asset components[Infrastructure]- Completed Infrastructure Item[Infrastructure\
+		]
+	~	asset component
+	~		|
+
+Completed Infrastructure Item[Infrastructure]= INTEG (
+	Infrastructure completion rate[Infrastructure],
+		0)
+	~	asset component
+	~		|
+
+Infrastructure:
+	Forrest Common, GTOC, MTB Trails, Wastewater, CFA Truck
+	~	
+	~		|
+
+funding scenario[Forrest Common]=
+	0 ~~|
+funding scenario[GTOC]=
+	0 ~~|
+funding scenario[MTB Trails]=
+	1 ~~|
+funding scenario[Wastewater]=
+	0 ~~|
+funding scenario[CFA Truck]=
+	0
+	~	Dmnl
+	~		|
+
+infrastructure approved funding[Forrest Common]=
+	IF THEN ELSE ( funding scenario[Forrest Common]
+	                  = 1, 
+	             1.7e+06, 
+	             0) ~~|
+infrastructure approved funding[GTOC]=
+	IF THEN ELSE ( funding scenario[GTOC]
+	                  = 1, 
+	             1.2e+07, 
+	             0) ~~|
+infrastructure approved funding[MTB Trails]=
+	IF THEN ELSE ( funding scenario[MTB Trails]
+	                  = 1, 
+	             4.55e+06, 
+	             0) ~~|
+infrastructure approved funding[Wastewater]=
+	IF THEN ELSE ( funding scenario[Wastewater]
+	                  = 1, 
+	             1.01e+07, 
+	             0) ~~|
+infrastructure approved funding[CFA Truck]=
+	IF THEN ELSE ( funding scenario[CFA Truck]
+	                  = 1, 
+	             21000, 
+	             0)
+	~	dollar
+	~	Confirmed CFA truck $ with Pete Ashton
+	|
+
+funding duration[Forrest Common]=
+	1 ~~|
+funding duration[GTOC]=
+	2 ~~|
+funding duration[MTB Trails]=
+	1 ~~|
+funding duration[Wastewater]=
+	3 ~~|
+funding duration[CFA Truck]=
+	1
+	~	Year
+	~		|
+
+housing build delay=
+	2
+	~	Year
+	~	Assume it takes 2 years from approval to build completion
+	|
+
+Fixed Wireless Towers= INTEG (
+	INTEGER(Fixed wireless tower investment rate),
+		INIT number of towers)
+	~	tower
+	~		|
+
+average land per house=
+	(land per house LDRZ+land per house RLZ)/2
+	~	hectares/structure
+	~		|
+
+Internet Service Capacity= INTEG (
+	Internet service capacity rate,
+		maximum speed per connection*fixed wireless user limit)
+	~	Mbps*connections/tower
+	~		|
+
+INIT number of towers=
+	1
+	~	tower
+	~		|
+
+internet service performance=
+	Internet Service Capacity/Internet Service Demand
+	~	Mbps/tower
+	~	This is the equivalent of a supply/demand ratio
+	|
+
+residential internet demand=
+	max number of premises to connect to the internet*households with internet access fraction
+	~	structure
+	~		|
+
+demand per location=
+	1
+	~	connections/structure
+	~	1 connections per location (mostly a units fixing variable)
+	|
+
+"business income distribution (agriculture)"["0-$50k"]=
+	0.3 ~~|
+"business income distribution (agriculture)"["$50k-$100k"]=
+	0.1 ~~|
+"business income distribution (agriculture)"["$100k-$200k"]=
+	0.1 ~~|
+"business income distribution (agriculture)"["$200k-$500k"]=
+	0.3 ~~|
+"business income distribution (agriculture)"["$500k-$2m"]=
+	0.1 ~~|
+"business income distribution (agriculture)"["$2m-$5m"]=
+	0
+	~	structure*Year/dollars
+	~		|
+
+"business income distribution (other)"["0-$50k"]=
+	0.4 ~~|
+"business income distribution (other)"["$50k-$100k"]=
+	0.2 ~~|
+"business income distribution (other)"["$100k-$200k"]=
+	0.2 ~~|
+"business income distribution (other)"["$200k-$500k"]=
+	0.2 ~~|
+"business income distribution (other)"["$500k-$2m"]=
+	0.1 ~~|
+"business income distribution (other)"["$2m-$5m"]=
+	0
+	~	structure*Year/dollars
+	~		|
+
+"job vacancies (agriculture) filled externally"=
+	IF THEN ELSE("labour demand (agriculture)">labour input ag, "labour demand (agriculture)"\
+		-labour input ag, 0)
+	~	job/Year
+	~		|
+
+"average jobs per business (tourism)"=
+	3.71
+	~	job/structure/Year
+	~		|
+
+Business Income:
+	"0-$50k", "$50k-$100k", "$100k-$200k", "$200k-$500k", "$500k-$2m", "$2m-$5m"
+	~	
+	~		|
+
+"average jobs per business (agriculture)"=
+	1.45
+	~	jobs/structure/Year
+	~		|
+
+"number of businesses (agriculture)"=
+	INTEGER(sum("number of businesses in income bracket (agriculture)"[Business Income!]\
+		))
+	~	structure
+	~		|
+
+"labour demand (agriculture)"=
+	"number of businesses (agriculture)"
+	             * "average jobs per business (agriculture)"
+	~	job/Year
+	~		|
+
+"unemployment (agriculture)"=
+	IF THEN ELSE("labour demand (agriculture)"<labour input ag, labour input ag-"labour demand (agriculture)"\
+		, 0)
+	~	job/Year
+	~		|
+
+residents not in paid work[Male]=
+	fraction of residents not in paid work[Male]
+	             * "working-age population" ~~|
+residents not in paid work[Female]=
+	fraction of residents not in paid work[Female] * "working-age population"
+	~	people
+	~	ABS "Away From Work" category
+	|
+
+fraction of unemployed residents[Male]=
+	0.024 ~~|
+fraction of unemployed residents[Female]=
+	0.056
+	~	fraction
+	~		|
+
+"average jobs per business (other)"=
+	3.66
+	~	job/structure/Year
+	~		|
+
+fraction of residents not in paid work[Male]=
+	0.072 ~~|
+fraction of residents not in paid work[Female]=
+	0.08
+	~	fraction
+	~		|
+
+unemployed residents[Male]=
+	fraction of unemployed residents[Male]
+	             * "working-age population" ~~|
+unemployed residents[Female]=
+	fraction of unemployed residents[Female] * "working-age population"
+	~	people
+	~	ABS "Unemployed, looking for x-time work" categories
+	|
+
+fraction of residents in paid work[Male]=
+	0.344 ~~|
+fraction of residents in paid work[Female]=
+	0.424
+	~	fraction
+	~		|
+
+effect of job availability on migration=
+	("job vacancies (agriculture) filled externally"+"job vacancies (other) filled externally"\
+		+"job vacancies (tourism) filled externally") / "working-age population"
+	~	job/(people*Year)
+	~		|
+
+residents in paid work[Male]=
+	fraction of residents in paid work[Male]
+	             * "working-age population" ~~|
+residents in paid work[Female]=
+	fraction of residents in paid work[Female]*"working-age population"
+	~	people
+	~	ABS "Employed, worked x-time" categories
+	|
+
+"unemployment (tourism)"=
+	IF THEN ELSE("labour demand (tourism)"<labour input tourism, labour input tourism-"labour demand (tourism)"\
+		, 0)
+	~	job/Year
+	~		|
+
+"job vacancies (tourism) filled externally"=
+	IF THEN ELSE("labour demand (tourism)">labour input tourism, "labour demand (tourism)"\
+		-labour input tourism, 0)
+	~	job/Year
+	~		|
+
+"job vacancies (other) filled externally"=
+	IF THEN ELSE("labour demand (other)">labour input other, "labour demand (other)"-labour input other\
+		, 0)
+	~	job/Year
+	~		|
+
+number of unemployed people=
+	"unemployment (agriculture)" + "unemployment (other)" + "unemployment (tourism)"
+	~	job/Year
+	~		|
+
+"unemployment (other)"=
+	IF THEN ELSE("labour demand (other)"<labour input other, labour input other-"labour demand (other)"\
+		, 0)
+	~	job/Year
+	~		|
+
+labour input other=
+	sum(labour force [Gender!])*"reference jobs fraction (other)"
+	~	job/Year
+	~		|
+
+number of times each tourist house occupied per year=
+	52
+	~	1/Year
+	~	Assume tourist house is occupied half the weeks of the year
+	|
+
+normal tourist numbers=
+	3432
+	~	people/Year
+	~	Assuming 33 houses in Forrest used for tourism (2006 census unoccupied \
+		dwellings), at an average of 3 night stays, this means Forrest's houses \
+		can support a max of 6000 tourists per year. Make an assumption that \
+		houses will only be occupied on weekends (for "normal" numbers), \
+		multiplied by two for two-people-per-house stays: 33 * 52 * 2 approx = \
+		3232 people per year
+	|
+
+Housing demolition=
+	housing demolition rate 
+	             * Housing Supply
+	~	structure/Year
+	~		|
+
+WHO target disease burden=
+	1e-05
+	~	Year/person
+	~	The new wastewater infrastructure will meet this disease burden target
+	|
+
+net climate change impact on economy=
+	climate damage fraction
+	~	Dmnl
+	~	The fraction of ecomomy output loss due to climate change.
+	|
+
+climate damage scale=
+	0.013
+	~	Dmnl
+	~	Climate Damage Fraction at Reference Temperature.
+	|
+
+reference temperature for climate damages=
+	3
+	~	DegreesC
+	~	Reference Temperature for Calculation of Climate Damages.
+	|
+
+climate damage nonlinearity=
+	2
+	~	Dmnl
+	~	Nonlinearity of Climate Damage Cost Fraction.
+	|
+
+households with internet access fraction=
+	0.77
+	~	fraction
+	~	From ABS data: 77% of households accessed the internet from their home
+	|
+
+fixed wireless user limit=
+	60
+	~	connections/tower
+	~	This value was difficult to ascertain, however this article quoted NBN Co saying \
+		they had reduced users from historical levels of 60 per cell to an average \
+		of 19: \
+		https://www.itnews.com.au/news/nbn-co-cuts-average-number-of-users-per-wire\
+		less-cell-to-19-559707
+		Based upon that, we assume 60 connections is higher than acceptable and \
+		have set that as our maximum value.
+	|
+
+reference average house price=
+	685000
+	~	dollar
+	~	https://www.aupropertyreport.com/suburb-report/forrest-3236-vic/
+	|
+
+job availability unit conversion factor=
+	1
+	~	people*Year/job
+	~	This is a unit correction variable
+	|
+
+"migration rate 65+"=
+	"reference migration rate 65+"*effect of housing on migration
+	~	1/Year
+	~		|
+
+Outgoing school cohort  = 
+        School Enrolments 
+             / maturation of school students
+	~	people/Year
+	~		|
+
+"reference migration rate 15-64"=
+	0.02
+	~	1/Year
+	~	Migration rates taken from Otway SA2 data: the average rate for 2017-2019
+		0.011
+	|
+
+"reference migration rate 65+"=
+	-0.01
+	~	1/Year
+	~	Migration rates taken from Otway SA2 data: the average rate for 2017-2019
+		-0.022
+	|
+
+maximum speed per connection=
+	75
+	~	Mbps
+	~	Fixed wireless has a maximum plan speed of 75Mbps
+	|
+
+Internet Service Demand= INTEG (
+	Internet service demand rate,
+		INIT NBN connections)
+	~	connections
+	~		|
+
+INIT NBN connections=
+	114+27
+	~	connections
+	~	77% of 148 dwellings (from 2016 ABS Census data)
+		Plus 27 businesses (from 2020 ABS counts of businesses)
+	|
+
+average size of household=
+	2
+	~	people/structure
+	~	From ABS census data (consistent for 2011 and 2016)
+	|
+
+labour force[Male]=
+	residents in paid work[Male] 
+	             + unemployed residents[Male] ~~|
+labour force[Female]=
+	residents in paid work[Female]+unemployed residents[Female]
+	~	people
+	~		|
+
+Gender:
+	Male, Female
+	~	
+	~		|
+
+table for effect of supply demand ratio on house prices(
+	[(0,0.8)-(2,1.4)],(0,1.34),(0.25,1.31),(0.5,1.27),(0.75,1.17),(1,1),(1.25,0.94),(1.5\
+		,0.89),(1.75,0.87),(2,0.85))
+	~	Dmnl
+	~	Özbaş et al 2014
+	|
+
+effect of supply demand ratio on house prices=
+	table for effect of supply demand ratio on house prices(housing supply demand ratio)
+	~	Dmnl
+	~	Özbaş et al 2014
+	|
+
+average house price=
+	effect of supply demand ratio on house prices*reference average house price
+	~	dollars
+	~		|
+
+number people below poverty line[poverty line ss,Gender]=
+	number labour force in income bracket[poverty line ss,Gender]
+	~	people
+	~	Poverty line is below first quartile ($0-399). This is in line with the \
+		ACOSS figure of $457
+	|
+
+number labour force in income bracket[Income,Gender]=
+	INTEGER(income distribution fractions by income cohort and gender[Income,Gender]*labour force\
+		[Gender])
+	~	people
+	~		|
+
+Income:
+	Negative, Nil, "$1-$149", "$150-$299", "$300-$399",
+	                            "$400-$499", "$500-$649", "$650-$799", "$800-$999", "$1,000-$1,249"\
+		,
+	                            "$1,250-$1,499", "$1,500-$1,749", "$1,750-$1,999",
+	                            "$2,000-$2,999", "$3,000 or more"
+	~	
+	~		|
+
+income distribution fractions by income cohort and gender[Negative,Gender]=
+	0.006, 0.0022 ~~|
+income distribution fractions by income cohort and gender[Nil,Gender]=
+	0.0105, 0.009 ~~|
+income distribution fractions by income cohort and gender["$1-$149",Gender]=
+	0.0224, 0.0269 ~~|
+income distribution fractions by income cohort and gender["$150-$299",Gender]=
+	0.0284, 0.0396 ~~|
+income distribution fractions by income cohort and gender["$300-$399",Gender]=
+	0.0366, 0.0403 ~~|
+income distribution fractions by income cohort and gender["$400-$499",Gender]=
+	0.0448, 0.0612 ~~|
+income distribution fractions by income cohort and gender["$500-$649",Gender]=
+	0.0523, 0.0717 ~~|
+income distribution fractions by income cohort and gender["$650-$799",Gender]=
+	0.0605, 0.0695 ~~|
+income distribution fractions by income cohort and gender["$800-$999",Gender]=
+	0.0859, 0.0471 ~~|
+income distribution fractions by income cohort and gender["$1,000-$1,249",Gender]=
+	0.0799, 0.0381 ~~|
+income distribution fractions by income cohort and gender["$1,250-$1,499",Gender]=
+	0.0276, 0.0224 ~~|
+income distribution fractions by income cohort and gender["$1,500-$1,749",Gender]=
+	0.0246, 0.0261 ~~|
+income distribution fractions by income cohort and gender["$1,750-$1,999",Gender]=
+	0.0202, 0.003 ~~|
+income distribution fractions by income cohort and gender["$2,000-$2,999",Gender]=
+	0.0194, 0.0105 ~~|
+income distribution fractions by income cohort and gender["$3,000 or more",Gender]=
+	0.0112, 0.0075
+	~	Dmnl
+	~	Weekly income
+	|
+
+land per house RLZ=
+	7.3
+	~	hectares/structure
+	~	Rural Living Zone specifies a lot size of at least 2 hectares and provides \
+		opportunities for some rural uses to occur
+		https://www.planning.vic.gov.au/__data/assets/pdf_file/0026/97172/PPN37-Rural-Residen\
+		tial-Development_June-2015.pdf
+		Mean value of RLZ lot size is 7.3
+	|
+
+land per house LDRZ=
+	0.82
+	~	hectares/structure
+	~	Low Density Residential Zone with a lot size of a minimum of 0.4 ha in areas with no \
+		reticulated sewerage \
+		https://www.planning.vic.gov.au/__data/assets/pdf_file/0026/97172/PPN37-Rur\
+		al-Residential-Development_June-2015.pdf
+		Mean value of LDRZ lot size is 0.82 hectares
+	|
+
+housing demolition rate=
+	0
+	~	fraction/Year
+	~	0
+	|
+
+"0-14"= INTEG (
+	 Births 
+	                  + "In-out migration 0-14" 
+	                  - "Ageing 0-14" 
+	                  - "Deaths 0-14",
+		 
+		    45)
+	~	people
+	~		|
+
+"15-64"= INTEG (
+	 "Ageing 0-14" 
+	                  + "In-out migration 15-64" 
+	                  - "Ageing 15-64" 
+	                  - "Deaths 15-64",
+		 
+		106)
+	~	people
+	~	Inital value taken from 2006 Census data
+	|
+
+"65+"= INTEG (
+	 "Ageing 15-64" 
+	                  + "In-out migration 65+" 
+	                  - "Deaths 65+",
+		20)
+	~	people
+	~		|
+
+maturation of school students=
+	7
+	~	Year
+	~	School age cohort (max-min) (12-5)
+	|
+
+district kids' parents cohort=
+	INTEGER ( (district 0 to 14 cohort*0.75)
+	                  * 1.5)
+	~	people
+	~	Multiply by 1.5 to capture both parents with some wiggle room for single parents etc
+		Multiply by 0.75 to take into account 0.5 enrolment ratio (ie, only half \
+		of cohort are of primary school age) and 0.25 for childcare
+	|
+
+enrolment ratio  = 0.5
+	~	1/Year
+	~	Only half of the 0-14 cohort will enrol at the local primary school (age \
+		4-10)
+	|
+
+fertility rate=
+	0.07
+	~	1/Year
+	~	The number of live births per woman aged 15-64 each year Derived from \
+		calibration of the model against data.
+	|
+
+"mortality rate 15-64"=
+	0.00156
+	~	1/Year
+	~	Constant derived from data aggregated at state level
+		0.00156
+	|
+
+"mortality rate 0-14"=
+	0.00031
+	~	1/Year
+	~	Mortality rate: constant Derived from data aggregated at state level
+		0.00031
+	|
+
+"mortality rate 65+"=
+	0.03694
+	~	1/Year
+	~	Mortality rate: constant Derived from data aggregated at state level
+		0.03694
+	|
+
+"maturation factor 0-14"  = 14
+	~	Year
+	~	The length of time a person can spend in the cohort before maturing into \
+		the next (max age - min age)
+	|
+
+"maturation factor 15-64"=
+	49
+	~	Year
+	~	Cohort (15-64) (max-min)
+	|
+
+labour input tourism=
+	sum(labour force [Gender!])
+	             * "reference jobs fraction (tourism)"
+	~	job/Year
+	~		|
+
+"non-local retail demand"=
+	1.2
+	~	Dmnl
+	~	Arbitrary value
+	|
+
+"reference jobs fraction (tourism)"=
+	0.279638
+	~	job/people/Year
+	~	Fraction of jobs in the tourism sector (calibrated against data)
+	|
+
+"labour demand (tourism)"  = 
+        "number of businesses (tourism)" 
+             * "average jobs per business (tourism)"
+	~	job/Year
+	~		|
+
+"reference jobs fraction (other)"=
+	0.22
+	~	job/people/Year
+	~	fraction of jobs in "other sectors" historically existing in Forrest \
+		(calibrated against data)
+	|
+
+"reference jobs fraction (agriculture)"=
+	0.18
+	~	job/people/Year
+	~	Fraction of total jobs from the agriculture sector (calibrated against \
+		data)
+	|
+
+labour input ag=
+	sum(labour force [Gender!])
+	             * "reference jobs fraction (agriculture)"
+	~	job/Year
+	~		|
+
+agriculture protected land=
+	1533.8
+	~	hectare
+	~	LU 2008 data: all farming and livestock land use >40ha as equivalent to Farming Zone
+		https://www.planning.vic.gov.au/__data/assets/pdf_file/0027/97182/PPN42-App\
+		lying-the-Rural-Zones_June-2015.pdf
+	|
+
+agriculture to forest land allocation time=
+	2.5
+	~	Year
+	~	Calibrated
+	|
+
+agriculture to housing land allocation time=
+	500
+	~	Year
+	~	Calibrated
+	|
+
+forest to agriculture land allocation time=
+	19
+	~	Year
+	~	Calibrated
+	|
+
+forest to housing land allocation time=
+	500
+	~	Year
+	~	Calibrated
+	|
+
+Fertilisation Intensity  = 
+        INTEG( Fertilisation intensity change rate , 
+             INIT Fertilisation Intensity )
+	~	TonNutrient/(ha*Year)
+	~	Intensity of fertilisation practices per ha per year.
+	|
+
+Housing Land  = 
+        INTEG( Agricultural to Housing transfer rate 
+                  + Forest to Housing transfer rate , 
+             INIT housing land )
+	~	hectare
+	~		|
+
+INIT agricultural land=
+	3549.5
+	~	hectare
+	~	2006
+	|
+
+INIT forest land=
+	4436
+	~	hectare
+	~	2008
+	|
+
+INIT Fertilisation Intensity=
+	0.254
+	~	TonNutrient/(ha*Year)
+	~	In 2008, farming in Cogangamite used 0.254 tons/ha/year
+	|
+
+INIT protected land=
+	1283.7
+	~	hectare
+	~	Area of forest land indicated as protected in year 2006
+	|
+
+INIT housing land=
+	57.3
+	~	hectare
+	~	2008
+	|
+
+time to adjust fertilisation intensity=
+	4
+	~	Year
+	~	Calibrated
+	|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2050
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2000
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.25
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Demographic
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
+10,1,Time,607,375,25,9,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,2,"15-64",787,508,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,3,4,2,4,0,0,22,0,0,0,-1--1--1,,1|(787,464)|
+11,4,10166,787,432,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,5,"Ageing 0-14",840,432,37,9,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,6,7,2,100,0,0,22,0,0,0,-1--1--1,,1|(787,552)|
+11,7,10298,787,584,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,8,"Ageing 15-64",835,584,40,9,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,9,48,1003,359,12,8,0,3,0,8,-1,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+1,10,11,9,4,0,0,22,0,0,0,-1--1--1,,1|(960,359)|
+11,11,48,916,359,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,12,"Deaths 0-14",916,380,37,9,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,13,48,1007,508,12,8,0,3,0,8,-1,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+1,14,16,13,4,0,0,22,0,0,0,-1--1--1,,1|(960,508)|
+1,15,16,2,100,0,0,22,0,0,0,-1--1--1,,1|(865,508)|
+11,16,48,912,508,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,17,"Deaths 15-64",912,523,40,9,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+12,18,48,524,359,12,8,0,3,0,8,-1,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+1,19,20,18,100,0,0,22,0,0,0,-1--1--1,,1|(584,359)|
+11,20,48,639,359,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,21,"In-out migration 0-14",639,383,49,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,22,48,523,508,12,8,0,3,0,8,-1,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+1,23,25,2,4,0,0,22,0,0,0,-1--1--1,,1|(697,508)|
+1,24,25,22,100,0,0,22,0,0,0,-1--1--1,,1|(584,508)|
+11,25,48,639,508,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,26,"In-out migration 15-64",639,532,49,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,27,48,536,668,12,8,0,3,0,8,-1,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+1,28,29,27,100,0,0,22,0,0,0,-1--1--1,,1|(595,668)|
+11,29,48,652,668,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,30,"In-out migration 65+",652,692,49,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,31,total population,1204,492,45,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,32,2,31,1,0,0,1,2,128,0,-1--1--1,|12||0-0-0,1|(943,548)|
+12,33,48,787,247,12,8,0,3,0,8,-1,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+1,34,35,33,100,0,0,22,0,0,0,-1--1--1,,1|(787,271)|
+11,35,48,787,296,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,36,Births,820,296,19,9,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,37,2,35,1,0,0,0,0,128,0,-1--1--1,,1|(728,323)|
+10,38,fertility rate,696,247,35,9,8,3,0,8,0,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+1,39,38,35,1,0,0,0,0,128,0,-1--1--1,,1|(719,287)|
+10,40,"migration rate 0-14",575,272,56,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,41,"migration rate 15-64",496,451,60,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,42,"migration rate 65+",483,731,56,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,43,40,20,1,0,0,0,0,128,0,-1--1--1,,1|(603,312)|
+1,44,41,25,1,0,0,0,0,128,0,-1--1--1,,1|(572,484)|
+1,45,42,30,1,0,0,0,0,128,0,-1--1--1,,1|(551,711)|
+10,46,"mortality rate 0-14",1004,308,55,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,47,46,11,1,0,0,0,0,128,0,-1--1--1,,1|(956,327)|
+12,48,48,787,820,12,8,0,3,0,8,-1,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+1,49,50,48,4,0,0,22,0,0,0,-1--1--1,,1|(787,785)|
+11,50,48,787,751,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,51,"Deaths 65+",836,751,35,9,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,52,"mortality rate 15-64",963,451,60,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,53,52,16,1,0,0,0,0,128,0,-1--1--1,,1|(935,475)|
+10,54,"mortality rate 65+",988,739,53,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,55,54,51,1,0,0,0,0,128,0,-1--1--1,,1|(900,759)|
+1,56,2,16,1,0,0,0,2,128,0,-1--1--1,|12||0-0-0,1|(888,479)|
+10,57,"maturation factor 0-14",644,440,36,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,58,"maturation factor 15-64",668,604,52,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,59,57,4,1,0,0,0,0,128,0,-1--1--1,,1|(724,452)|
+1,60,58,7,1,0,0,0,0,128,0,-1--1--1,,1|(735,599)|
+1,61,2,8,1,0,0,0,0,128,0,-1--1--1,,1|(823,560)|
+12,62,0,1176,619,85,17,3,135,1,1,-1,0,0,0,255-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+Navarro & Tapiador 2019
+1,63,2,26,1,0,0,0,2,64,0,-1--1--1,|12||0-0-0,1|(723,532)|
+10,64,"0-14",787,359,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,65,64,11,1,0,0,0,0,64,0,-1--1--1,,1|(856,336)|
+10,66,"65+",787,668,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,67,29,66,4,0,0,22,0,0,0,-1--1--1,,1|(703,668)|
+1,68,7,66,4,0,0,22,0,0,0,-1--1--1,,1|(787,620)|
+1,69,50,66,100,0,0,22,0,0,0,-1--1--1,,1|(787,715)|
+1,70,4,64,100,0,0,22,0,0,0,-1--1--1,,1|(787,401)|
+1,71,11,64,100,0,0,22,0,0,0,-1--1--1,,1|(867,359)|
+1,72,35,64,4,0,0,22,0,0,0,-1--1--1,,1|(787,321)|
+1,73,20,64,4,0,0,22,0,0,0,-1--1--1,,1|(697,359)|
+1,74,64,5,0,0,0,0,0,64,0,-1--1--1,,1|(812,395)|
+1,75,64,21,1,0,0,0,0,64,0,-1--1--1,,1|(727,379)|
+1,76,66,51,0,0,0,0,0,64,0,-1--1--1,,1|(812,708)|
+1,77,66,30,1,0,0,0,0,64,0,-1--1--1,,1|(732,691)|
+1,78,64,31,1,0,0,1,2,64,0,-1--1--1,|12||0-0-0,1|(951,423)|
+1,79,66,31,1,0,0,1,2,64,0,-1--1--1,|12||0-0-0,1|(959,612)|
+10,80,School Enrolments,1299,260,45,40,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,81,48,1515,260,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,82,84,81,4,0,0,22,0,0,0,-1--1--1,,1|(1468,260)|
+1,83,84,80,100,0,0,22,0,0,0,-1--1--1,,1|(1380,260)|
+11,84,48,1420,260,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,85,Outgoing school cohort,1420,284,49,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,86,district 0 to 14 cohort,972,127,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,87,district kids' parents cohort,907,52,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,88,number of childcare enrolments,928,199,64,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,89,86,88,1,0,0,0,0,128,0,-1--1--1,,1|(948,152)|
+10,90,maturation of school students,1408,192,47,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,91,90,84,1,0,0,0,0,128,0,-1--1--1,,1|(1419,223)|
+1,92,80,84,1,0,0,0,0,64,0,-1--1--1,,1|(1372,235)|
+12,93,48,1136,260,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,94,96,80,4,0,0,22,0,0,0,-1--1--1,,1|(1232,260)|
+1,95,96,93,100,0,0,22,0,0,0,-1--1--1,,1|(1168,260)|
+11,96,48,1199,260,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,97,New enrolments,1199,275,49,9,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,98,86,87,0,0,0,0,0,128,0,-1--1--1,,1|(944,96)|
+10,99,enrolment ratio,1159,156,45,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,100,64,88,1,0,0,0,0,128,0,-1--1--1,,1|(880,240)|
+10,101,effect of job availability on migration,316,419,41,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,102,"reference migration rate 15-64",313,512,60,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,103,102,41,0,0,0,0,0,128,0,-1--1--1,,1|(408,480)|
+10,104,effect of housing on migration,367,647,52,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,105,"reference migration rate 65+",468,827,55,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,106,105,42,0,0,0,0,0,128,0,-1--1--1,,1|(476,784)|
+10,107,average house price,240,753,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,108,housing supply demand ratio,188,688,52,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,109,reference average house price,349,773,59,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,110,Time,303,492,25,9,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,111,"average jobs per business (agriculture)",303,492,68,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,112,"average jobs per business (other)",303,492,57,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,113,"average jobs per business (tourism)",303,492,60,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,114,104,41,1,0,0,0,0,128,0,-1--1--1,,1|(492,552)|
+1,115,104,42,0,0,0,0,0,128,0,-1--1--1,,1|(423,688)|
+10,116,job availability unit conversion factor,419,541,55,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,117,TIME STEP,1199,304,48,9,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,118,64,97,1,0,0,0,0,64,0,-1--1--1,,1|(980,280)|
+1,119,86,96,0,0,0,0,0,64,0,-1--1--1,,1|(1089,195)|
+1,120,99,96,0,0,0,0,0,64,0,-1--1--1,,1|(1176,201)|
+10,121,"labour demand (other)",303,492,48,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,122,"labour demand (agriculture)",303,492,48,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,123,"labour demand (tourism)",303,492,48,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,124,"job vacancies (agriculture) filled externally",132,368,56,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,125,"job vacancies (other) filled externally",151,431,45,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,126,"job vacancies (tourism) filled externally",187,495,45,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,127,124,101,0,0,0,0,0,128,0,-1--1--1,,1|(224,393)|
+1,128,125,101,0,0,0,0,0,128,0,-1--1--1,,1|(228,425)|
+1,129,126,101,0,0,0,0,0,128,0,-1--1--1,,1|(244,460)|
+10,130,"working-age population",191,325,44,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,131,130,101,0,0,0,0,0,128,0,-1--1--1,,1|(244,363)|
+1,132,116,41,0,0,0,0,0,128,0,-1--1--1,,1|(455,497)|
+10,133,Time,1199,300,25,9,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,134,cohort time,1235,360,35,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,135,134,97,0,0,0,0,0,128,0,-1--1--1,,1|(1219,323)|
+10,136,"social housing supply/demand ratio",167,620,65,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,137,101,41,1,0,0,0,0,128,0,-1--1--1,,1|(381,452)|
+1,138,41,40,1,0,0,0,0,128,0,-1--1--1,,1|(496,359)|
+1,139,108,104,0,0,0,0,0,128,0,-1--1--1,,1|(272,669)|
+1,140,136,104,0,0,0,0,0,128,0,-1--1--1,,1|(268,632)|
+10,141,"reference migration rate 0-14",592,207,57,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,142,141,40,0,0,0,0,0,128,0,-1--1--1,,1|(584,236)|
+1,143,107,104,0,0,0,0,0,128,0,-1--1--1,,1|(297,704)|
+1,144,109,104,0,0,0,0,0,128,0,-1--1--1,,1|(356,716)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Land Use
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
+10,1,fertilisation intensity change,417,264,48,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Fertilisation Intensity,241,136,40,20,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,INIT Fertilisation Intensity,244,60,52,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,time to adjust fertilisation intensity,393,128,60,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,fertiliser consumption,160,380,39,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,6,3,2,0,0,0,0,0,0,1,-1--1--1,,1|(241,92)|
+1,7,2,5,1,0,0,0,0,128,0,-1--1--1,,1|(201,253)|
+12,8,48,244,292,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,9,11,2,4,0,0,22,0,0,0,-1--1--1,,1|(241,184)|
+1,10,11,8,100,0,0,22,0,0,0,-1--1--1,,1|(241,256)|
+11,11,48,241,220,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,12,Fertilisation intensity change rate,312,220,61,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,13,1,12,0,0,0,0,0,64,0,-1--1--1,,1|(372,244)|
+1,14,2,12,0,0,0,0,0,64,0,-1--1--1,,1|(272,176)|
+1,15,4,12,0,0,0,0,0,64,0,-1--1--1,,1|(356,168)|
+10,16,Agriculture Land,508,468,59,32,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,17,Forest Land,941,471,59,32,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,18,Housing Land,740,664,59,32,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,20,18,4,0,0,22,0,0,0,-1--1--1,,1|(600,663)|
+11,20,1190,513,663,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,21,Agricultural to Housing transfer rate,513,687,63,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,22,23,18,4,0,0,22,0,0,0,-1--1--1,,1|(863,664)|
+11,23,2180,937,664,8,8,34,131,0,0,1,0,0,0,0,0,0,0,0,0
+10,24,Forest to Housing transfer rate,937,688,56,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,25,26,17,36,0,0,22,2,0,0,-1--1--1,|11||0-0-0,1|(811,475)|
+11,26,1894,733,475,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,27,Forest to Agriculture transfer rate,733,507,59,24,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,28,26,16,4,0,0,22,0,0,0,-1--1--1,,1|(645,475)|
+1,29,23,17,36,0,0,22,2,0,0,-1--1--1,|11||0-0-0,1|(937,579)|
+1,30,20,16,36,0,0,22,2,0,0,-1--1--1,|11||0-0-0,1|(513,577)|
+10,31,INIT agricultural land,356,360,48,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,32,INIT forest land,1052,377,49,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,33,INIT housing land,744,785,56,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,34,31,16,0,0,0,0,0,128,1,-1--1--1,,1|(412,401)|
+1,35,32,17,0,0,0,0,0,128,1,-1--1--1,,1|(1016,407)|
+1,36,33,18,0,0,0,0,0,128,1,-1--1--1,,1|(740,744)|
+10,37,Protected Land,1252,468,59,32,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,38,INIT protected land,1304,369,59,9,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,39,38,37,0,0,0,0,0,64,1,-1--1--1,,1|(1285,400)|
+10,43,agriculture protected land,581,540,43,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,44,forest to housing change,1008,804,51,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,45,agriculture to housing change,508,795,47,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,46,45,21,0,0,0,0,0,128,0,-1--1--1,,1|(508,747)|
+1,47,44,24,0,0,0,0,0,128,0,-1--1--1,,1|(975,751)|
+10,48,agriculture to housing land allocation time,336,708,56,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,49,48,21,0,0,0,0,0,128,0,-1--1--1,,1|(413,700)|
+10,50,forest to housing land allocation time,1097,687,57,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,51,50,24,0,0,0,0,0,128,0,-1--1--1,,1|(1023,687)|
+10,52,forest to agriculture land allocation time,617,608,59,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,53,agriculture to forest land allocation time,741,295,59,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,54,52,27,0,0,0,0,0,128,0,-1--1--1,,1|(664,568)|
+1,55,53,74,0,0,0,0,0,128,0,-1--1--1,,1|(737,332)|
+10,56,forest to agriculture change,744,588,55,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,57,17,27,1,0,0,0,0,128,0,-1--1--1,,1|(836,499)|
+1,58,16,75,1,0,0,0,0,128,0,-1--1--1,,1|(604,399)|
+1,59,16,20,1,0,0,0,0,128,0,-1--1--1,,1|(457,603)|
+1,60,17,24,1,0,0,0,0,128,0,-1--1--1,,1|(1009,595)|
+1,61,43,20,0,0,0,0,0,64,0,-1--1--1,,1|(547,599)|
+12,62,0,1417,224,40,20,3,7,1,1,-1,0,0,0,255-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+FeliX
+1,63,18,45,1,0,0,0,0,128,0,-1--1--1,,1|(629,757)|
+1,64,18,44,0,0,0,0,0,128,0,-1--1--1,,1|(879,737)|
+10,65,housing demand,728,827,56,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,66,average land per house,733,895,49,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,67,70,66,0,0,0,0,0,128,0,-1--1--1,,1|(809,936)|
+1,68,71,66,0,0,0,0,0,128,0,-1--1--1,,1|(631,937)|
+1,69,66,45,1,0,0,0,0,128,0,-1--1--1,,1|(585,845)|
+10,70,land per house LDRZ,876,967,44,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,71,land per house RLZ,561,967,60,9,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,72,74,17,4,0,0,22,0,0,0,-1--1--1,,3|(937,372)|(937,375)|(937,407)|
+1,73,74,16,100,0,0,22,0,0,0,-1--1--1,,1|(508,372)|
+11,74,11310,733,372,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,75,Agriculture to Forest transfer rate,733,396,60,16,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,76,agriculture to forest change,612,299,41,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,77,76,74,0,0,0,0,0,128,0,-1--1--1,,1|(676,337)|
+1,78,16,76,1,0,0,0,0,128,0,-1--1--1,,1|(512,347)|
+10,79,"number of businesses (agriculture)",721,211,44,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,80,79,76,0,0,0,0,0,128,0,-1--1--1,,1|(668,256)|
+10,81,average land per agricultural business,577,195,61,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,82,81,76,0,0,0,0,0,128,0,-1--1--1,,1|(592,240)|
+1,83,43,75,1,0,0,0,0,128,0,-1--1--1,,1|(664,480)|
+1,84,86,37,4,0,0,22,0,0,0,-1--1--1,,1|(1148,468)|
+1,85,86,17,100,0,0,22,0,0,0,-1--1--1,,1|(1044,468)|
+11,86,4820,1093,468,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,87,Forest to Protected transfer rate,1093,492,60,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,88,forest to protected change,1077,580,39,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,89,forest to protected allocation time,1180,571,36,32,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,90,89,87,0,0,0,0,0,128,0,-1--1--1,,1|(1132,528)|
+1,91,88,87,0,0,0,0,0,128,0,-1--1--1,,1|(1084,540)|
+1,92,17,87,0,0,0,0,0,64,0,-1--1--1,,1|(1009,480)|
+1,93,56,27,0,0,0,0,0,128,0,-1--1--1,,1|(739,560)|
+1,94,66,44,0,0,0,0,0,128,0,-1--1--1,,1|(864,851)|
+1,95,65,44,0,0,0,0,0,128,0,-1--1--1,,1|(861,816)|
+1,96,65,45,0,0,0,0,0,128,0,-1--1--1,,1|(620,811)|
+1,97,16,5,0,0,0,0,0,128,0,-1--1--1,,1|(329,423)|
+10,98,total land,236,892,28,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,99,Housing Land,133,819,49,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,100,Agriculture Land,313,827,60,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,101,Forest Land,160,983,44,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,102,Protected Land,321,988,53,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,103,99,98,0,0,0,0,0,128,0,-1--1--1,,1|(177,851)|
+1,104,100,98,0,0,0,0,0,128,0,-1--1--1,,1|(280,855)|
+1,105,101,98,0,0,0,0,0,128,0,-1--1--1,,1|(191,944)|
+1,106,102,98,0,0,0,0,0,128,0,-1--1--1,,1|(284,945)|
+10,107,max land,1524,648,28,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,108,max land protected,1441,717,56,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,109,max land ag,1441,768,36,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,110,max land forest,1441,817,48,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,111,max land housing,1441,889,52,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,112,Agriculture Land,1625,716,60,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,113,Forest Land,1625,772,44,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,114,Housing Land,1625,824,49,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,115,Protected Land,1625,889,53,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,117,107,108,0,0,0,0,0,128,0,-1--1--1,,1|(1488,680)|
+1,118,107,109,1,0,0,0,0,128,0,-1--1--1,,1|(1465,752)|
+1,119,107,110,1,0,0,0,0,128,0,-1--1--1,,1|(1529,780)|
+1,120,107,111,1,0,0,0,0,128,0,-1--1--1,,1|(1523,739)|
+1,121,112,108,0,0,0,0,0,128,0,-1--1--1,,1|(1540,716)|
+1,122,113,108,0,0,0,0,0,128,0,-1--1--1,,1|(1539,748)|
+1,123,114,108,0,0,0,0,0,128,0,-1--1--1,,1|(1539,776)|
+1,124,113,109,0,0,0,0,0,128,0,-1--1--1,,1|(1535,772)|
+1,125,114,109,0,0,0,0,0,128,0,-1--1--1,,1|(1539,800)|
+1,126,115,109,0,0,0,0,0,128,0,-1--1--1,,1|(1540,832)|
+1,127,112,110,0,0,0,0,0,128,0,-1--1--1,,1|(1539,763)|
+1,128,114,110,0,0,0,0,0,128,0,-1--1--1,,1|(1539,820)|
+1,129,115,110,0,0,0,0,0,128,0,-1--1--1,,1|(1539,855)|
+1,130,112,111,0,0,0,0,0,128,0,-1--1--1,,1|(1540,797)|
+1,131,113,111,0,0,0,0,0,128,0,-1--1--1,,1|(1540,828)|
+1,132,115,111,0,0,0,0,0,128,0,-1--1--1,,1|(1539,889)|
+1,133,108,87,0,1,0,0,0,64,0,-1--1--1,,1|(1280,611)|
+1,134,110,75,0,1,0,0,0,64,0,-1--1--1,,1|(1100,613)|
+1,135,109,27,0,1,0,0,0,64,0,-1--1--1,,1|(1111,645)|
+1,136,111,21,0,1,0,0,0,64,0,-1--1--1,,1|(996,791)|
+1,138,111,24,1,1,0,0,0,128,0,-1--1--1,,1|(1084,771)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Housing
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
+10,1,total population,1092,572,56,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,2,Housing Supply,808,424,53,27,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,3,48,612,416,12,8,0,3,0,8,-1,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+1,4,6,2,4,0,0,22,0,0,0,-1--1--1,,1|(721,416)|
+1,5,6,3,100,0,0,22,0,0,0,-1--1--1,,1|(647,416)|
+11,6,48,684,416,8,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,7,Housing construction,684,448,48,21,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+12,8,48,1000,423,12,8,0,3,0,8,-1,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+1,9,11,8,4,0,0,22,0,0,0,-1--1--1,,1|(965,423)|
+1,10,11,2,100,0,0,22,0,0,0,-1--1--1,,1|(892,423)|
+11,11,48,936,423,8,11,34,131,0,0,1,0,0,0,0,0,0,0,0,0
+10,12,Housing demolition,936,443,56,9,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,13,0,64,184,64,23,3,135,1,9,-1,0,0,0,255-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+Ghaffarzadegan et al 2011
+10,14,average size of household,1120,423,45,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,reference average house price,1744,443,53,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,average house price,1624,512,60,9,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,17,effect of supply demand ratio on house prices,1579,435,68,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,17,16,0,0,0,0,0,0,0,-1--1--1,,1|(1600,473)|
+1,19,15,16,0,0,0,0,0,0,0,-1--1--1,,1|(1684,476)|
+10,20,housing supply demand ratio,1463,340,45,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,21,table for effect of supply demand ratio on house prices,1640,331,76,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,22,21,17,0,0,0,0,0,0,0,-1--1--1,,1|(1612,376)|
+10,23,housing demand,1347,395,48,9,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,24,23,20,0,0,0,0,0,0,0,-1--1--1,,1|(1391,373)|
+10,25,number of desired tourist houses,1272,307,55,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,26,25,23,0,0,0,0,0,0,0,-1--1--1,,1|(1308,349)|
+10,27,housing demolition rate,976,368,44,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,28,27,11,0,0,0,0,0,0,0,-1--1--1,,1|(956,396)|
+10,29,housing build delay,512,580,56,9,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,30,29,162,0,0,0,0,0,0,0,-1--1--1,,1|(552,556)|
+1,31,2,12,1,0,0,0,0,128,0,-1--1--1,,1|(872,463)|
+1,32,14,25,1,0,0,0,0,128,0,-1--1--1,,1|(1175,356)|
+10,33,number of times each tourist house occupied per year,1079,196,68,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,34,33,25,1,0,0,0,0,128,0,-1--1--1,,1|(1203,244)|
+10,35,Number Of Tourists,1027,827,56,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,36,number of desired residential households,1265,520,65,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,37,14,36,1,0,0,0,0,128,0,-1--1--1,,1|(1196,468)|
+1,38,1,36,1,0,0,0,0,128,0,-1--1--1,,1|(1181,579)|
+1,39,36,23,0,0,0,0,0,128,0,-1--1--1,,1|(1304,460)|
+10,40,Wastewater availability,535,439,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,41,fraction of rented houses,599,860,53,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,42,fraction of mortgaged houses,1039,840,55,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,43,number of rented households,752,872,52,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,44,number of mortgaged households,923,864,36,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,45,42,44,0,0,0,0,0,128,0,-1--1--1,,1|(980,852)|
+10,46,INIT annual rent cost,344,916,37,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,47,46,55,0,0,0,0,0,128,0,-1--1--1,,1|(387,937)|
+10,48,consumer price index,467,916,47,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,49,48,55,0,0,0,0,0,128,0,-1--1--1,,1|(443,935)|
+10,50,TIME STEP,532,835,48,9,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,51,Annual Rent Cost By Income Group,560,955,48,27,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,52,48,331,955,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,53,55,51,4,0,0,22,0,0,0,-1--1--1,,1|(472,955)|
+1,54,55,52,100,0,0,22,0,0,0,-1--1--1,,1|(377,955)|
+11,55,48,424,955,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,56,Rent rate change,424,988,52,9,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,57,Time,419,1047,25,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,58,Annual Mortgage Cost By Income Group,1139,955,52,32,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,59,48,1328,955,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,60,62,58,4,0,0,22,0,0,0,-1--1--1,,1|(1224,955)|
+1,61,62,59,100,0,0,22,0,0,0,-1--1--1,,1|(1293,955)|
+11,62,48,1264,955,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,63,Mortgage rate change,1264,979,44,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,64,INIT annual mortgage cost,1327,892,43,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,65,consumer price index,1184,892,51,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,66,Time,1263,1076,25,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,67,65,62,0,0,0,0,0,128,0,-1--1--1,,1|(1224,923)|
+1,68,64,62,0,0,0,0,0,128,0,-1--1--1,,1|(1296,924)|
+1,69,66,63,0,0,0,0,0,128,0,-1--1--1,,1|(1264,1036)|
+10,70,"30 percent",848,1120,32,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,71,41,43,0,0,0,0,0,128,0,-1--1--1,,1|(668,863)|
+1,72,43,90,0,0,0,0,0,128,0,-1--1--1,,1|(752,899)|
+10,73,number of mortgaged households by income cohort,935,968,67,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,74,44,73,0,0,0,0,0,128,0,-1--1--1,,1|(927,907)|
+1,75,57,56,0,0,0,0,0,128,0,-1--1--1,,1|(419,1023)|
+10,76,rent stress,644,1079,32,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,77,51,76,0,0,0,0,0,128,0,-1--1--1,,1|(601,1020)|
+1,78,70,76,0,0,0,0,0,64,0,-1--1--1,,1|(752,1099)|
+10,79,income values,848,1183,44,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,80,79,76,1,0,0,0,0,128,0,-1--1--1,,1|(743,1155)|
+10,81,mortgage stress,1071,1079,47,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,82,58,81,0,0,0,0,0,128,0,-1--1--1,,1|(1101,1024)|
+1,83,70,81,0,0,0,0,0,128,0,-1--1--1,,1|(944,1101)|
+1,84,79,81,1,0,0,0,0,128,0,-1--1--1,,1|(1003,1160)|
+1,85,73,81,0,0,0,0,0,128,0,-1--1--1,,1|(1008,1025)|
+10,86,income distribution by income cohort,856,1047,61,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,87,86,73,0,0,0,0,0,128,0,-1--1--1,,1|(885,1015)|
+10,88,number of households under mortgage stress,1192,1184,67,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,89,81,88,0,0,0,0,0,128,0,-1--1--1,,1|(1120,1124)|
+10,90,number of rented households by income cohort,755,951,67,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,91,86,90,0,0,0,0,0,128,0,-1--1--1,,1|(813,1007)|
+1,92,90,76,0,0,0,0,0,128,0,-1--1--1,,1|(696,1017)|
+10,93,number of households under rent stress,511,1184,67,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,94,76,93,0,0,0,0,0,128,0,-1--1--1,,1|(588,1124)|
+12,95,0,1611,935,200,195,3,156,1,0,1,0,0,0,0,0,0,0,0,0
+Housing_stress
+10,96,Social Housing Supply,347,487,44,27,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,97,48,348,356,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,98,100,96,4,0,0,22,0,0,0,-1--1--1,,1|(348,441)|
+1,99,100,97,100,0,0,22,0,0,0,-1--1--1,,1|(348,384)|
+11,100,48,348,416,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,101,Social housing construction,400,416,44,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,102,social housing demand,160,571,43,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,103,102,113,0,0,0,0,0,128,0,-1--1--1,,1|(176,532)|
+10,104,social housing build delay,255,340,43,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,105,104,100,0,0,0,0,0,128,0,-1--1--1,,1|(301,376)|
+10,106,social housing scenario switch,400,287,47,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,107,106,101,0,0,0,0,0,128,0,-1--1--1,,1|(400,343)|
+1,108,93,102,1,0,0,0,0,128,0,-1--1--1,,1|(219,999)|
+10,109,sum of people below poverty line,72,508,59,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,110,109,102,1,0,0,0,0,128,0,-1--1--1,,1|(127,551)|
+10,111,average size of household,219,660,49,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,112,111,102,0,0,0,0,0,128,0,-1--1--1,,1|(193,620)|
+10,113,social housing discrepancy,200,484,43,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,114,96,113,0,0,0,0,0,128,0,-1--1--1,,1|(279,484)|
+1,115,113,100,0,0,0,0,0,128,0,-1--1--1,,1|(279,444)|
+10,116,housing demand,592,647,56,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,117,housing discrepancy,699,576,36,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,118,116,117,0,0,0,0,0,128,0,-1--1--1,,1|(633,617)|
+1,119,117,162,0,0,0,0,0,128,0,-1--1--1,,1|(664,552)|
+10,120,land per house RLZ,804,256,48,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,121,land per house LDRZ,804,256,48,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,122,Number Of Tourists,1097,284,56,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,123,122,25,1,0,0,0,0,128,0,-1--1--1,,1|(1196,276)|
+10,124,"social housing supply/demand ratio",315,595,60,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,125,96,124,0,0,0,0,0,128,0,-1--1--1,,1|(331,539)|
+1,126,102,124,0,0,0,0,0,128,0,-1--1--1,,1|(224,579)|
+1,127,96,43,1,0,0,0,0,128,0,-1--1--1,,1|(476,724)|
+1,128,20,17,0,0,0,0,0,128,0,-1--1--1,,1|(1512,380)|
+10,129,Housing Land,549,336,49,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,130,housing land occupied,671,320,40,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,131,40,101,0,0,0,0,0,128,0,-1--1--1,,1|(471,427)|
+10,132,Tourism Housing,808,256,43,28,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,133,135,132,4,0,0,22,0,0,0,-1--1--1,,1|(807,312)|
+1,134,135,2,100,0,0,22,0,0,0,-1--1--1,,1|(807,376)|
+11,135,816,807,348,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,136,Tourism housing allocation rate,868,348,51,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,137,Residential Housing,808,584,43,28,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,138,140,137,4,0,0,22,0,0,0,-1--1--1,,1|(808,536)|
+1,139,140,2,100,0,0,22,0,0,0,-1--1--1,,1|(808,473)|
+11,140,794,808,508,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,141,Residential housing allocation rate,871,508,57,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,142,33,136,1,0,0,0,0,128,0,-1--1--1,,1|(964,251)|
+1,143,122,136,1,0,0,0,0,128,0,-1--1--1,,1|(981,288)|
+1,144,14,136,1,0,0,0,0,128,0,-1--1--1,,1|(1028,331)|
+10,145,housing transfer delay,901,220,43,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,146,145,136,0,0,0,0,0,128,0,-1--1--1,,1|(884,279)|
+1,147,14,141,0,0,0,0,0,128,0,-1--1--1,,1|(1004,461)|
+1,148,1,141,0,0,0,0,0,128,0,-1--1--1,,1|(999,543)|
+1,149,2,141,1,0,0,0,0,128,0,-1--1--1,,1|(844,479)|
+1,150,2,136,1,0,0,0,0,128,0,-1--1--1,,1|(851,372)|
+10,151,housing transfer delay,932,595,53,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,152,151,141,0,0,0,0,0,128,0,-1--1--1,,1|(904,556)|
+1,153,137,43,0,0,0,0,0,128,0,-1--1--1,,1|(780,725)|
+1,154,137,44,0,0,0,0,0,128,0,-1--1--1,,1|(861,717)|
+1,155,132,130,0,0,0,0,0,128,0,-1--1--1,,1|(739,284)|
+1,156,137,130,1,0,0,0,0,128,0,-1--1--1,,1|(740,452)|
+1,157,129,6,0,0,0,0,0,128,0,-1--1--1,,1|(613,373)|
+1,158,40,6,1,0,0,0,0,128,0,-1--1--1,,1|(620,431)|
+1,159,130,6,0,0,0,0,0,128,0,-1--1--1,,1|(675,363)|
+10,160,minimum average land per house,604,212,53,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,161,160,130,0,0,0,0,0,128,0,-1--1--1,,1|(632,259)|
+10,162,housing discrepancy delay,620,519,56,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,163,145,162,0,1,0,0,2,64,0,-1--1--1,|11||0-0-0,1|(761,367)|
+1,164,162,7,0,0,0,0,0,128,0,-1--1--1,,1|(644,492)|
+10,165,Current time,464,519,48,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,166,165,162,0,0,0,0,0,64,0,-1--1--1,,1|(529,519)|
+10,167,Tourism Housing,1400,223,59,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,168,Residential Housing,1528,215,36,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,169,167,20,0,0,0,0,0,128,0,-1--1--1,,1|(1424,272)|
+1,170,168,20,0,0,0,0,0,128,0,-1--1--1,,1|(1497,272)|
+1,171,137,117,1,0,0,0,0,128,0,-1--1--1,,1|(740,624)|
+1,172,132,117,1,0,0,0,0,128,0,-1--1--1,,1|(721,480)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Economy
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
+10,1,residents not in paid work,947,-544,48,16,8,3,0,8,0,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+10,2,"working-age population",811,-493,40,16,8,3,0,8,0,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+10,3,"reference jobs fraction (agriculture)",995,-24,48,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,"average jobs per business (agriculture)",1267,-92,65,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,"labour demand (agriculture)",1263,-177,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,6,4,5,0,0,0,0,0,128,0,-1--1--1,,1|(1265,-128)|
+10,7,labour input ag,899,-93,44,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,3,7,0,0,0,0,0,128,0,-1--1--1,,1|(941,-63)|
+1,9,2,1,0,0,0,0,0,128,0,-1--1--1,,1|(871,-516)|
+10,10,residents in paid work,940,-413,48,16,8,3,0,8,0,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+1,11,2,10,0,0,0,0,0,128,0,-1--1--1,,1|(869,-456)|
+10,12,unemployed residents,960,-481,36,16,8,3,0,8,0,0,0,0,0-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+1,13,2,12,0,0,0,0,0,128,0,-1--1--1,,1|(880,-487)|
+10,14,labour force,1096,-437,37,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,15,12,14,0,0,0,0,0,128,0,-1--1--1,,1|(1025,-460)|
+1,16,10,14,0,0,0,0,0,128,0,-1--1--1,,1|(1016,-424)|
+10,17,labour force,856,-5,45,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,18,17,7,0,0,0,0,0,128,0,-1--1--1,,1|(873,-40)|
+10,19,"reference jobs fraction (tourism)",1035,404,53,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,20,"average jobs per business (tourism)",1276,300,56,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,21,"labour demand (tourism)",1227,216,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,20,21,0,0,0,0,0,128,0,-1--1--1,,1|(1255,264)|
+1,23,123,21,0,0,0,0,0,128,0,-1--1--1,,1|(1205,172)|
+10,24,labour input tourism,899,316,59,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,25,19,24,0,0,0,0,0,128,0,-1--1--1,,1|(967,360)|
+10,26,"number of businesses (other)",1192,611,55,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,27,"reference jobs fraction (other)",1039,872,48,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,28,"average jobs per business (other)",1223,775,49,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,29,"effect of non-local school parents participating in Forrest's economy",387,736,77,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,30,district kids' parents cohort,300,856,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,31,30,29,0,0,0,0,0,128,0,-1--1--1,,1|(335,803)|
+10,32,"non-local retail demand",212,800,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,33,32,29,0,0,0,0,0,128,0,-1--1--1,,1|(281,772)|
+10,34,labour force,875,395,45,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,35,34,24,0,0,0,0,0,128,0,-1--1--1,,1|(884,361)|
+10,36,"15-64",663,-512,27,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,37,36,2,0,0,0,0,0,128,0,-1--1--1,,1|(723,-505)|
+10,38,"15-64",187,724,27,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,39,38,29,0,0,0,0,0,128,0,-1--1--1,,1|(255,725)|
+10,40,labour force,899,871,45,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,41,labour input other,899,800,52,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,42,"labour demand (other)",1163,696,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,43,40,41,0,0,0,0,0,128,0,-1--1--1,,1|(899,841)|
+1,44,27,41,0,0,0,0,0,128,0,-1--1--1,,1|(968,833)|
+1,45,28,42,0,0,0,0,0,128,0,-1--1--1,,1|(1197,740)|
+10,46,"job vacancies (other) filled externally",983,712,63,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,47,"unemployment (other)",1076,775,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,48,42,46,1,0,0,0,0,128,0,-1--1--1,,1|(1092,700)|
+1,49,41,47,1,0,0,0,0,128,0,-1--1--1,,1|(1015,791)|
+1,50,42,47,1,0,0,0,0,128,0,-1--1--1,,1|(1127,729)|
+10,51,"job vacancies (tourism) filled externally",1047,227,45,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,52,"unemployment (tourism)",1128,317,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,53,24,51,1,0,0,0,0,128,0,-1--1--1,,1|(983,280)|
+1,54,24,52,1,0,0,0,0,128,0,-1--1--1,,1|(1060,328)|
+1,55,21,52,1,0,0,0,0,128,0,-1--1--1,,1|(1187,256)|
+1,56,21,51,1,0,0,0,0,128,0,-1--1--1,,1|(1144,219)|
+10,57,"job vacancies (agriculture) filled externally",1087,-165,56,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,58,"unemployment (agriculture)",1131,-85,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,59,5,57,1,0,0,0,0,128,0,-1--1--1,,1|(1187,-172)|
+10,60,fraction of residents not in paid work,763,-588,60,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,61,60,1,0,0,0,0,0,128,0,-1--1--1,,1|(856,-568)|
+10,62,fraction of unemployed residents,1111,-512,65,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,63,fraction of residents in paid work,788,-392,60,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,64,62,12,0,0,0,0,0,128,0,-1--1--1,,1|(1027,-495)|
+1,65,63,10,0,0,0,0,0,128,0,-1--1--1,,1|(863,-403)|
+10,66,"number of businesses (agriculture)",1235,-261,48,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,67,66,5,0,0,0,0,0,128,0,-1--1--1,,1|(1247,-221)|
+10,68,"business income distribution (agriculture)",1232,-329,49,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,69,"business income distribution (other)",1199,515,56,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,70,68,71,0,0,0,0,0,128,0,-1--1--1,,1|(1155,-305)|
+10,71,"number of businesses in income bracket (agriculture)",1043,-268,72,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,72,71,66,0,0,0,0,0,128,0,-1--1--1,,1|(1144,-265)|
+10,73,"number of businesses in income bracket (other)",1040,572,56,29,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,74,69,73,0,0,0,0,0,128,0,-1--1--1,,1|(1131,540)|
+10,75,Number Of Tourists,1716,315,56,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,76,internet service performance,203,584,52,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,77,76,83,0,0,0,0,0,128,0,-1--1--1,,1|(276,568)|
+10,78,total productivity,403,-492,52,9,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,79,maximum speed per connection,211,495,53,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,80,Fixed Wireless Towers,300,440,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,81,79,83,0,0,0,0,0,128,0,-1--1--1,,1|(284,520)|
+1,82,80,83,0,0,0,0,0,128,0,-1--1--1,,1|(331,488)|
+10,83,effect of internet on other sector business,372,548,64,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,84,73,26,0,0,0,0,0,128,0,-1--1--1,,1|(1109,588)|
+1,85,26,42,0,0,0,0,0,128,0,-1--1--1,,1|(1179,645)|
+10,86,productivity factor ag,507,-96,36,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,87,capital input ag,651,-45,45,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,88,elasticity q1 ag,575,-316,44,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,89,elasticity q2 ag,707,-309,44,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,90,Total Agricultural Productivity,815,-197,57,31,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,91,48,551,-208,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,92,94,90,4,0,0,22,0,0,0,-1--1--1,,1|(712,-208)|
+1,93,94,91,100,0,0,22,0,0,0,-1--1--1,,1|(604,-208)|
+11,94,48,655,-208,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,95,Rate of productivity change ag,655,-184,60,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,96,87,95,0,0,0,0,0,64,0,-1--1--1,,1|(652,-105)|
+1,97,88,94,0,0,0,0,0,64,0,-1--1--1,,1|(611,-268)|
+1,98,89,94,0,0,0,0,0,64,0,-1--1--1,,1|(683,-264)|
+1,99,86,95,0,0,0,0,0,64,0,-1--1--1,,1|(576,-136)|
+10,100,productivity factor tourism,507,332,43,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,101,capital input tourism,652,383,60,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,102,Total Tourism Productivity,815,227,57,31,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,103,48,551,220,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,104,106,102,4,0,0,22,0,0,0,-1--1--1,,1|(712,220)|
+1,105,106,103,100,0,0,22,0,0,0,-1--1--1,,1|(604,220)|
+11,106,48,655,220,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,107,Rate of productivity change tourism,655,244,60,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,108,101,107,0,0,0,0,0,64,0,-1--1--1,,1|(652,324)|
+1,109,100,107,0,0,0,0,0,64,0,-1--1--1,,1|(576,289)|
+10,110,productivity factor other,572,716,36,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,111,capital input other,683,736,53,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,112,Total Other Productivity,815,599,57,31,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,113,48,551,592,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,114,116,112,4,0,0,22,0,0,0,-1--1--1,,1|(712,592)|
+1,115,116,113,100,0,0,22,0,0,0,-1--1--1,,1|(604,592)|
+11,116,48,655,592,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,117,Rate of productivity change other,655,616,60,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,118,111,117,0,0,0,0,0,64,0,-1--1--1,,1|(671,684)|
+1,119,110,117,0,0,0,0,0,64,0,-1--1--1,,1|(608,669)|
+1,120,112,73,0,0,0,0,0,128,0,-1--1--1,,1|(921,585)|
+1,121,41,46,0,0,0,0,0,128,0,-1--1--1,,1|(932,764)|
+1,122,41,117,0,0,0,0,0,128,0,-1--1--1,,1|(787,713)|
+10,123,"number of businesses (tourism)",1192,143,64,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,124,"business income distribution (tourism)",1176,83,64,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,125,"number of businesses in income bracket (tourism)",980,140,76,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,126,124,125,0,0,0,0,0,128,0,-1--1--1,,1|(1084,108)|
+1,127,125,123,0,0,0,0,0,128,0,-1--1--1,,1|(1085,139)|
+1,128,102,125,0,0,0,0,0,128,0,-1--1--1,,1|(904,180)|
+1,129,24,107,0,0,0,0,0,128,0,-1--1--1,,1|(795,283)|
+10,130,Total Tourism Productivity,396,-572,47,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,131,Total Other Productivity,520,-540,41,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,132,130,78,0,0,0,0,0,128,0,-1--1--1,,1|(400,-537)|
+1,133,131,78,0,0,0,0,0,128,0,-1--1--1,,1|(460,-517)|
+1,134,5,58,0,0,0,0,0,128,0,-1--1--1,,1|(1204,-132)|
+1,135,7,58,0,0,0,0,0,128,0,-1--1--1,,1|(1008,-89)|
+1,136,7,57,0,0,0,0,0,128,0,-1--1--1,,1|(969,-120)|
+1,137,90,71,0,0,0,0,0,128,0,-1--1--1,,1|(916,-228)|
+1,138,7,95,0,0,0,0,0,128,0,-1--1--1,,1|(792,-133)|
+10,139,Total Agricultural Productivity,263,-529,57,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,140,139,78,0,0,0,0,0,128,0,-1--1--1,,1|(336,-508)|
+10,141,other productivity multiplier,436,624,56,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,142,29,141,0,0,0,0,0,128,0,-1--1--1,,1|(412,680)|
+1,143,83,141,0,0,0,0,0,128,0,-1--1--1,,1|(400,580)|
+10,144,tourism productivity multiplier,424,248,61,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,145,Number Of Tourists,323,308,39,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,146,normal tourist numbers,303,196,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,147,145,144,0,0,0,0,0,128,0,-1--1--1,,1|(368,279)|
+1,148,146,144,0,0,0,0,0,128,0,-1--1--1,,1|(356,217)|
+1,149,144,107,0,0,0,0,0,128,0,-1--1--1,,1|(533,244)|
+1,150,141,117,0,0,0,0,0,128,0,-1--1--1,,1|(536,620)|
+10,151,agriculture productivity multiplier,403,-181,36,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,152,151,95,0,0,0,0,0,128,0,-1--1--1,,1|(512,-180)|
+10,153,fraction of land under regenerative agriculture,275,32,72,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,154,profitability increase from regenerative agriculture,191,-129,60,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,155,regenerative agriculture multiplier,295,-57,61,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,156,154,155,0,0,0,0,0,128,0,-1--1--1,,1|(244,-92)|
+1,157,155,151,0,0,0,0,0,128,0,-1--1--1,,1|(340,-109)|
+10,158,Time,76,-124,25,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,159,158,154,0,0,0,0,0,128,0,-1--1--1,,1|(109,-124)|
+1,160,153,155,0,0,0,0,0,128,0,-1--1--1,,1|(284,-4)|
+10,161,RA coefficient,160,-264,43,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,162,161,154,0,0,0,0,0,128,0,-1--1--1,,1|(171,-211)|
+10,163,RA intercept,96,-225,40,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,164,163,154,0,0,0,0,0,128,0,-1--1--1,,1|(132,-189)|
+10,165,net climate change impact on economy,320,-321,64,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,166,165,151,0,0,0,0,0,128,0,-1--1--1,,1|(356,-261)|
+10,167,INIT ag productivity,827,-296,36,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,168,167,90,0,0,0,0,0,128,1,-1--1--1,,1|(823,-261)|
+10,169,INIT tourism productivity,809,103,41,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,170,169,102,0,0,0,0,0,128,1,-1--1--1,,1|(812,152)|
+10,171,INIT other productivity,845,495,36,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,172,171,112,0,0,0,0,0,128,1,-1--1--1,,1|(836,532)|
+10,173,elasticity q1 tourism,496,76,59,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,174,elasticity q2 tourism,660,76,59,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,175,173,106,0,0,0,0,0,128,0,-1--1--1,,1|(572,143)|
+1,176,174,106,0,0,0,0,0,128,0,-1--1--1,,1|(657,139)|
+10,177,elasticity q1 other,543,472,52,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,178,elasticity q2 other,689,471,52,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,179,177,116,0,0,0,0,0,128,0,-1--1--1,,1|(595,527)|
+1,180,178,116,0,0,0,0,0,128,0,-1--1--1,,1|(673,524)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Tourism
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
+10,1,impact of tourism infrastructure improvements on tourist numbers,915,468,85,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,normal tourist numbers,288,228,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,effect of MTB Trails improvements,1132,456,64,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,4,3,1,0,0,0,0,0,128,0,-1--1--1,,1|(1040,460)|
+10,5,effect of wastewater,963,563,35,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,Number Of Tourists,416,299,44,25,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,7,48,656,300,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,6,4,0,0,22,0,0,0,-1--1--1,,1|(505,300)|
+1,9,10,7,100,0,0,22,0,0,0,-1--1--1,,1|(607,300)|
+11,10,48,560,300,9,9,34,131,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,Rate of tourist increase,560,327,43,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,tourist numbers multiplier,709,457,47,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,13,1,12,0,0,0,0,0,128,0,-1--1--1,,1|(799,461)|
+10,14,impact of climate on tourism,592,531,52,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,15,14,12,0,0,0,0,0,128,0,-1--1--1,,1|(644,497)|
+1,16,5,1,0,0,0,0,0,128,0,-1--1--1,,1|(944,525)|
+10,17,number of times each tourist house occupied per year,415,399,79,24,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,18,average size of household,415,399,49,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,19,total population,415,399,56,9,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,20,Wastewater availability,1104,588,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,21,20,5,0,0,0,0,0,128,0,-1--1--1,,1|(1033,575)|
+10,22,MTB trails improvements availability,1287,487,48,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,23,22,3,0,0,0,0,0,128,0,-1--1--1,,1|(1224,476)|
+10,24,effect of future improvements to infrastructure,1048,376,52,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,25,24,1,0,0,0,0,0,128,0,-1--1--1,,1|(987,420)|
+10,26,impact of bus frequency on tourist numbers,796,367,61,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,27,26,12,0,0,0,0,0,128,0,-1--1--1,,1|(753,411)|
+12,28,0,1156,204,56,16,8,7,0,2,-1,0,0,0,-1--1--1,0-0-0,|11||0-128-0,0,0,0,0,0,0
+These are scenario variables
+1,29,28,31,1,0,0,0,3,128,0,255-128-0,|11||0-0-0,1|(988,223)|
+1,30,28,24,0,0,0,0,3,128,0,255-128-0,|11||0-0-0,1|(1108,280)|
+10,31,tourist bus frequency,896,260,32,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,32,31,26,0,0,0,0,0,128,0,-1--1--1,,1|(856,303)|
+10,33,tourist bus capacity,956,316,60,9,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,34,33,26,0,0,0,0,0,64,0,-1--1--1,,1|(899,333)|
+1,35,6,26,1,0,0,0,0,128,0,-1--1--1,,1|(639,232)|
+10,36,probability of catastrophic bushfire elsewhere in Victoria,596,704,80,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,37,36,14,0,0,0,0,0,128,0,-1--1--1,,1|(596,620)|
+10,38,annual probability of flood,724,672,57,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,39,38,14,0,0,0,0,0,128,0,-1--1--1,,1|(664,608)|
+10,40,bushfire risk fraction,467,656,44,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,41,40,14,0,0,0,0,0,128,0,-1--1--1,,1|(524,600)|
+10,42,tourist house discrepancy,347,392,39,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,43,6,42,1,0,0,0,0,128,0,-1--1--1,,1|(380,335)|
+10,44,average size of household,401,560,49,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,45,44,42,0,0,0,0,0,128,0,-1--1--1,,1|(376,484)|
+1,46,12,11,1,0,0,0,0,128,0,-1--1--1,,1|(680,388)|
+10,47,number of times each tourist house occupied per year,253,495,68,29,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,48,47,42,0,0,0,0,0,128,0,-1--1--1,,1|(300,444)|
+10,49,Time,617,396,25,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,50,49,11,0,0,0,0,0,64,0,-1--1--1,,1|(596,372)|
+1,51,42,11,0,0,0,0,0,128,0,-1--1--1,,1|(444,364)|
+1,52,44,11,1,0,0,0,0,128,0,-1--1--1,,1|(452,437)|
+10,53,Tourism Housing,184,387,59,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,54,53,42,0,0,0,0,0,128,0,-1--1--1,,1|(268,388)|
+10,55,initial tourist increase,544,443,37,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,56,55,11,0,0,0,0,0,128,0,-1--1--1,,1|(552,391)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Biodiversity
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
+10,1,impact of climate damage on biodiversity,477,688,69,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,impact of cultural burning on biodiversity,460,309,69,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Cultural Burning,351,241,56,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,4,3,2,0,0,0,0,0,128,0,-1--1--1,,1|(393,267)|
+10,5,Species richness,652,385,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,INIT species richness,617,276,40,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,7,6,5,0,0,0,0,0,128,1,-1--1--1,,1|(631,320)|
+12,8,48,467,387,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,9,11,5,4,0,0,22,0,0,0,-1--1--1,,1|(580,385)|
+1,10,11,8,100,0,0,22,0,0,0,-1--1--1,,1|(504,385)|
+11,11,48,540,385,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,12,Species richness increase rate,540,409,52,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,13,48,851,385,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,14,16,13,4,0,0,22,0,0,0,-1--1--1,,1|(808,383)|
+1,15,16,5,100,0,0,22,0,0,0,-1--1--1,,1|(723,383)|
+11,16,48,763,383,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,17,Species richness decrease rate,763,407,52,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,18,land use change impact on biodiversity,443,501,68,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,18,12,0,0,0,0,0,128,0,-1--1--1,,1|(485,459)|
+1,20,2,11,0,0,0,0,0,128,0,-1--1--1,,1|(499,347)|
+10,22,Forest Land,900,720,44,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,23,Protected Land,724,709,53,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,28,species area curve coefficient,248,504,55,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,29,28,18,0,0,0,0,0,128,0,-1--1--1,,1|(332,501)|
+10,30,species area curve exponent,345,580,55,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,31,30,18,0,0,0,0,0,128,0,-1--1--1,,1|(388,543)|
+10,32,simulation time,323,415,45,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,33,32,18,0,0,0,0,0,128,0,-1--1--1,,1|(371,452)|
+10,34,baseline invasive species impact,695,181,49,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,35,invasive species impact discrepancy,803,273,60,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,36,34,35,0,0,0,0,0,128,0,-1--1--1,,1|(743,224)|
+1,37,6,34,0,0,0,0,0,128,0,-1--1--1,,1|(651,232)|
+1,38,35,16,0,0,0,0,0,128,0,-1--1--1,,1|(784,325)|
+10,39,simulation time,779,488,53,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,40,39,17,0,0,0,0,0,128,0,-1--1--1,,1|(773,456)|
+1,41,5,35,0,0,0,0,0,128,0,-1--1--1,,1|(723,331)|
+10,42,fire impact on biodiversity,896,453,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,43,42,17,0,0,0,0,0,128,0,-1--1--1,,1|(837,432)|
+10,44,FFDI model,1024,433,45,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,45,44,42,0,0,0,0,0,128,0,-1--1--1,,1|(968,441)|
+10,49,Land for BD impact,696,604,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,50,48,520,603,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,51,53,50,4,0,0,22,0,0,0,-1--1--1,,1|(557,603)|
+1,52,53,49,100,0,0,22,0,0,0,-1--1--1,,1|(628,603)|
+11,53,48,592,603,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,54,land reduction from CD,592,627,43,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,55,1,54,1,0,0,0,0,128,0,-1--1--1,,1|(527,660)|
+12,56,48,856,600,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,57,59,49,4,0,0,22,0,0,0,-1--1--1,,1|(765,600)|
+1,58,59,56,100,0,0,22,0,0,0,-1--1--1,,1|(828,600)|
+11,59,48,803,600,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,60,land use change over time,803,624,48,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,61,23,60,1,0,0,0,0,128,0,-1--1--1,,1|(756,680)|
+1,62,22,60,1,0,0,0,0,128,0,-1--1--1,,1|(852,672)|
+1,65,49,53,1,0,0,0,0,128,0,-1--1--1,,1|(648,572)|
+1,66,49,18,1,0,0,0,0,128,0,-1--1--1,,1|(584,509)|
+1,67,39,59,1,0,0,0,0,128,0,-1--1--1,,1|(791,549)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Climate change
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
+10,1,TIME STEP,1468,635,48,9,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+12,2,0,840,296,4,9,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,climate damage nonlinearity,657,652,48,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,reference temperature for climate damages,619,796,68,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,climate damage fraction,508,704,48,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,climate damage scale,469,793,48,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,7,6,5,0,0,0,0,0,64,0,-1--1--1,,1|(485,756)|
+1,8,3,5,0,0,0,0,0,64,0,-1--1--1,,1|(589,675)|
+10,9,net climate change impact on economy,692,716,59,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,10,5,9,0,0,0,0,2,64,0,-1--1--1,|11||0-0-0,1|(587,709)|
+12,11,0,693,599,40,20,3,7,1,1,-1,0,0,0,255-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+FeliX
+10,12,Cultural Burning,1001,352,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,13,48,828,352,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,14,16,12,4,0,0,22,0,0,0,-1--1--1,,1|(927,352)|
+1,15,16,13,100,0,0,22,0,0,0,-1--1--1,,1|(857,352)|
+11,16,48,885,352,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,17,Cultural burning rate,885,376,48,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,18,cultural burning adjustment time,947,276,47,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,18,16,0,0,0,0,0,128,0,-1--1--1,,1|(916,313)|
+10,20,cultural burning discrepancy,985,456,47,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,21,cultural burning goal,1121,428,47,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,12,20,0,0,0,0,0,128,0,-1--1--1,,1|(993,399)|
+1,23,21,20,0,0,0,0,0,128,0,-1--1--1,,1|(1059,440)|
+1,24,20,17,0,0,0,0,0,128,0,-1--1--1,,1|(940,420)|
+12,25,0,1169,279,84,24,8,7,1,2,-1,0,0,0,-1--1--1,0-0-0,|11||0-128-0,0,0,0,0,0,0
+This is a highly uncertain variable because there is no data to compare against
+1,26,25,12,0,1,0,0,3,128,0,255-128-0,|11||0-0-0,1|(1083,315)|
+10,27,Time,861,451,25,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,28,27,17,0,0,0,0,0,64,0,-1--1--1,,1|(868,423)|
+10,29,cultural burning scenario switch,813,280,47,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,30,29,16,0,0,0,0,0,128,0,-1--1--1,,1|(849,316)|
+10,31,temperature model coefficient,308,547,56,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,32,temperature linear model,353,500,36,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,33,31,32,0,0,0,0,0,128,0,-1--1--1,,1|(325,528)|
+10,34,Time,200,444,25,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,35,34,32,0,0,0,0,0,128,0,-1--1--1,,1|(263,467)|
+10,36,rainfall model coefficient,325,316,41,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,37,rainfall linear model,339,383,57,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,38,34,37,0,0,0,0,0,128,0,-1--1--1,,1|(264,416)|
+1,39,36,37,0,0,0,0,0,128,0,-1--1--1,,1|(331,348)|
+10,40,CO2 linear model,213,596,51,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,41,CO2 model coefficient,164,676,36,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,42,34,40,0,0,0,0,0,128,0,-1--1--1,,1|(205,513)|
+1,43,41,40,0,0,0,0,0,128,0,-1--1--1,,1|(188,640)|
+10,44,reference rainfall,483,275,52,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,45,reference temperature 1865,515,427,53,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,46,reference CO2,257,711,44,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,47,rainfall change,427,332,43,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,48,37,47,0,0,0,0,0,128,0,-1--1--1,,1|(376,361)|
+1,49,44,47,0,0,0,0,0,128,0,-1--1--1,,1|(460,300)|
+10,50,temperature change since 1865,505,519,59,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,51,45,50,0,0,0,0,0,128,0,-1--1--1,,1|(512,468)|
+1,52,32,50,0,0,0,0,0,128,0,-1--1--1,,1|(412,508)|
+10,53,CO2 change,339,656,37,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,54,40,53,0,0,0,0,0,128,0,-1--1--1,,1|(269,623)|
+1,55,46,53,0,0,0,0,0,128,0,-1--1--1,,1|(291,687)|
+1,56,50,5,0,0,0,0,0,128,0,-1--1--1,,1|(505,604)|
+1,57,4,5,0,0,0,0,0,128,0,-1--1--1,,1|(568,756)|
+10,58,FFDI model,252,191,37,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,59,FFDI model coefficient,128,164,37,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,60,59,58,0,0,0,0,0,128,0,-1--1--1,,1|(183,175)|
+1,61,34,58,0,0,0,0,0,128,0,-1--1--1,,1|(224,324)|
+10,62,reference FFDI,252,100,48,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,63,bushfire risk fraction,392,147,40,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,64,58,63,0,0,0,0,0,128,0,-1--1--1,,1|(309,172)|
+1,65,62,63,0,0,0,0,0,128,0,-1--1--1,,1|(308,120)|
+10,66,annual probability of flood,617,173,53,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Inequality
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
+10,1,number of young people at risk for intergenerational inequality,412,624,80,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,total population,844,152,56,9,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,3,"0-14",508,536,31,16,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,4,3,1,0,0,0,0,0,128,0,-1--1--1,,1|(469,569)|
+10,5,labour force,1216,159,45,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,6,income distribution fractions by income cohort and gender,1444,221,60,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,number labour force in income bracket,1263,220,61,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,6,7,0,0,0,0,0,128,0,-1--1--1,,1|(1360,220)|
+1,9,5,7,0,0,0,0,0,128,0,-1--1--1,,1|(1232,179)|
+10,10,number people below poverty line,1253,307,55,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,11,7,10,0,0,0,0,0,128,0,-1--1--1,,1|(1260,255)|
+10,12,number of unemployed people,753,312,57,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,13,"unemployment (agriculture)",819,196,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,14,"unemployment (other)",687,199,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,15,"unemployment (tourism)",596,260,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,16,13,12,0,0,0,0,0,128,0,-1--1--1,,1|(789,245)|
+1,17,14,12,0,0,0,0,0,128,0,-1--1--1,,1|(715,248)|
+1,18,15,12,0,0,0,0,0,128,0,-1--1--1,,1|(667,281)|
+10,19,sum of people below poverty line,1067,360,55,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,20,10,19,0,0,0,0,0,0,0,-1--1--1,,1|(1168,332)|
+10,21,households with internet access fraction,493,404,53,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,22,disability fraction,1073,517,51,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,23,normalised poverty line,945,428,35,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,24,total population,943,300,53,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,25,23,54,0,0,0,0,0,128,0,-1--1--1,,1|(916,477)|
+1,26,19,23,0,0,0,0,0,128,0,-1--1--1,,1|(1012,388)|
+1,27,24,23,0,0,0,0,0,128,0,-1--1--1,,1|(943,351)|
+10,28,normalised unemployed,855,404,36,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,29,12,28,0,0,0,0,0,128,0,-1--1--1,,1|(800,351)|
+1,30,24,28,0,0,0,0,0,128,0,-1--1--1,,1|(908,341)|
+1,31,28,54,0,0,0,0,0,128,0,-1--1--1,,1|(868,464)|
+10,32,households without internet access fraction,669,471,72,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,33,21,32,0,0,0,0,0,128,0,-1--1--1,,1|(580,435)|
+1,34,32,54,0,0,0,0,0,128,0,-1--1--1,,1|(780,503)|
+10,35,normalised intergenerational inequality youth at risk,663,547,68,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,36,1,35,0,0,0,0,0,128,0,-1--1--1,,1|(536,585)|
+1,37,3,35,0,0,0,0,0,128,0,-1--1--1,,1|(560,537)|
+1,38,35,54,0,0,0,0,0,128,0,-1--1--1,,1|(771,540)|
+1,39,22,54,0,0,0,0,0,128,0,-1--1--1,,1|(985,524)|
+10,40,bus frequency,616,680,51,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,41,bus frequency required for travel equity,731,732,56,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,42,normalised travel inequality,763,645,51,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,43,40,42,0,0,0,0,0,128,0,-1--1--1,,1|(677,664)|
+1,44,41,42,0,0,0,0,0,128,0,-1--1--1,,1|(745,692)|
+1,45,42,54,0,0,0,0,0,128,0,-1--1--1,,1|(819,592)|
+10,46,income distribution by income cohort,1407,144,57,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,47,6,46,0,0,0,0,0,128,0,-1--1--1,,1|(1428,183)|
+10,48,number of households under mortgage stress,1211,687,71,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,49,number of households under rent stress,1132,755,77,23,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,50,normalised housing stress,997,647,43,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,51,49,50,0,0,0,0,0,128,0,-1--1--1,,1|(1065,701)|
+1,52,48,50,0,0,0,0,0,128,0,-1--1--1,,1|(1096,665)|
+1,53,50,54,0,0,0,0,0,128,0,-1--1--1,,1|(940,591)|
+10,54,inequality indicator,880,536,55,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,55,sum of people below poverty line,232,660,59,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,56,55,1,0,0,0,0,0,128,0,-1--1--1,,1|(304,644)|
+10,57,intergenerational risk factor,384,539,49,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,58,57,1,0,0,0,0,0,128,0,-1--1--1,,1|(393,569)|
+12,59,0,204,157,152,152,3,44,1,0,1,0,0,0,0,0,0,0,0,0
+Inequality_indicator
+10,60,normalised unemployed unit conversion,708,396,49,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,61,60,28,0,0,0,0,0,128,0,-1--1--1,,1|(781,397)|
+10,62,Residential Housing,236,579,36,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,63,62,1,0,0,0,0,0,128,0,-1--1--1,,1|(295,592)|
+10,64,Residential Housing,947,764,36,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,65,64,50,0,0,0,0,0,128,0,-1--1--1,,1|(968,712)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Health and Wellbeing
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
+10,1,WHO target disease burden,165,579,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,disease burden before WW,185,648,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Wastewater availability,269,696,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,4,excess disease burden from lowered healthcare access,424,663,73,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Safer Healthier People,328,440,45,28,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,Vulnerable People,697,440,45,28,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,7,9,6,4,0,0,22,0,0,0,-1--1--1,,1|(584,440)|
+1,8,9,5,100,0,0,22,0,0,0,-1--1--1,,1|(437,440)|
+11,9,7636,509,440,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,10,Becoming vulnerable,509,464,31,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,11,13,5,4,0,0,22,0,0,0,-1--1--1,,3|(328,312)|(328,320)|(328,368)|
+1,12,13,6,100,0,0,22,0,0,0,-1--1--1,,1|(697,312)|
+11,13,7372,513,312,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,14,Becoming safer and healthier,513,336,47,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,water quality,301,539,39,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,16,disease from wastewater,349,595,39,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,17,climate risk,549,620,35,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,18,low income population,637,591,35,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,15,10,0,0,0,0,0,128,0,-1--1--1,,1|(396,504)|
+1,20,16,10,0,0,0,0,0,128,0,-1--1--1,,1|(423,533)|
+1,21,17,10,0,0,0,0,0,128,0,-1--1--1,,1|(531,552)|
+1,22,18,10,0,0,0,0,0,128,0,-1--1--1,,1|(577,532)|
+10,23,middle and high income population,544,211,55,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,24,biodiversity impact on health,381,232,57,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,25,24,13,0,0,0,0,0,128,0,-1--1--1,,1|(452,273)|
+1,26,23,13,0,0,0,0,0,128,0,-1--1--1,,1|(529,260)|
+10,27,road accidents,700,551,43,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,28,27,10,0,0,0,0,0,128,0,-1--1--1,,1|(616,512)|
+12,29,0,152,340,47,27,3,135,1,1,-1,0,0,0,255-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+Homer and Hirsch 2006
+10,30,population initial,140,480,48,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,31,30,5,0,0,0,0,0,128,1,-1--1--1,,1|(225,461)|
+10,32,total population,501,392,53,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,33,32,9,0,0,0,0,0,128,0,-1--1--1,,1|(503,409)|
+1,34,32,14,0,0,0,0,0,128,0,-1--1--1,,1|(503,376)|
+10,35,disability fraction,752,508,59,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,36,35,10,0,0,0,0,0,128,0,-1--1--1,,1|(628,485)|
+10,37,number labour force in income bracket,732,656,68,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,38,37,18,0,0,0,0,0,128,0,-1--1--1,,1|(692,627)|
+10,39,number labour force in income bracket,592,48,68,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,40,middle income population,512,127,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,41,high income population,655,131,37,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,42,39,40,0,0,0,0,0,128,0,-1--1--1,,1|(557,84)|
+1,43,39,41,0,0,0,0,0,128,0,-1--1--1,,1|(620,83)|
+1,44,40,23,0,0,0,0,0,128,0,-1--1--1,,1|(525,164)|
+1,45,41,23,0,0,0,0,0,128,0,-1--1--1,,1|(605,168)|
+1,46,1,16,0,0,0,0,0,128,0,-1--1--1,,1|(252,585)|
+1,47,2,16,0,0,0,0,0,128,0,-1--1--1,,1|(264,624)|
+1,48,3,16,0,0,0,0,0,128,0,-1--1--1,,1|(304,652)|
+1,49,4,10,0,0,0,0,0,128,0,-1--1--1,,1|(465,565)|
+10,50,risk to health from bushfire,497,727,56,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,51,risk to health from increasing temperatures,640,719,71,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,52,50,17,0,0,0,0,0,128,0,-1--1--1,,1|(520,676)|
+1,53,51,17,0,0,0,0,0,128,0,-1--1--1,,1|(596,671)|
+10,54,Time,620,388,25,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,55,54,9,0,0,0,0,0,64,0,-1--1--1,,1|(564,413)|
+1,56,54,14,0,0,0,0,0,128,0,-1--1--1,,1|(579,368)|
+10,57,bushfire risk fraction,496,827,44,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,58,57,50,0,0,0,0,0,128,0,-1--1--1,,1|(496,784)|
+10,59,GTOC availability,803,156,35,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,60,increasing bushfire safety from GTOC,696,243,57,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,61,60,13,0,0,0,0,0,128,0,-1--1--1,,1|(593,281)|
+1,62,59,60,0,0,0,0,0,128,0,-1--1--1,,1|(756,195)|
+10,63,bushfire risk fraction,837,232,44,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,64,63,60,0,0,0,0,0,128,0,-1--1--1,,1|(779,235)|
+10,65,climate damage fraction,692,823,52,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,66,65,51,0,0,0,0,0,128,0,-1--1--1,,1|(669,777)|
+10,67,Species richness,235,203,57,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,68,67,24,0,0,0,0,0,128,0,-1--1--1,,1|(295,216)|
+10,69,INIT species richness,341,143,44,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,70,69,24,0,0,0,0,0,128,0,-1--1--1,,1|(357,181)|
+10,71,Road Quality,824,611,47,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,72,71,27,0,0,0,0,0,128,0,-1--1--1,,1|(768,584)|
+10,73,accident coefficient,859,531,60,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,74,73,27,0,0,0,0,0,128,0,-1--1--1,,1|(777,540)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Telecommunications
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
+10,1,Internet Service Demand,663,355,55,32,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,420,355,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(568,355)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(469,355)|
+11,5,48,516,355,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Internet service demand rate,516,379,47,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,internet service performance,884,279,48,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,1,7,1,0,0,0,0,128,0,-1--1--1,,1|(792,271)|
+10,9,Internet Service Capacity,1076,152,51,29,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,10,48,1076,464,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,11,13,9,4,0,0,22,0,0,0,-1--1--1,,1|(1076,284)|
+1,12,13,10,100,0,0,22,0,0,0,-1--1--1,,1|(1076,429)|
+11,13,48,1076,395,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,14,Internet service capacity rate,1132,395,47,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,15,9,7,0,0,0,0,0,128,0,-1--1--1,,1|(976,220)|
+10,16,Fixed Wireless Towers,796,665,52,27,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,17,48,800,511,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,20,16,4,0,0,22,0,0,0,-1--1--1,,1|(796,608)|
+1,19,20,17,100,0,0,22,0,0,0,-1--1--1,,1|(796,541)|
+11,20,48,796,571,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,21,Fixed wireless tower investment rate,868,571,64,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,22,households with internet access fraction,436,508,64,25,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,23,INIT NBN connections,624,233,36,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,23,1,0,0,0,0,0,128,1,-1--1--1,,1|(640,279)|
+10,25,number of desired tourist houses,892,440,60,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,26,maximum speed per connection,1143,304,49,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,27,number of desired tourist houses,716,288,60,16,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,28,Time,968,363,25,9,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,29,fixed wireless user limit,995,296,44,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,30,max number of premises to connect to the internet,208,376,75,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,31,Internet Service Demand,1399,536,52,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+12,32,0,1524,168,100,40,3,135,1,1,-1,0,0,0,255-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+Stock and flow structure inspired by Gargar & Mahmouzedah (video) but all formulas & aux structure my own work
+10,33,fixed wireless user limit,515,580,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,34,"number of businesses (agriculture)",208,256,44,24,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,35,"number of businesses (tourism)",412,211,53,31,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,36,residential internet demand,368,419,56,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,37,business internet demand,351,283,52,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,38,30,36,0,0,0,0,0,128,0,-1--1--1,,1|(284,395)|
+1,39,22,36,0,0,0,0,0,128,0,-1--1--1,,1|(404,464)|
+1,40,34,37,0,0,0,0,0,128,0,-1--1--1,,1|(268,267)|
+1,41,35,37,0,0,0,0,0,128,0,-1--1--1,,1|(379,249)|
+10,42,demand per location,500,288,59,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,43,36,6,0,0,0,0,0,128,0,-1--1--1,,1|(439,399)|
+10,44,Time,532,443,25,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,45,44,6,0,0,0,0,0,128,0,-1--1--1,,1|(528,421)|
+1,46,42,5,0,0,0,0,0,64,0,-1--1--1,,1|(508,315)|
+10,47,INIT number of towers,599,672,49,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,48,47,16,0,0,0,0,0,128,1,-1--1--1,,1|(689,668)|
+10,49,tower oversubscription factor,632,528,72,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,50,1,49,1,0,0,0,0,128,0,-1--1--1,,1|(625,445)|
+1,51,33,49,0,0,0,0,0,128,0,-1--1--1,,1|(567,556)|
+1,52,16,49,1,0,0,0,0,128,0,-1--1--1,,1|(716,607)|
+1,53,26,9,1,0,0,0,0,128,1,-1--1--1,,1|(1120,245)|
+1,54,29,9,1,0,0,0,0,128,1,-1--1--1,,1|(1032,240)|
+1,55,47,49,0,0,0,0,0,128,0,-1--1--1,,1|(613,608)|
+1,56,49,20,0,0,0,0,0,128,0,-1--1--1,,1|(733,556)|
+10,57,internet capacity demand,1221,537,49,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,58,internet capacity discrepancy,1328,404,49,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,59,31,57,0,0,0,0,0,128,0,-1--1--1,,1|(1315,536)|
+1,60,16,57,1,0,0,0,0,128,0,-1--1--1,,1|(1020,585)|
+1,61,9,58,0,0,0,0,0,128,0,-1--1--1,,1|(1203,279)|
+1,62,57,58,0,0,0,0,0,128,0,-1--1--1,,1|(1269,475)|
+1,63,58,14,0,0,0,0,0,128,0,-1--1--1,,1|(1235,399)|
+10,64,maximum speed per connection,1243,652,53,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,65,64,57,0,0,0,0,0,128,0,-1--1--1,,1|(1233,601)|
+1,66,49,13,1,0,0,0,0,128,0,-1--1--1,,1|(804,383)|
+1,67,16,13,1,0,0,0,0,128,0,-1--1--1,,1|(1001,517)|
+1,68,29,13,0,0,0,0,0,128,0,-1--1--1,,1|(1036,344)|
+1,69,26,14,0,0,0,0,0,128,0,-1--1--1,,1|(1140,344)|
+1,70,37,5,0,0,0,0,0,128,0,-1--1--1,,1|(441,324)|
+10,71,"number of businesses (other)",284,157,59,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,72,71,37,0,0,0,0,0,128,0,-1--1--1,,1|(313,213)|
+10,73,Time,868,603,25,9,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,74,tower build delay time,952,493,36,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,75,74,21,0,0,0,0,0,128,0,-1--1--1,,1|(915,527)|
+10,76,Time,1151,463,25,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,77,76,14,0,0,0,0,0,128,0,-1--1--1,,1|(1144,439)|
+10,78,tower investment responsiveness,852,439,48,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,79,78,21,0,0,0,0,0,128,0,-1--1--1,,1|(859,501)|
+10,80,Residential Housing,232,512,36,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,81,80,30,0,0,0,0,0,128,0,-1--1--1,,1|(221,452)|
+10,82,Tourism Housing,76,464,59,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,83,82,30,0,0,0,0,0,128,0,-1--1--1,,1|(132,427)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Infrastructure V2
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
+10,1,Forrest Common Build In Progress,228,331,53,35,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Completed Forrest Common,455,336,47,43,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,3,48,15,336,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,4,6,1,4,0,0,22,0,0,0,-1--1--1,,1|(141,340)|
+1,5,6,3,100,0,0,22,0,0,0,-1--1--1,,1|(60,340)|
+11,6,48,100,340,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,7,Forrest Common start rate,100,368,52,16,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,2,4,0,0,22,0,0,0,-1--1--1,,1|(380,340)|
+1,9,10,1,100,0,0,22,0,0,0,-1--1--1,,1|(308,340)|
+11,10,4292,340,340,8,8,34,131,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,Forrest Common completion rate,340,367,52,16,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,cost per asset component Forrest Common,152,444,57,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,13,12,7,0,0,0,0,0,128,0,-1--1--1,,1|(127,408)|
+10,14,funding lag Forrest Common,39,256,57,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,15,14,6,0,0,0,0,0,128,0,-1--1--1,,1|(68,300)|
+10,16,build delay Forrest Common,163,260,56,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,17,16,6,0,0,0,0,0,128,0,-1--1--1,,1|(131,300)|
+10,18,build time Forrest Common,284,239,53,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,19,total number of asset components Forrest Common,228,543,63,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,20,asset component discrepancy Forrest Common,359,488,60,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,21,19,20,0,0,0,0,0,128,0,-1--1--1,,1|(288,519)|
+1,22,2,20,0,0,0,0,0,128,0,-1--1--1,,1|(404,416)|
+1,23,20,11,1,0,0,0,0,128,0,-1--1--1,,1|(352,435)|
+10,24,Forrest Common Funding,-120,536,60,28,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,25,48,-117,344,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,26,28,25,4,0,0,22,0,0,0,-1--1--1,,1|(-117,388)|
+1,27,28,24,100,0,0,22,0,0,0,-1--1--1,,1|(-117,472)|
+11,28,48,-117,427,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,29,Forrest Common funding allocation rate,-45,427,68,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,30,Forrest Common approved funding,-228,443,53,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,31,30,24,0,0,0,0,0,128,1,-1--1--1,,1|(-187,479)|
+1,32,29,7,0,0,0,0,0,128,0,-1--1--1,,1|(20,401)|
+10,33,Forrest Common funding duration,24,507,52,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,34,33,29,0,0,0,0,0,128,0,-1--1--1,,1|(-4,473)|
+1,35,24,29,0,0,0,0,0,64,0,-1--1--1,,1|(-83,484)|
+10,36,time at which Forrest Common is complete,203,167,65,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,37,14,36,0,0,0,0,0,128,0,-1--1--1,,1|(116,215)|
+1,38,16,36,0,0,0,0,0,128,0,-1--1--1,,1|(179,220)|
+1,39,18,36,0,0,0,0,0,128,0,-1--1--1,,1|(248,208)|
+10,40,Forrest Common funding scenario,-136,212,52,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,41,40,30,0,0,0,0,0,128,0,-1--1--1,,1|(-180,324)|
+1,42,18,10,1,0,0,0,0,128,0,-1--1--1,,1|(312,291)|
+1,43,40,36,0,0,0,0,0,64,0,-1--1--1,,1|(20,192)|
+10,44,GTOC Build In Progress,1124,320,53,35,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,45,Completed GTOC,1359,323,56,40,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,46,48,911,323,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,47,49,44,4,0,0,22,0,0,0,-1--1--1,,1|(1037,327)|
+1,48,49,46,100,0,0,22,0,0,0,-1--1--1,,1|(956,327)|
+11,49,48,996,327,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,50,GTOC start rate,996,351,48,9,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,51,53,45,4,0,0,22,0,0,0,-1--1--1,,1|(1273,327)|
+1,52,53,44,100,0,0,22,0,0,0,-1--1--1,,1|(1204,327)|
+11,53,4468,1236,327,8,8,34,131,0,0,1,0,0,0,0,0,0,0,0,0
+10,54,GTOC completion rate,1236,351,48,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,55,cost per asset component GTOC,1036,431,56,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,56,55,50,0,0,0,0,0,128,0,-1--1--1,,1|(1017,396)|
+10,57,funding lag GTOC,935,247,55,9,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,58,57,49,0,0,0,0,0,128,0,-1--1--1,,1|(961,283)|
+10,59,build delay GTOC,1044,247,53,9,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,60,59,49,0,0,0,0,0,128,0,-1--1--1,,1|(1023,283)|
+10,61,build time GTOC,1183,235,51,9,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,62,total number of asset components GTOC,1435,444,63,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,63,asset component discrepancy GTOC,1291,504,60,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,64,62,63,0,0,0,0,0,128,0,-1--1--1,,1|(1369,472)|
+1,65,45,63,0,0,0,0,0,128,0,-1--1--1,,1|(1324,419)|
+1,66,63,54,0,0,0,0,0,128,0,-1--1--1,,1|(1265,435)|
+10,67,GTOC Funding,776,523,60,28,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,68,48,779,331,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,69,71,68,4,0,0,22,0,0,0,-1--1--1,,1|(779,376)|
+1,70,71,67,100,0,0,22,0,0,0,-1--1--1,,1|(779,460)|
+11,71,48,779,416,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,72,GTOC funding allocation rate,851,416,45,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,73,GTOC approved funding,668,432,52,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,74,73,67,0,0,0,0,0,128,1,-1--1--1,,1|(708,467)|
+1,75,72,50,0,0,0,0,0,128,0,-1--1--1,,1|(924,383)|
+10,76,GTOC funding duration,924,500,45,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,77,76,72,0,0,0,0,0,128,0,-1--1--1,,1|(892,464)|
+1,78,67,72,0,0,0,0,0,64,0,-1--1--1,,1|(813,472)|
+10,79,time at which GTOC is complete,1095,156,56,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,80,57,79,0,0,0,0,0,128,0,-1--1--1,,1|(1001,209)|
+1,81,59,79,0,0,0,0,0,128,0,-1--1--1,,1|(1064,212)|
+1,82,61,79,0,0,0,0,0,128,0,-1--1--1,,1|(1147,204)|
+10,83,GTOC funding scenario,748,195,45,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,84,83,73,0,0,0,0,0,128,0,-1--1--1,,1|(712,307)|
+1,85,61,53,1,0,0,0,0,128,0,-1--1--1,,1|(1223,283)|
+1,86,83,79,0,0,0,0,0,64,0,-1--1--1,,1|(909,180)|
+10,87,MTB Trails Build In Progress,231,947,53,35,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,88,Completed MTB Trails,464,948,56,40,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,89,48,16,948,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,90,92,87,4,0,0,22,0,0,0,-1--1--1,,1|(144,952)|
+1,91,92,89,100,0,0,22,0,0,0,-1--1--1,,1|(60,952)|
+11,92,48,103,952,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,93,MTB Trails start rate,103,976,35,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,94,96,88,4,0,0,22,0,0,0,-1--1--1,,1|(379,952)|
+1,95,96,87,100,0,0,22,0,0,0,-1--1--1,,1|(309,952)|
+11,96,3126,343,952,8,8,34,131,0,0,1,0,0,0,0,0,0,0,0,0
+10,97,MTB Trails completion rate,343,976,48,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,98,cost per asset component MTB Trails,144,1059,51,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,99,98,93,0,0,0,0,0,128,0,-1--1--1,,1|(124,1019)|
+10,100,funding lag MTB Trails,51,868,51,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,101,100,92,0,0,0,0,0,128,0,-1--1--1,,1|(75,908)|
+10,102,build delay MTB Trails,160,867,49,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,103,102,92,0,0,0,0,0,128,0,-1--1--1,,1|(132,908)|
+10,104,build time MTB Trails,271,860,47,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,105,total number of asset components MTB Trails,376,1180,73,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,106,asset component discrepancy MTB Trails,380,1079,56,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,107,105,106,0,0,0,0,0,128,0,-1--1--1,,1|(377,1140)|
+1,108,88,106,0,0,0,0,0,128,0,-1--1--1,,1|(420,1015)|
+1,109,106,97,0,0,0,0,0,128,0,-1--1--1,,1|(364,1032)|
+10,110,MTB Trails Funding,-117,1148,60,28,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,111,48,-116,956,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,112,114,111,4,0,0,22,0,0,0,-1--1--1,,1|(-116,999)|
+1,113,114,110,100,0,0,22,0,0,0,-1--1--1,,1|(-116,1085)|
+11,114,48,-116,1043,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,115,MTB Trails funding allocation rate,-44,1043,59,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,116,MTB Trails approved funding,-225,1059,53,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,117,116,110,0,0,0,0,0,128,1,-1--1--1,,1|(-184,1093)|
+1,118,115,93,0,0,0,0,0,128,0,-1--1--1,,1|(23,1011)|
+10,119,MTB Trails funding duration,24,1127,49,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,120,119,115,0,0,0,0,0,128,0,-1--1--1,,1|(-4,1092)|
+1,121,110,115,0,0,0,0,0,64,0,-1--1--1,,1|(-81,1095)|
+10,122,time at which MTB Trails is complete,200,783,60,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,123,100,122,0,0,0,0,0,128,0,-1--1--1,,1|(120,828)|
+1,124,102,122,0,0,0,0,0,128,0,-1--1--1,,1|(176,831)|
+1,125,104,122,0,0,0,0,0,128,0,-1--1--1,,1|(240,828)|
+10,126,MTB Trails funding scenario,-136,828,52,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,127,126,116,0,0,0,0,0,128,0,-1--1--1,,1|(-176,936)|
+1,128,104,96,1,0,0,0,0,128,0,-1--1--1,,1|(336,903)|
+1,129,126,122,0,0,0,0,0,64,0,-1--1--1,,1|(21,807)|
+10,130,Wastewater Build In Progress,1135,951,53,35,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,131,Completed Wastewater,1372,956,56,40,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,132,48,924,956,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,133,135,130,4,0,0,22,0,0,0,-1--1--1,,1|(1048,960)|
+1,134,135,132,100,0,0,22,0,0,0,-1--1--1,,1|(968,960)|
+11,135,48,1007,960,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,136,Wastewater start rate,1007,984,36,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,137,139,131,4,0,0,22,0,0,0,-1--1--1,,1|(1285,960)|
+1,138,139,130,100,0,0,22,0,0,0,-1--1--1,,1|(1213,960)|
+11,139,4226,1247,960,8,8,34,131,0,0,1,0,0,0,0,0,0,0,0,0
+10,140,Wastewater completion rate,1247,984,48,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,141,cost per asset component Wastewater,1047,1060,44,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,142,141,136,0,0,0,0,0,128,0,-1--1--1,,1|(1028,1024)|
+10,143,funding lag Wastewater,951,876,36,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,144,143,135,0,0,0,0,0,128,0,-1--1--1,,1|(977,916)|
+10,145,build delay Wastewater,1059,872,36,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,146,145,135,0,0,0,0,0,128,0,-1--1--1,,1|(1036,916)|
+10,147,build time Wastewater,1191,871,36,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,148,total number of asset components Wastewater,1123,1195,76,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,149,asset component discrepancy Wastewater,1307,1139,52,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,150,148,149,0,0,0,0,0,128,0,-1--1--1,,1|(1208,1168)|
+1,151,131,149,0,0,0,0,0,128,0,-1--1--1,,1|(1340,1048)|
+1,152,149,140,0,0,0,0,0,128,0,-1--1--1,,1|(1280,1064)|
+10,153,Wastewater Funding,787,1156,60,28,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,154,48,792,964,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,155,157,154,4,0,0,22,0,0,0,-1--1--1,,1|(792,1005)|
+1,156,157,153,100,0,0,22,0,0,0,-1--1--1,,1|(792,1091)|
+11,157,48,792,1047,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,158,Wastewater funding allocation rate,864,1047,60,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,159,Wastewater approved funding,679,1063,53,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,160,159,153,0,0,0,0,0,128,1,-1--1--1,,1|(720,1100)|
+1,161,158,136,0,0,0,0,0,128,0,-1--1--1,,1|(929,1017)|
+10,162,Wastewater funding duration,924,1116,49,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,163,162,158,0,0,0,0,0,128,0,-1--1--1,,1|(900,1088)|
+1,164,153,158,0,0,0,0,0,64,0,-1--1--1,,1|(824,1101)|
+10,165,time at which Wastewater is complete,1067,760,43,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,166,143,165,0,0,0,0,0,128,0,-1--1--1,,1|(1000,828)|
+1,167,145,165,0,0,0,0,0,128,0,-1--1--1,,1|(1064,828)|
+1,168,147,165,0,0,0,0,0,128,0,-1--1--1,,1|(1140,824)|
+1,169,147,139,1,0,0,0,0,128,0,-1--1--1,,1|(1219,919)|
+10,170,CFA Truck Build In Progress,704,1575,53,35,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,171,Completed CFA Truck,939,1576,56,40,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,172,48,491,1576,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,173,175,170,4,0,0,22,0,0,0,-1--1--1,,1|(617,1580)|
+1,174,175,172,100,0,0,22,0,0,0,-1--1--1,,1|(536,1580)|
+11,175,48,576,1580,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,176,CFA Truck start rate,576,1604,35,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,177,179,171,4,0,0,22,0,0,0,-1--1--1,,1|(853,1580)|
+1,178,179,170,100,0,0,22,0,0,0,-1--1--1,,1|(784,1580)|
+11,179,3478,816,1580,8,8,34,131,0,0,1,0,0,0,0,0,0,0,0,0
+10,180,CFA Truck completion rate,816,1604,48,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,181,cost per asset component CFA Truck,612,1684,49,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,182,181,176,0,0,0,0,0,128,0,-1--1--1,,1|(595,1648)|
+10,183,funding lag CFA Truck,503,1507,49,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,184,183,175,0,0,0,0,0,128,0,-1--1--1,,1|(539,1543)|
+10,185,build delay CFA Truck,664,1491,48,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,186,185,175,0,0,0,0,0,128,0,-1--1--1,,1|(619,1535)|
+10,187,build time CFA Truck,808,1484,45,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,188,total number of asset components CFA Truck,1016,1712,73,16,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,189,asset component discrepancy CFA Truck,864,1760,52,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,190,188,189,0,0,0,0,0,128,0,-1--1--1,,1|(947,1733)|
+1,191,171,189,0,0,0,0,0,128,0,-1--1--1,,1|(900,1669)|
+1,192,189,180,0,0,0,0,0,128,0,-1--1--1,,1|(840,1684)|
+10,193,CFA Truck Funding,356,1776,60,28,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,194,48,359,1584,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,195,197,194,4,0,0,22,0,0,0,-1--1--1,,1|(359,1627)|
+1,196,197,193,100,0,0,22,0,0,0,-1--1--1,,1|(359,1713)|
+11,197,48,359,1671,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,198,CFA Truck funding allocation rate,431,1671,59,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,199,CFA Truck approved funding,248,1687,53,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,200,199,193,0,0,0,0,0,128,1,-1--1--1,,1|(289,1721)|
+1,201,198,176,0,0,0,0,0,128,0,-1--1--1,,1|(496,1640)|
+10,202,CFA Truck funding duration,491,1736,49,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,203,202,198,0,0,0,0,0,128,0,-1--1--1,,1|(465,1708)|
+1,204,193,198,0,0,0,0,0,64,0,-1--1--1,,1|(393,1723)|
+10,205,time at which CFA Truck is complete,675,1411,57,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,206,183,205,0,0,0,0,0,128,0,-1--1--1,,1|(584,1464)|
+1,207,185,205,0,0,0,0,0,128,0,-1--1--1,,1|(668,1457)|
+1,208,187,205,0,0,0,0,0,128,0,-1--1--1,,1|(747,1452)|
+10,209,funding scenario CFA Truck,332,1444,52,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,210,209,199,0,0,0,0,0,128,0,-1--1--1,,1|(292,1560)|
+1,211,187,179,1,0,0,0,0,128,0,-1--1--1,,1|(811,1531)|
+1,212,209,205,0,0,0,0,0,64,0,-1--1--1,,1|(496,1428)|
+10,213,Current time,604,652,51,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,214,Current time,375,1268,51,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,215,Forrest Common availability,332,91,52,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,216,Current time,608,48,40,9,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,217,216,215,0,0,0,0,0,0,0,-1--1--1,,1|(481,68)|
+1,218,36,215,0,0,0,0,0,128,0,-1--1--1,,1|(259,133)|
+10,219,GTOC availability,924,96,52,9,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,220,216,219,0,0,0,0,0,0,0,-1--1--1,,1|(753,71)|
+1,221,79,219,0,0,0,0,0,128,0,-1--1--1,,1|(1008,125)|
+10,222,MTB trails improvements availability,328,703,43,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,223,213,222,0,0,0,0,0,128,0,-1--1--1,,1|(468,676)|
+1,224,122,222,0,0,0,0,0,128,0,-1--1--1,,1|(252,752)|
+10,225,Wastewater availability,932,687,36,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,226,213,225,0,0,0,0,0,128,0,-1--1--1,,1|(767,669)|
+1,227,165,225,0,0,0,0,0,128,0,-1--1--1,,1|(1000,723)|
+10,228,CFA Truck availability,555,1335,35,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,229,214,228,0,0,0,0,0,128,0,-1--1--1,,1|(452,1296)|
+1,230,205,228,0,0,0,0,0,128,0,-1--1--1,,1|(620,1376)|
+10,231,Wastewater funding scenario,708,803,52,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,232,231,165,0,0,0,0,0,128,0,-1--1--1,,1|(884,781)|
+1,233,231,159,0,0,0,0,0,128,0,-1--1--1,,1|(693,928)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Transport
+$192-192-192,0,Times New Roman|11||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,100,0
+10,1,bus frequency,167,311,43,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,number people with ability to travel by bus,539,103,68,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,car use,948,223,23,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,number of cars in Forrest,1051,212,56,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,bus capacity,291,316,40,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,6,4,3,0,0,0,0,0,128,0,-1--1--1,,1|(989,217)|
+12,7,0,100,376,83,24,8,7,1,2,-1,0,0,0,-1--1--1,0-0-0,|11||0-128-0,0,0,0,0,0,0
+Currently 1 return per week but can use this as a scenario variable
+1,8,7,1,0,1,0,0,3,128,0,255-128-0,|11||0-0-0,1|(135,340)|
+12,9,0,1176,243,28,9,8,7,1,2,-1,0,0,0,-1--1--1,0-0-0,|11||0-128-0,0,0,0,0,0,0
+ABS data
+1,10,9,4,0,1,0,0,3,128,0,255-128-0,|11||0-0-0,1|(1136,232)|
+10,11,fraction of population who would choose to travel by bus,575,-12,80,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,12,11,2,0,0,0,0,0,128,0,-1--1--1,,1|(560,44)|
+10,13,number of car trips per year per car,892,88,60,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,13,3,0,0,0,0,0,128,0,-1--1--1,,1|(920,152)|
+10,15,cost of petrol,979,43,40,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,16,0,1015,-41,79,24,8,7,1,2,-1,0,0,0,-1--1--1,0-0-0,|11||0-128-0,0,0,0,0,0,0
+this might be one of the more significant drivers of reducing car use
+1,17,16,15,0,1,0,0,3,128,0,255-128-0,|11||0-0-0,1|(996,4)|
+10,18,table for car ownership,1188,199,37,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,19,Time,1160,159,25,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,20,19,4,0,0,0,0,0,128,0,-1--1--1,,1|(1120,180)|
+1,21,18,4,0,0,0,0,0,128,0,-1--1--1,,1|(1135,203)|
+10,22,average litres of petrol per 100km,1100,31,52,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,23,average trip distance,1164,88,35,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,24,total population,683,55,56,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,25,24,2,0,0,0,0,0,128,0,-1--1--1,,1|(628,73)|
+10,26,car travel cost per year,1052,128,43,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,27,15,26,0,0,0,0,0,128,0,-1--1--1,,1|(1007,76)|
+1,28,22,26,0,0,0,0,0,128,0,-1--1--1,,1|(1079,73)|
+1,29,23,26,0,0,0,0,0,128,0,-1--1--1,,1|(1120,103)|
+1,30,3,26,0,0,0,0,0,128,0,-1--1--1,,1|(992,183)|
+10,31,max annual capacity of bus route,229,200,61,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,32,1,31,1,0,0,0,0,128,0,-1--1--1,,1|(184,255)|
+1,33,5,31,0,0,0,0,0,128,0,-1--1--1,,1|(265,267)|
+10,34,annual potential bus demand,447,176,48,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,35,2,34,0,0,0,0,0,128,0,-1--1--1,,1|(500,135)|
+10,36,annual bus capacity discrapancy,367,247,59,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,37,31,36,0,0,0,0,0,128,0,-1--1--1,,1|(292,221)|
+1,38,34,36,0,0,0,0,0,128,0,-1--1--1,,1|(412,208)|
+10,39,number people below poverty line,525,672,59,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,40,number of people of reduced mobility,628,519,61,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,41,"0-14",507,496,23,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,42,"65+",505,555,21,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,43,41,40,0,0,0,0,0,128,0,-1--1--1,,1|(541,504)|
+1,44,42,40,0,0,0,0,0,128,0,-1--1--1,,1|(544,543)|
+10,45,sum of people below poverty line,631,603,55,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,46,39,45,0,0,0,0,0,128,0,-1--1--1,,1|(571,641)|
+1,47,45,40,0,0,0,0,0,128,0,-1--1--1,,1|(629,567)|
+12,48,0,700,735,124,32,8,7,1,2,-1,0,0,0,-1--1--1,0-0-0,|11||0-128-0,0,0,0,0,0,0
+this summation is ok because <number people below poverty line> takes <labour force> as an input, which only takes the <15-64> cohort
+1,49,48,40,1,1,0,0,3,128,0,255-128-0,|11||0-0-0,1|(708,611)|
+10,50,average number of bus trips per year,807,219,56,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,51,travel equity bus demand,580,400,49,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,52,40,51,0,0,0,0,0,128,0,-1--1--1,,1|(608,465)|
+1,53,50,51,1,0,0,0,0,128,0,-1--1--1,,1|(745,320)|
+10,54,bus frequency required for travel equity,433,348,56,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,55,5,54,0,0,0,0,0,128,0,-1--1--1,,1|(348,328)|
+1,56,51,54,0,0,0,0,0,128,0,-1--1--1,,1|(520,377)|
+10,57,travel equity bus frequency discrepancy,303,411,68,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,58,54,57,0,0,0,0,0,128,0,-1--1--1,,1|(368,380)|
+12,59,0,200,603,152,152,3,44,1,0,1,0,0,0,0,0,0,0,0,0
+Number_of_buses_needed_to_acheive_travel_equity
+12,60,0,1452,67,152,152,3,44,1,0,1,0,0,0,0,0,0,0,0,0
+Car_Use
+10,61,bus frequency required for whole population,503,272,55,25,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,62,50,34,1,0,0,0,0,128,0,-1--1--1,,1|(640,163)|
+1,63,5,61,1,0,0,0,0,128,0,-1--1--1,,1|(384,296)|
+1,64,34,61,0,0,0,0,0,128,0,-1--1--1,,1|(468,213)|
+10,65,whole population bus frequency discrepancy,655,216,68,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,66,bus frequency,648,307,51,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,67,61,65,0,0,0,0,0,128,0,-1--1--1,,1|(577,244)|
+1,68,66,65,0,0,0,0,0,128,0,-1--1--1,,1|(649,271)|
+12,69,0,216,31,152,152,3,44,1,0,1,0,0,0,0,0,0,0,0,0
+Buses_needed_for_whole_population
+10,70,Road Quality,1223,519,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,71,48,1029,519,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,72,74,71,4,0,0,22,0,0,0,-1--1--1,,1|(1073,519)|
+1,73,74,70,100,0,0,22,0,0,0,-1--1--1,,1|(1153,519)|
+11,74,48,1115,519,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,75,Road deterioration rate,1115,543,52,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,76,0,1595,499,60,27,3,135,1,1,-1,0,0,0,255-0-0,0-0-0,|11||0-0-0,0,0,0,0,0,0
+Fallah-Fini et al 2015
+10,77,effect of road quality on deterioration rate,1088,608,63,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,78,effect of ageing of pavement on deterioration rate,1288,415,56,24,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,79,age of pavement,1448,456,49,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,80,road damage ratio,1116,420,53,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,81,allowable number of load cycles,1167,336,53,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,82,deterioration multiplier,988,448,37,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,83,82,74,0,0,0,0,0,128,0,-1--1--1,,1|(1055,488)|
+1,84,77,75,0,0,0,0,0,128,0,-1--1--1,,1|(1100,581)|
+1,85,78,74,1,0,0,0,0,128,0,-1--1--1,,1|(1156,463)|
+1,86,79,78,0,0,0,0,0,128,0,-1--1--1,,1|(1385,439)|
+1,87,80,74,1,0,0,0,0,128,0,-1--1--1,,1|(1107,439)|
+1,88,81,80,0,0,0,0,0,128,0,-1--1--1,,1|(1143,375)|
+10,89,service life of road,1445,348,55,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,90,89,78,0,0,0,0,0,128,0,-1--1--1,,1|(1392,371)|
+10,91,ageing nonlinearity factor,1484,408,55,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,92,91,78,0,0,0,0,0,128,0,-1--1--1,,1|(1393,412)|
+10,93,road quality nonlinearity factor,1020,684,55,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,94,road quality multiplier,1179,691,35,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,95,94,77,0,0,0,0,0,128,0,-1--1--1,,1|(1140,656)|
+1,96,93,77,0,0,0,0,0,128,0,-1--1--1,,1|(1048,651)|
+10,97,Time,980,527,25,9,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,98,97,75,0,1,0,0,0,64,0,-1--1--1,,1|(1027,531)|
+1,99,70,77,1,0,0,0,0,128,0,-1--1--1,,1|(1184,584)|
+12,100,48,1408,519,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,101,103,70,4,0,0,22,0,0,0,-1--1--1,,1|(1299,519)|
+1,102,103,100,100,0,0,22,0,0,0,-1--1--1,,1|(1375,519)|
+11,103,48,1344,519,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,104,Road maintenance rate,1344,543,52,16,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,105,critical condition index,1265,631,52,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,106,preventative maintenance,1380,616,37,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,107,corrective maintenance,1417,688,37,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,108,restorative maintenance,1476,755,37,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,109,105,106,1,0,0,0,0,128,0,-1--1--1,,1|(1323,623)|
+1,110,105,107,1,0,0,0,0,128,0,-1--1--1,,1|(1352,676)|
+1,111,105,108,1,0,0,0,0,128,0,-1--1--1,,1|(1388,748)|
+1,112,70,105,0,0,0,0,0,128,0,-1--1--1,,1|(1244,572)|
+1,113,70,103,1,0,0,0,0,128,0,-1--1--1,,1|(1284,483)|
+1,114,70,74,1,0,0,0,0,128,0,-1--1--1,,1|(1172,480)|
+1,115,106,104,0,0,0,0,0,128,0,-1--1--1,,1|(1365,585)|
+1,116,107,104,1,0,0,0,0,128,0,-1--1--1,,1|(1432,599)|
+1,117,108,104,1,0,0,0,0,128,0,-1--1--1,,1|(1481,619)|
+10,118,Time,1485,539,25,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+1,119,118,104,0,0,0,0,0,64,0,-1--1--1,,1|(1436,539)|
+1,120,3,80,1,0,0,0,0,128,0,-1--1--1,,1|(1049,299)|
+1,121,1,57,0,0,0,0,0,128,0,-1--1--1,,1|(224,353)|
+1,122,50,80,1,0,0,0,0,128,0,-1--1--1,,1|(981,303)|
+10,123,Number Of Tourists,785,399,39,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|11||128-128-128,0,0,0,0,0,0
+10,124,tourist trips per year,944,384,60,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,125,123,124,0,0,0,0,0,128,0,-1--1--1,,1|(847,393)|
+10,126,trips per tourist,872,315,48,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,127,126,124,0,0,0,0,0,128,0,-1--1--1,,1|(904,344)|
+1,128,124,80,0,0,0,0,0,128,0,-1--1--1,,1|(1023,400)|
+10,129,effect of flooding on road quality,924,572,53,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,130,damage to road from flooding,793,523,48,16,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,131,130,129,0,0,0,0,0,128,0,-1--1--1,,1|(851,544)|
+1,132,129,75,0,0,0,0,0,128,0,-1--1--1,,1|(1013,560)|
+10,133,annual probability of flood,809,639,53,16,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,134,133,129,0,0,0,0,0,128,0,-1--1--1,,1|(859,609)|
+///---\\\
+:GRAPH Housing_Supply
+:TITLE Housing Supply
+:SCALE
+:VAR Housing Supply
+
+:GRAPH Housing_Demand
+:TITLE Housing Demand
+:SCALE
+:VAR Housing demand
+
+:GRAPH Housing_Supply/Demand_ra
+:TITLE Housing Supply/Demand ratio
+:SCALE
+:VAR Housing supply demand ratio
+:Y-MIN 0
+:Y-MAX 0.1
+
+:GRAPH Average_house_price
+:TITLE Average house price
+:SCALE
+:VAR Average house price
+
+:GRAPH Poverty_Line
+:TITLE Poverty Line
+:SCALE
+:VAR Number people below poverty line[Gender,Income]
+
+:GRAPH Internet_Service_Demand
+:TITLE Internet Service Demand
+:SCALE
+:VAR Internet Service Demand
+
+:GRAPH Internet_Service_Capacit
+:TITLE Internet Service Capacity
+:SCALE
+:VAR Internet Service Capacity
+
+:GRAPH Number_of_buses_needed_to_acheive_travel_equity
+:TITLE # buses needed for travel equity
+:SCALE
+:VAR travel equity bus frequency discrepancy
+:DATASET ForrestSDGs_test
+
+:GRAPH Car_Use
+:TITLE Car use
+:SCALE
+:VAR car use
+:DATASET ForrestSDGs_test
+
+:GRAPH Buses_needed_for_whole_population
+:TITLE Buses needed for whole population
+:SCALE
+:VAR whole population bus frequency discrepancy
+:DATASET ForrestSDGs_test
+
+:GRAPH Housing_stress
+:TITLE Housing stress
+:SCALE
+:VAR number of households under mortgage stress
+:Y-MIN 0
+:Y-MAX 30
+:DATASET ForrestSDGs_test
+:SCALE
+:VAR number of households under rent stress
+:Y-MIN 0
+:Y-MAX 30
+:DATASET ForrestSDGs_test
+
+:GRAPH Inequality_indicator
+:TITLE Inequality indicator
+:SCALE
+:VAR inequality indicator
+:Y-MIN 0.2
+:Y-MAX 0.3
+:DATASET ForrestSDGs_test
+
+:GRAPH Total_Agricultural_Produ
+:TITLE Total Agricultural Productivity
+:SCALE
+:VAR Total Agricultural Productivity
+:DATASET ForrestSDGs_test
+:SCALE
+:VAR Total Agricultural Productivity
+:DATASET Land
+
+:GRAPH Housing_Land
+:TITLE Housing_Land
+:SCALE
+:VAR Housing Land
+:LINE-WIDTH 1
+:SCALE
+:VAR Housing Land
+:DATASET Land
+:LINE-WIDTH 1
+
+:GRAPH Ag_Land
+:TITLE Ag_Land
+:SCALE
+:VAR Agriculture Land
+:SCALE
+:VAR Agriculture Land
+:DATASET Land
+
+:GRAPH Forest_Land
+:TITLE Forest_Land
+:SCALE
+:VAR Forest Land
+:SCALE
+:VAR Forest Land
+:DATASET Land
+
+:GRAPH Protected_Land
+:TITLE Protected_Land
+:SCALE
+:VAR Protected Land
+:SCALE
+:VAR Protected Land
+:DATASET Land
+:L<%^E!@
+1:Pop.vdfx
+1:Land.vdfx
+1:ForrestSDGs_test.vdfx
+4:Time
+5:Protected Land
+6:"$1-$149"
+6:"$100k-$200k"
+6:"$150-$299"
+6:"$200k-$500k"
+6:"$2m-$5m"
+6:"$300-$399"
+6:"$400-$499"
+6:"$500-$649"
+6:"$500k-$2m"
+6:"$50k-$100k"
+6:"$650-$799"
+6:"$800-$999"
+6:"0-$50k"
+6:CFA Truck
+6:Female
+6:Forrest Common
+6:GTOC
+6:Male
+6:MTB Trails
+6:Negative
+6:Nil
+6:Wastewater
+9:ForrestSDGs_test
+19:100,5
+24:2000
+25:2050
+26:2050
+57:1
+54:0
+55:0
+82:0
+86:0
+59:0
+56:0
+58:0
+71:0
+44:65001
+46:0
+45:5
+49:1
+50:1
+51:
+52:
+53:
+43:ForrestSDGs_test
+47:ForrestSDGs_test
+48:
+22:connection,connections
+22:DegreesC,degrees C
+22:dollar,dollars,$
+22:fire,fires
+22:hectares,hectare,ha
+22:job,jobs
+22:metre,metres,m
+22:minute,minutes
+22:night,nights
+22:people,person,persons
+22:ton,tons
+22:year,years
+11:Forrest SDGs complete V3.voc
+12:Land Use.vpd
+13:Land.vdfx
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:0
+41:0
+95:0
+96:0
+77:0
+78:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:ForrestSDGs_test
