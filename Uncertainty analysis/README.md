@@ -1,5 +1,6 @@
 ## Using the code  
-You can download a copy of all the files in this repository by cloning the git repository or download a zip archive.
+You can download a copy of all the files in this repository by cloning the git repository or download a zip archive.  
+The code is thoroughly commented to identify the changes that need to be made for a user to set local file paths.  
 
 ## Dependencies  
 You'll need Vensim DSS 8.2.1 to run the code. The Vensim registration must be in the same name as the Windows log in or else the code will fail.  
